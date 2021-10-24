@@ -1,0 +1,4 @@
+<span class="center">
+  <span *ngIf="!condition">{{ text }}</span>
+  <app-loader [diameter]="loaderSize" *ngIf="condition"></app-loader>
+</span>

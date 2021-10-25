@@ -4,9 +4,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
-  declarations: [
-    LayoutComponent
-  ],
+  declarations: [LayoutComponent],
   imports: [CommonModule, AuthenticationRoutingModule],
 })
 export class AuthenticationModule {}

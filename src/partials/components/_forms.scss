@@ -1,1 +1,35 @@
-@import "abstracts/variables";
+@import "partials/abstract/variables";
+
+.form_group {
+  label {
+    color: $blue-700;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    span {
+      color: $error;
+    }
+  }
+
+  input,
+  select {
+    width: 100%;
+    margin-top: 0.4rem;
+    height: 4.8rem;
+    border-radius: 0.8rem;
+    font-size: 1.4rem;
+    color: $blue-700;
+    padding: 1.35rem 1.6rem;
+    background: rgba($blue-700, 0.07);
+
+    &.is-invalid {
+      border: 0.1rem solid $error !important;
+    }
+    &:focus {
+      background: $white-100;
+      color: $blue-700;
+      border: 0.1rem solid rgba($blue-700, 0.4);
+      box-shadow: none;
+      // box-shadow: 0rem 0.8rem 1.6rem rgba($blue-700, 0.2);
+    }
+  }
+}

@@ -1,6 +1,6 @@
-//Import font from assets
+@import "assets/fonts/Poppins/stylesheet.css";
 
 body {
   font-family: $docstream_font;
-  color: rgba($color-black, 0.6);
+  color: $blue-700;
 }

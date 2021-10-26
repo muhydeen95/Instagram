@@ -8,19 +8,17 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { CurrentUserService } from '../services/current-user.service';
 import { BaseComponent } from '../base/base/base.component';
-import { AuthService } from '@auth/services/auth.service';
-import { ResponseModel } from 'app/models/response.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private isRefreshing: boolean = false;
   constructor(
     private _currentUser: CurrentUserService,
     private _base: BaseComponent,
-    private _auth: AuthService
+    private router: Router
   ) {}
 
   intercept(
@@ -64,7 +62,7 @@ export class AuthInterceptor implements HttpInterceptor {
         )
       );
     } else {
-      this._base.openSnackBarSuccess('Internet not connected');
+      this._base.openSnackBar('Internet not connected', 'error');
       return throwError({ message: 'Internet not connected' });
     }
   }
@@ -100,10 +98,11 @@ export class AuthInterceptor implements HttpInterceptor {
     next?: HttpHandler
   ) {
     if (error.error instanceof ErrorEvent) {
-      this._base.openSnackBarError(error.error?.message);
+      this._base.openSnackBar(error.error?.message, 'error');
     } else {
       if (error.status === 401) {
-        this.handleRefresh(newRequest!, next!);
+        this.router.navigate(['login']);
+        // this.handleRefresh(newRequest!, next!);
       }
 
       console.error(
@@ -113,35 +112,35 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return throwError(error);
   }
-  private handleRefresh(request: HttpRequest<any>, next: HttpHandler) {
-    const refreshToken = localStorage.getItem('refreshToken') as string;
-    if (!this.isRefreshing) {
-      this.isRefreshing = true;
-      const token = this._currentUser.getAuthToken();
-      if (token)
-        return this._auth.refreshToken(JSON.parse(refreshToken)).pipe(
-          map((res: ResponseModel) => {
-            this.isRefreshing = false;
-            this._currentUser.storeUserCredentials(res?.data);
-            return next.handle(
-              this.addTokenHeader(request, res?.data?.refreshToken)
-            );
-          }),
-          catchError((err) => {
-            this.isRefreshing = false;
-            this._currentUser.logOut();
-            return throwError(err);
-          })
-        );
-    }
-    return;
-  }
-  private addTokenHeader(request: HttpRequest<any>, token: string) {
-    return (request = request.clone({
-      setHeaders: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }));
-  }
+  // private handleRefresh(request: HttpRequest<any>, next: HttpHandler) {
+  //   const refreshToken = localStorage.getItem('refreshToken') as string;
+  //   if (!this.isRefreshing) {
+  //     this.isRefreshing = true;
+  //     const token = this._currentUser.getAuthToken();
+  //     if (token)
+  //       return this._auth.refreshToken(JSON.parse(refreshToken)).pipe(
+  //         map((res: ResponseModel) => {
+  //           this.isRefreshing = false;
+  //           this._currentUser.storeUserCredentials(res?.response);
+  //           return next.handle(
+  //             this.addTokenHeader(request, res?.response?.refreshToken)
+  //           );
+  //         }),
+  //         catchError((err) => {
+  //           this.isRefreshing = false;
+  //           this._currentUser.logOut();
+  //           return throwError(err);
+  //         })
+  //       );
+  //   }
+  //   return;
+  // }
+  // private addTokenHeader(request: HttpRequest<any>, token: string) {
+  //   return (request = request.clone({
+  //     setHeaders: {
+  //       Accept: 'application/json',
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   }));
+  // }
 }

@@ -18,9 +18,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
+    FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    FormsModule,
+
     JwtModule.forRoot({
       config: {},
     }),

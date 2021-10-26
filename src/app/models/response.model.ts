@@ -1,5 +1,5 @@
 export interface ResponseModel {
-  data: any;
   errors: any;
+  response: any;
   message: string;
 }

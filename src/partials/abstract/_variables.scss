@@ -1,18 +1,28 @@
 // colors and fonts go here.
 
-$color-white: #ffffff;
+// Brand Colours
+$blue-100: #f0f2f9;
+$blue-700: #182252;
+$blue-900: #161b37;
+$green-400: #2db2a7;
+$green-600: #00a5ab;
+$green-700: #008085;
 
-// orange
-$color-orange: #ff5c00;
-$color-orange-1: #ff9900;
-$color-orange-2: #ff0000;
+// Neutrals & Shades
+$white-100: #ffffff;
+$white-200: #f7f7f7;
+$white-700: #f2f2f2;
+$text-body: #464e75;
+$black-100: #000000;
+$black-850: #1f1f1f;
 
-// black
-$color-black: #000000;
+// Alerts
+$success: #5c993d;
+$warning: #f2b12e;
+$error: #d93b2b;
+$info: #418ed9;
+$tip: #4d4d4d;
 
-//Other fidelity colors will be specified here
-
-// fonts
-
-//Font specified by Emmanuel
-$docstream_font: "";
+//Fonts specified by Emmanuel
+$docstream_font: "poppins", sans-serif;
+$docstream_font_bold: "poppins bold", sans-serif;

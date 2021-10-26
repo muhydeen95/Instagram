@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Injectable, Injector } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, TeardownLogic } from 'rxjs';
+import { DocstreamSnackbarComponent } from '../docstream-snackbar/docstream-snackbar.component';
 
 @Injectable({
   providedIn: 'root',
@@ -26,28 +27,16 @@ export abstract class BaseComponent {
   public goBack(): void {
     this.location.back();
   }
-  public openSnackBarSuccess(message: string, timeDuration = 5000): void {
-    if (message) {
-      this.snackBar.open(message, 'close', {
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        duration: timeDuration,
-      });
-    }
-  }
 
-  public openSnackBarError(message: string, timeDuration = 5000): void {
-    if (timeDuration === 0) {
-      this.snackBar.open(message, 'close', {
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-      });
-    } else {
-      this.snackBar.open(message, 'close', {
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
+  public openSnackBar(message: string, type?: string, timeDuration = 3000) {
+    const _type: string = type !== undefined ? type : 'success';
+    if (message) {
+      this.snackBar.openFromComponent(DocstreamSnackbarComponent, {
         duration: timeDuration,
-        panelClass: ['snackbar__error'],
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: ['docstream_snackbar_success'],
+        data: { message: message, type: _type },
       });
     }
   }

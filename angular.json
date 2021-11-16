@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Docstream-Admin",
+            "outputPath": "dist/Docstream-Customer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -127,5 +127,5 @@
       }
     }
   },
-  "defaultProject": "Docstream-Admin"
+  "defaultProject": "Docstream-Customer"
 }

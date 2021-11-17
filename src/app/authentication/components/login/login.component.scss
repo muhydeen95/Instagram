@@ -29,9 +29,13 @@ $side_padding: 12.4rem 20rem 12.4rem 12.2rem;
     a {
       color: $blue-700;
       font-weight: 600;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       line-height: 1.8rem;
       text-decoration: none;
+    }
+    span {
+      color: $green-600;
+      text-decoration: underline;
     }
   }
   &__login_btn {
@@ -52,8 +56,5 @@ $side_padding: 12.4rem 20rem 12.4rem 12.2rem;
     &:hover {
       background: $green-700;
     }
-  }
-  &__sign_up span {
-    color: $green-600;
   }
 }

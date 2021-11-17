@@ -24,9 +24,17 @@ $side_padding: 12.4rem 6rem 12.4rem 9.2rem;
       margin-bottom: 5.6rem;
     }
   }
+  .position-relative {
+    .fa {
+      position: absolute;
+      font-size: 1.5rem;
+      top: 1.8rem;
+      right: 1.5rem;
+    }
+  }
   &__sign_in {
     margin-bottom: 3.4rem;
-    a {
+    a,p {
       color: $blue-700;
       font-weight: 600;
       font-size: 1.4rem;

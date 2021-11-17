@@ -8,6 +8,8 @@ import { BaseComponent } from '@core/base/base/base.component';
 })
 export class RegistrationComponent implements OnInit {
   public isLoggingIn: boolean = false;
+  public showPassword: boolean = false;
+  public showConfirmPassword: boolean = false;
 
   constructor(private _base: BaseComponent) { }
 

@@ -28,13 +28,24 @@
           >Password
           <span>● </span>
         </label>
-        <input
-          type="password"
-          autocomplete="current-password"
-          class="form-control"
-          placeholder="Enter password"
-          id="password"
-        />
+        <div class="position-relative">
+          <input
+            class="form-control pr-2"
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Enter password"
+          />
+          <i
+            class="fa fa-eye-slash click"
+            *ngIf="showPassword; else hidePassword"
+            (click)="showPassword = !showPassword"
+          ></i>
+          <ng-template #hidePassword>
+            <i
+              class="fa fa-eye click"
+              (click)="showPassword = !showPassword"
+            ></i>
+          </ng-template>
+        </div>
       </div>
       <div class="wrapper__forgot">
         <a routerLink="/authentication/forgot-password"> Forgot Password?</a>
@@ -46,7 +57,7 @@
         ></app-loading-button>
       </button>
       <div class="wrapper__sign_up mt-4">
-        <a routerLink="/authentication/register"> Dont have an account? <span>Sign Up</span></a>
+        <p>Dont have an account? <a routerLink="/authentication/register"><span>Sign Up</span></a></p>
       </div>
     </div>
   </div>

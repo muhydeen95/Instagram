@@ -8,6 +8,7 @@ import { BaseComponent } from '@core/base/base/base.component';
 })
 export class LoginComponent implements OnInit {
   public isLoggingIn: boolean = false;
+  public showPassword: boolean = false;
   constructor(private _base: BaseComponent) {}
 
   ngOnInit(): void {}

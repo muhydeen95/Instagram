@@ -1,0 +1,121 @@
+<div class="dashboard-wrapper m-0">
+  <div class="container">
+    <div class="d-flex justify-content-between py-5 mb-5">
+      <div class="admin_wrapper">
+        <h2 class="font-weight-bold">
+          Good
+          {{
+            hour < 12
+              ? "morning"
+              : hour >= 12 && hour <= 17
+              ? "afternoon"
+              : "evening"
+          }}
+          {{ unique_name }}, wash your hands
+          <ng-container>
+            {{
+              hour < 12 ? "🌞" : hour >= 12 && hour <= 17 ? "🌤️" : "🌚"
+            }}</ng-container
+          >
+        </h2>
+        <p>Welcome to your dashboard</p>
+      </div>
+      <div>
+        <button
+          class="btn btn-green btn-lg text-center"
+          (click)="openDialog({ isEditing: false })"
+        >
+          <img class="pe-3" src="assets/icons/pen.svg" alt="" />
+          <div class="text">Company Info</div>
+        </button>
+      </div>
+    </div>
+    <div></div>
+
+    <div class="dashboard-content mt-5">
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <app-card [name]="'users'" [count]="4" [route]="'users'"></app-card>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <app-card
+            [name]="'departments'"
+            [count]="6"
+            [route]="'organization/departments'"
+          ></app-card>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <app-card
+            [name]="'units'"
+            [count]="10"
+            [route]="'organization/departments'"
+          ></app-card>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <app-card
+            [name]="'positions'"
+            [count]="10"
+            [route]="'organization/positions'"
+          ></app-card>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <app-card
+            [name]="'regions'"
+            [count]="10"
+            [route]="'organization/regions'"
+          ></app-card>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <app-card
+            [name]="'branches'"
+            [count]="10"
+            [route]="'organization/branches'"
+          ></app-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="dashboard-table table-responsive bg-white">
+          <h5 class="font-weight-bold py-3">Key Personnel</h5>
+          <table class="table text-nowrap" datatable>
+            <thead>
+              <tr class="py-3">
+                <th>Name</th>
+                <th>Position</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Oluwole Asalu</td>
+                <td>Head of Organization</td>
+                <td class="click" (click)="openDialog({ isEditing: false })">
+                  <img class="pr-2" src="assets/icons/update.svg" alt="" />
+                  Update
+                </td>
+              </tr>
+              <tr>
+                <td>Jessica Timon</td>
+                <td>Head of Human Resource Unit</td>
+                <td class="click" (click)="openDialog({ isEditing: false })">
+                  <img class="pr-2" src="assets/icons/update.svg" alt="" />
+                  Update
+                </td>
+              </tr>
+              <tr>
+                <td>Abdulmateen Bello</td>
+                <td>Head of Archive</td>
+                <td class="click" (click)="openDialog({ isEditing: false })">
+                  <img class="pr-2" src="assets/icons/update.svg" alt="" />
+                  Update
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

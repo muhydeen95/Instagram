@@ -2,6 +2,8 @@
 @import "partials/abstract/mixins";
 
 $side_bar_width: 59rem;
+$medium_side_bar_width: 35rem;
+
 $side_padding: 12.4rem 26rem 12.4rem 14.2rem;
 $mobile_side_padding: 3rem;
 
@@ -30,7 +32,7 @@ $mobile_side_padding: 3rem;
     }
   }
 }
-@include screenSize(S) {
+@include maxSize($canvas: M) {
   .wrapper {
     &__side {
       width: 0;
@@ -38,6 +40,20 @@ $mobile_side_padding: 3rem;
     }
     &__layout {
       width: 100%;
+      &--content {
+        padding: $mobile_side_padding;
+      }
+    }
+  }
+}
+@include screenSize($canvas: L) {
+  .wrapper {
+    &__side {
+      width: $medium_side_bar_width;
+      // display: none;
+    }
+    &__layout {
+      width: calc(100% - #{$medium_side_bar_width});
       &--content {
         padding: $mobile_side_padding;
       }

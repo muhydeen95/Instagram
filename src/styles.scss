@@ -1,4 +1,7 @@
+//Ng select
+
 // Custom Theming for Angular Material
+
 // For more information: https://material.angular.io/guide/theming
 @use "~@angular/material" as mat;
 // Plus imports for other components in your app.
@@ -39,6 +42,9 @@ $docstream-theme: mat.define-light-theme(
 @import "./partials/abstract/variables";
 @import "./partials/base/typography";
 @import "./partials/base/base";
+@import "./partials/base/buttons";
+@import "partials/abstract/mixins";
+@import "components/forms";
 
 .docstream_snackbar_success {
   background: $white-100;
@@ -52,4 +58,55 @@ $docstream-theme: mat.define-light-theme(
 }
 .cdk-global-overlay-wrapper {
   background: rgba($black-100, 0.5);
+}
+
+.cdk-overlay-pane {
+  max-width: 91vw !important;
+  .mat-dialog-container {
+    width: 85rem !important;
+  }
+}
+
+.mat-dialog-title {
+  color: $blue-700;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-family: $docstream_font_bold;
+}
+
+.mat-dialog-container {
+  padding: 2.4rem 4rem 4rem 4rem !important;
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: $white-100;
+}
+
+.btn,
+.form-control,
+a,
+span,
+button {
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation-name: spin;
+  animation-duration: 3000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }

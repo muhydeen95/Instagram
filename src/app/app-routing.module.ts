@@ -13,6 +13,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'register',
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
+  {
     path: '',
     component: LayoutComponent,
     // canActivate: [RouteGuard],

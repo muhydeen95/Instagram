@@ -2,7 +2,7 @@
 @import "partials/abstract/mixins";
 @import "partials/components/forms";
 
-$side_padding: 12.4rem 20rem 12.4rem 12.2rem;
+$side_padding: 12.4rem 6rem 12.4rem 9.2rem;
 
 .wrapper {
   height: 100%;
@@ -35,7 +35,8 @@ $side_padding: 12.4rem 20rem 12.4rem 12.2rem;
     }
   }
   &__login_btn {
-    width: 100%;
+    width: 30%;
+    height: 4.5rem !important;
     background: $green-600;
     box-shadow: 0rem 0.4rem 0.8rem -0.1rem rgba(0, 74, 77, 0.15);
     border-radius: 0.8rem;
@@ -47,7 +48,7 @@ $side_padding: 12.4rem 20rem 12.4rem 12.2rem;
     justify-content: center;
     text-align: center;
     color: $white-100;
-    padding: 1.35rem 0;
+    padding: .35rem 0;
     transition: 0.6s all ease;
     &:hover {
       background: $green-700;

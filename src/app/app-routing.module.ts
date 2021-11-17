@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from '@shared/components/layout/layout.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { OfflineComponent } from './offline/offline.component';
 
 const routes: Routes = [
   {
@@ -11,8 +14,28 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'authentication',
-    pathMatch: 'full',
+    component: LayoutComponent,
+    // canActivate: [RouteGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+    ],
+  },
+  {
+    path: 'offline',
+    component: OfflineComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 

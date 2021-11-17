@@ -1,0 +1,31 @@
+@import "partials/abstract/variables";
+.card {
+  margin-bottom: 2rem;
+  border: none;
+  background: $blue-100;
+  color: $blue-700;
+  padding: 1rem !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 0.85rem;
+  .min-card {
+    width: 5.5rem;
+    text-align: center;
+    background: rgba($color: $blue-700, $alpha: 0.1);
+    color: $blue-900;
+    font-weight: bold;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+  }
+  p {
+    font-size: 1.5rem;
+    text-transform: capitalize !important;
+  }
+  img {
+    background: rgba($color: $blue-700, $alpha: 0.1);
+    border-radius: 0.5rem;
+  }
+}

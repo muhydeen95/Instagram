@@ -3,6 +3,12 @@ export interface Dashboard {
   name: string;
 }
 
+export interface UploadDocDTO {
+  type: number;
+  subject: string;
+  file: string;
+}
+
 export interface DashboardResponseDTO {
   branchesCount: number;
   departmentCount: number;

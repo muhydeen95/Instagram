@@ -4,8 +4,8 @@
 $side_bar_width: 59rem;
 $medium_side_bar_width: 35rem;
 
-$side_padding: 12.4rem 14.5rem 12.4rem 9rem;
-$mobile_side_padding: 3rem;
+// $side_padding: 12.4rem 14.5rem 12.4rem 9rem;
+// $mobile_side_padding: 3rem;
 
 .wrapper {
   height: 100vh;
@@ -27,7 +27,6 @@ $mobile_side_padding: 3rem;
       position: relative;
       width: 100%;
       height: 100%;
-      // padding: $side_padding;
       overflow-y: auto;
     }
   }
@@ -40,9 +39,6 @@ $mobile_side_padding: 3rem;
     }
     &__layout {
       width: 100%;
-      &--content {
-        padding: $mobile_side_padding;
-      }
     }
   }
 }
@@ -54,9 +50,6 @@ $mobile_side_padding: 3rem;
     }
     &__layout {
       width: calc(100% - #{$medium_side_bar_width});
-      &--content {
-        padding: $mobile_side_padding;
-      }
     }
   }
 }

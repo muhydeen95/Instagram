@@ -5,12 +5,15 @@ import { RegistrationRoutingModule } from './registration-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RegistrationDialogComponent } from './dialogs/registration-dialog/registration-dialog.component';
 
 @NgModule({
-  declarations: [RegistrationComponent],
+  declarations: [RegistrationComponent, RegistrationDialogComponent],
   imports: [
     CommonModule,
     RegistrationRoutingModule,
+    MatDialogModule,
     SharedModule,
     ReactiveFormsModule,
   ],

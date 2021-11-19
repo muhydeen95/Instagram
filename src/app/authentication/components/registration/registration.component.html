@@ -10,7 +10,7 @@
     <p>Required fields are marked with <span class="text-danger">● </span></p>
   </div>
   <div class="wrapper__form">
-    <div>
+    <form [formGroup]="registrationForm">
       <div class="row">
         <div class="col-lg-4">
           <div class="form_group mb-5">
@@ -23,6 +23,7 @@
               id="firstName"
               class="form-control"
               placeholder="Enter First Name"
+              formControlName="firstName"
             />
           </div>
         </div>
@@ -36,6 +37,7 @@
               id="middleName"
               class="form-control"
               placeholder="Enter Middle Name"
+              formControlName="middleName"
             />
           </div>
         </div>
@@ -50,6 +52,7 @@
               id="lastName"
               class="form-control"
               placeholder="Enter Last Name"
+              formControlName="lastName"
             />
           </div>
         </div>
@@ -64,6 +67,7 @@
               id="phoneNo"
               class="form-control"
               placeholder="Enter phone number"
+              formControlName="phoneNumber1"
             />
           </div>
         </div>
@@ -77,6 +81,7 @@
               id="altPhoneNo"
               class="form-control"
               placeholder="Enter alternate phone number"
+              formControlName="phoneNumber2"
             />
           </div>
         </div>
@@ -91,6 +96,7 @@
               id="email"
               class="form-control"
               placeholder="Email address"
+              formControlName="email"
             />
           </div>
         </div>
@@ -104,6 +110,7 @@
               id="altEmail"
               class="form-control"
               placeholder="Enter alternate email address"
+              formControlName="altEmail"
             />
           </div>
         </div>
@@ -117,6 +124,7 @@
               id="organizationName"
               class="form-control"
               placeholder="Enter organization name"
+              formControlName="organizationName"
             />
           </div>
         </div>
@@ -131,6 +139,7 @@
                 class="form-control pr-2"
                 [type]="showPassword ? 'text' : 'password'"
                 placeholder="Enter new password"
+                formControlName="password"
               />
               <i
                 class="fa fa-eye-slash click"
@@ -157,6 +166,7 @@
                 class="form-control pr-2"
                 [type]="showConfirmPassword ? 'text' : 'password'"
                 placeholder="Re-enter password"
+                formControlName="confirmPassword"
               />
               <i
                 class="fa fa-eye-slash click"
@@ -174,17 +184,17 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-between">
-        <div class="wrapper__sign_in py-3">
+      <div class="row d-flex flex-column-reverse flex-md-row justify-content-between">
+        <div class="col-md-6 order-md-12 wrapper__sign_in">
           <p>Already have an account? <a routerLink="/authentication/login"><span>Sign In</span></a></p>
         </div>
-        <button class="btn wrapper__login_btn" (click)="register()">
+        <button class="col-md-5 order-md-1 btn wrapper__login_btn" (click)="register()">
           <app-loading-button
             [text]="'Create Account'"
             [condition]="isLoggingIn"
           ></app-loading-button>
         </button>
      </div>
-    </div>
+    </form>
   </div>
 </div>

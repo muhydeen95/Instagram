@@ -10,7 +10,7 @@
     <p>Enter your credentials below to Login</p>
   </div>
   <div class="wrapper__form">
-    <div>
+    <form [formGroup]="loginForm">
       <div class="form_group mb-5">
         <label for="email" class="form-label"
           >Email
@@ -21,6 +21,7 @@
           id="email"
           class="form-control"
           placeholder="Enter email address"
+          formControlName="email"
         />
       </div>
       <div class="form_group mb-3">
@@ -33,6 +34,7 @@
             class="form-control pr-2"
             [type]="showPassword ? 'text' : 'password'"
             placeholder="Enter password"
+            formControlName="password"
           />
           <i
             class="fa fa-eye-slash click"
@@ -59,6 +61,6 @@
       <div class="wrapper__sign_up mt-4">
         <p>Dont have an account? <a routerLink="/authentication/register"><span>Sign Up</span></a></p>
       </div>
-    </div>
+    </form>
   </div>
 </div>

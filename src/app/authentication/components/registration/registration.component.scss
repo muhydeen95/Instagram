@@ -34,7 +34,7 @@ $mobile_side_padding: 3rem;
     }
   }
   &__sign_in {
-    margin-bottom: 3.4rem;
+    padding-top: 1.4rem;
     a,p {
       color: $blue-700;
       font-weight: 600;
@@ -71,5 +71,12 @@ $mobile_side_padding: 3rem;
 @include maxSize($canvas: M) {
   .wrapper {
     padding: $mobile_side_padding;
+    &__login_btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+    &__sign_in {
+      padding-top: 1.5rem;
+    }
   }
 }

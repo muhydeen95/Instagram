@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base/base.component';
 
@@ -8,14 +9,23 @@ import { BaseComponent } from '@core/base/base/base.component';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
+  public forgotPasswordForm!: FormGroup;
   public isLoggingIn: boolean = false;
 
   constructor(
     private _base: BaseComponent,
+    private fb: FormBuilder,
     private _router: Router
   ) { }
 
   ngOnInit() {
+    this.initForgotPasswordForm();
+  }
+
+  initForgotPasswordForm() {
+    this.forgotPasswordForm = this.fb.group({
+      email: ['', Validators.required]
+    })
   }
 
   public submit(): void {

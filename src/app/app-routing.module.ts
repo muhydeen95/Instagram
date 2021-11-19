@@ -13,6 +13,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'register',
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
+  {
     path: '',
     component: LayoutComponent,
     // canActivate: [RouteGuard],
@@ -32,13 +39,22 @@ const routes: Routes = [
         loadChildren: () =>
           import('./documents/documents.module').then((m) => m.DocumentsModule),
       },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./profile/profile.module').then((m) => m.ProfileModule),
+      },
     ],
   },
   {
     path: 'offline',
     component: OfflineComponent,
   },
-  { path: 'documents', loadChildren: () => import('./documents/documents.module').then(m => m.DocumentsModule) },
+  {
+    path: 'documents',
+    loadChildren: () =>
+      import('./documents/documents.module').then((m) => m.DocumentsModule),
+  },
   {
     path: '**',
     component: NotFoundComponent,

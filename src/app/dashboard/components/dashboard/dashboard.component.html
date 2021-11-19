@@ -22,7 +22,8 @@
           <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
             <app-quick-actions-cards
               tag="Track my Documents"
-              route="/documents"
+              route=""
+              (clickAction)="openTrackDialog()"
               image="document"
             ></app-quick-actions-cards>
           </div>

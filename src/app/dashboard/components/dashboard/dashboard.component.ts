@@ -5,6 +5,7 @@ import { DialogModel } from '@shared/components/models/dialog.model';
 import { Subscription } from 'rxjs';
 import { Dashboard, UploadDocDTO } from 'app/dashboard/models/dashboard.model';
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
+import { TrackDocumentComponent } from 'app/dashboard/dialogs/track-document/track-document.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,6 +44,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  public openTrackDialog(): void {
+    const dialogRef = this.dialog.open(TrackDocumentComponent);
+
+    dialogRef.componentInstance.searchAction.subscribe(
+      (event: DialogModel<UploadDocDTO>) => {
+        console.log(event);
+      }
+    );
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

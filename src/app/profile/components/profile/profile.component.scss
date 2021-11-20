@@ -14,7 +14,8 @@ $mobile_side_padding: 3rem;
         border-radius: .85rem;
         margin-top: 2.5rem;
         color: $white-100;
-        background-color: $blue-700;
+        background: url('../../../../assets/images/profile-bg.svg') no-repeat center center;
+        box-shadow:inset 0 0 0 10rem rgba($color: $blue-700, $alpha: 0.9);
         padding: 2rem 2rem 0rem 2rem;
         .profile_img {
             position: relative;
@@ -64,7 +65,9 @@ $mobile_side_padding: 3rem;
         padding: 2rem 2.5rem;
         background: $blue-100;
     }
-    .wrapper__login_btn, .change_password_btn {
+    .wrapper__login_btn, 
+    .change_password_btn,
+    .dummy_btn {
         width: 20%;
         height: 4.5rem !important;
         border-radius: 0.8rem;

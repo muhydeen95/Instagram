@@ -2,7 +2,7 @@
   <div class="profile_title">
     <h1>User Profile</h1>
   </div>
-  <div class="row profile__card d-flex justify-content-between">
+  <div *ngIf="!isFetchingProfile" class="row profile__card d-flex justify-content-between">
     <div class="col-lg-6 wrapper__sign_in">
       <div class="d-flex">
         <div class="profile_img">
@@ -18,17 +18,59 @@
           </div>
         </div>
         <div class="profile_detail">
-          <h3>Abdul Hassan</h3>
-          <p>abdulmateenbinbello@gmail.com</p>
+          <h3>
+            <!-- <span>{{ profile.firstName ? profile.firstName : 'Abdul' }}</span>
+            <span>{{ profile.firstName ? profile.firstName : '' }}</span>
+            <span>{{ profile.firstName ? profile.firstName : 'Hassan' }}</span> -->
+            Abdul Hassan
+          </h3>
+          <p>
+            <!-- {{ profile.firstName ? profile.email : '' }} -->
+            abdulmateenbinbello@gmail.com
+          </p>
         </div>
       </div>
     </div>
+   
     <button 
       class="col-lg-5 btn change_password_btn mb-5"
       (click)="openModal()"
     >
       Change Password
     </button>
+  </div>
+
+  <div *ngIf="isFetchingProfile" class="row profile__card d-flex justify-content-between">
+    <div class="col-lg-6 wrapper__sign_in">
+      <div class="d-flex">
+        <div class="profile_img">
+          <app-docstream-skeleton-loader
+            width="10rem"
+            height="10rem"
+            [appearance]="'circle'"
+          ></app-docstream-skeleton-loader>
+        </div>
+        <div class="profile_detail">
+          <app-docstream-skeleton-loader
+            class="d-block"
+            width="15rem"
+            height="2rem"
+          ></app-docstream-skeleton-loader>
+          <app-docstream-skeleton-loader
+            class="d-block"
+            width="25rem"
+            height="2rem"
+          ></app-docstream-skeleton-loader>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 dummy_btn">
+      <app-docstream-skeleton-loader
+        class="pt-4"
+        width="10rem"
+        height="2rem"
+      ></app-docstream-skeleton-loader>
+    </div>
   </div>
 
   <div class="profile__form mt-5">

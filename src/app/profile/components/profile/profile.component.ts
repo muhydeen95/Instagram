@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ResponseModel } from 'app/models/response.model';
 import { ChangePasswordDialogComponent } from 'app/profile/dialogs/change-password-dialog/change-password-dialog.component';
+import { Profile } from 'app/profile/models/user-profile.model';
+import { ProfileService } from 'app/profile/services/profile.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -9,10 +13,17 @@ import { ChangePasswordDialogComponent } from 'app/profile/dialogs/change-passwo
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  private sub: Subscription = new Subscription();
   public isLoading: boolean = false;
+  public isFetchingProfile: boolean = false;
   public updateProfileForm!: FormGroup;
+  public profile!: Profile;
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) { }
+  constructor(
+    public dialog: MatDialog, 
+    private fb: FormBuilder,
+    private _profile: ProfileService
+  ) { }
 
   ngOnInit() {
     this.initUpdateProfileForm();
@@ -20,15 +31,31 @@ export class ProfileComponent implements OnInit {
 
   initUpdateProfileForm() {
     this.updateProfileForm = this.fb.group({
-        firstName: [''],
-        middleName: [''],
-        lastName: [''],
-        phoneNumber1: [''],
-        phoneNumber2: [''],
-        email: [''],
-        altEmail: [''],
-        organizationName: ['']
+        firstName: [this.profile?.firstName ? this.profile?.firstName  : '' ],
+        middleName: [this.profile?.middleName ? this.profile?.middleName  : ''],
+        lastName: [this.profile?.lastName ? this.profile?.lastName  : ''],
+        phoneNumber1: [this.profile?.phoneNumber1 ? this.profile?.phoneNumber1  : ''],
+        phoneNumber2: [this.profile?.phoneNumber2 ? this.profile?.phoneNumber2  : ''],
+        email: [this.profile?.email ? this.profile?.email  : ''],
+        altEmail: [this.profile?.altEmail ? this.profile?.altEmail  : ''],
+        organizationName: [this.profile?.organizationName ? this.profile?.organizationName  : '']
     })
+  }
+
+  public getUserProfile(): void {
+    this.isFetchingProfile = true;
+    this.sub.add(
+      this._profile.getProfile(this.profile).subscribe({
+        next: (res: any) => {
+          this.isFetchingProfile = false;
+          this.profile = res?.response;
+        },
+        error: (error: ResponseModel<null>) => {
+          this.isFetchingProfile = false;
+          console.log(error);
+        },
+      })
+    );
   }
 
   public openModal():void {
@@ -45,8 +72,8 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  submit() {
-
+  public submit() {
+    this.isLoading = true;
   }
 
 }

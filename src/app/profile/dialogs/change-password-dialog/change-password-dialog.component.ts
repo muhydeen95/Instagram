@@ -20,7 +20,7 @@ export class ChangePasswordDialogComponent implements OnInit {
   public showCurrentPassword: boolean = false;
   public showPassword: boolean = false;
   public showConfirmPassword: boolean = false;
-  public isLoggingIn: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
@@ -48,6 +48,6 @@ export class ChangePasswordDialogComponent implements OnInit {
   }
 
   public submit(): void {
-    
+    this.isLoading = true;
   }
 }

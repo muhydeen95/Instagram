@@ -1,0 +1,25 @@
+<div class="tip-bag">
+  <div
+    class="d-flex"
+    [ngClass]="{ 'justify-content-end': position == 'left' }"
+  >
+    <span (click)="toggleBag()">
+      <img src="assets/images/Help-Center.svg" alt="" />
+    </span>
+  </div>
+  <div class="row tip" [ngClass]="{ close: !openBag }">
+    <div class="col-4">
+      <img src="assets/images/call-rep.svg" alt="">
+    </div>
+    <div class="col-8">
+      <div>
+        <img src="assets/images/phone.svg" alt="">
+        <span>Call us: +234 (0)810 333 7070</span>
+      </div>
+      <div>
+        <img src="assets/images/mail.svg" alt="">
+        <span>Mail us: support@fidelitybank.com</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,28 +1,22 @@
-// 
 @import "partials/abstract/variables.scss";
+@import "partials/abstract/mixins";
 
-// .tip {
-//     position: absolute;
-//     right: 4rem;
-//     background-origin: 3rem;
-// }
-
-
-.tip-bag {
-  font-size: 1.35rem;
+.help-center {
   position: fixed;
   bottom: 3rem;
   right: 2rem;
+  cursor: pointer;
   .toggle-icon {
     transition: all ease-in-out 0.3s;
     &.down {
       transform: rotate(180deg);
     }
   }
-  .tip {
-      border: 2px solid red;
-    top: -18rem;
-    position: absolute;
+
+}
+
+.hc-box {
+    bottom: 13rem;
     right: 4rem;
     background-origin: 3rem;
     background: rgba($white-100, 1);
@@ -32,13 +26,34 @@
     padding: 2rem 4.3rem 2.1rem 2rem;
     line-height: 2.1rem;
     transition: all ease-in-out 0.3s;
-    width: 500%;
-    position: absolute;
+    box-shadow: .2rem .25rem #888888;
+    position: fixed;
     z-index: 2000;
     &.close {
       height: 0;
       overflow: hidden;
       padding: 0;
     }
+    .position-relative {
+        .fas {
+            position: absolute;
+            bottom: -4.5rem;
+            right: -3rem;
+            font-size: 3rem;
+            color: $blue-100;
+        }
+    }
+}
+
+@include maxSize($canvas: M) {
+  .hc-box {
+    .info {
+      padding: 1rem;
+    }
+    span {
+      font-size: 1.25rem;
+    }
   }
 }
+  
+

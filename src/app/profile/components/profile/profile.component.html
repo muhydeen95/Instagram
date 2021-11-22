@@ -3,7 +3,7 @@
     <h1>User Profile</h1>
   </div>
   <div *ngIf="!isFetchingProfile" class="row profile__card d-flex justify-content-between">
-    <div class="col-lg-6 wrapper__sign_in">
+    <div class="col-md-6 col-lg-6 wrapper__sign_in">
       <div class="d-flex">
         <div class="profile_img">
           <img class="profile__pix" src="assets/images/profile.svg" alt="profile image">
@@ -33,7 +33,7 @@
     </div>
    
     <button 
-      class="col-lg-5 btn change_password_btn mb-5"
+      class="col-md-6 col-lg-5 btn change_password_btn mb-5"
       (click)="openModal()"
     >
       Change Password

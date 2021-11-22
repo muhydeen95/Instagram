@@ -35,17 +35,25 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: 'profile',
+        path: 'documents',
         loadChildren: () =>
-          import('./profile/profile.module').then(
-            (m) => m.ProfileModule
-          ),
+          import('./documents/documents.module').then((m) => m.DocumentsModule),
+      },
+      {
+        path: 'user-profile',
+        loadChildren: () =>
+          import('./profile/profile.module').then((m) => m.ProfileModule),
       },
     ],
   },
   {
     path: 'offline',
     component: OfflineComponent,
+  },
+  {
+    path: 'documents',
+    loadChildren: () =>
+      import('./documents/documents.module').then((m) => m.DocumentsModule),
   },
   {
     path: '**',

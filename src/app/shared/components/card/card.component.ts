@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
   @Input('count') count!: number | undefined;
+  @Input('dayCount') dayCount!: string | undefined;
+  @Input('color') color!: string;
   @Input('name') name!: string;
   @Input('route') route!: string;
   @Input('loading') loading: boolean = false;

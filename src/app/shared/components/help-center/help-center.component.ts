@@ -24,4 +24,6 @@ export class HelpCenterComponent implements OnInit {
     this.openBag = !this.openBag;
   }
 
+
+
 }

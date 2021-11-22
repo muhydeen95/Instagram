@@ -13,6 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LayoutComponent } from './components/layout/layout.component';
+import { CardComponent } from './components/card/card.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { HelpCenterComponent } from './components/help-center/help-center.component';
 
 @NgModule({
@@ -26,6 +28,8 @@ import { HelpCenterComponent } from './components/help-center/help-center.compon
     DocstreamSkeletonLoaderComponent,
     NoDataComponent,
     ConfirmationModalComponent,
+    CardComponent,
+    SearchbarComponent,
     HelpCenterComponent
   ],
   imports: [
@@ -46,6 +50,8 @@ import { HelpCenterComponent } from './components/help-center/help-center.compon
     NgxSkeletonLoaderModule,
     NoDataComponent,
     ConfirmationModalComponent,
+    CardComponent,
+    SearchbarComponent,
     HelpCenterComponent
   ],
 })

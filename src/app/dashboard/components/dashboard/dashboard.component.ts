@@ -2,9 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DashboardDialogComponent } from 'app/dashboard/dialogs/dashboard-dialog/dashboard-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogModel } from '@shared/components/models/dialog.model';
-import { Subscription, timer } from 'rxjs';
-import { map, share } from 'rxjs/operators';
-import { Dashboard } from 'app/dashboard/models/dashboard.model';
+import { Subscription } from 'rxjs';
+import { Dashboard, UploadDocDTO } from 'app/dashboard/models/dashboard.model';
+import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
+import { TrackDocumentComponent } from 'app/dashboard/dialogs/track-document/track-document.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,30 +14,11 @@ import { Dashboard } from 'app/dashboard/models/dashboard.model';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private sub: Subscription = new Subscription();
-  public show: boolean = false;
-  public hour!: number;
-  public unique_name!: 'Ali Musa';
   public isFetchingDashboard: boolean = false;
 
-  constructor(public dialog: MatDialog) {
-    this.sub.add(
-      timer(0, 1000)
-        .pipe(
-          map(() => new Date().getHours()),
-          share()
-        )
-        .subscribe((time) => {
-          this.hour = time;
-        })
-    );
-    // this.unique_name = JSON.parse(
-    //   localStorage.getItem('user_credential') as string
-    // ).unique_name;
-  }
+  constructor(public dialog: MatDialog) {}
 
-  ngOnInit() {
-    console.log('dashboard');
-  }
+  ngOnInit() {}
 
   public openDialog(
     payload: { isEditing?: boolean; editObj?: any } | any
@@ -48,6 +30,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     dialogRef.componentInstance.event.subscribe(
       (event: DialogModel<Dashboard>) => {
+        console.log(event);
+      }
+    );
+  }
+
+  public openUploadDialog(): void {
+    const dialogRef = this.dialog.open(UploadDocumentComponent);
+
+    dialogRef.componentInstance.event.subscribe(
+      (event: DialogModel<UploadDocDTO>) => {
+        console.log(event);
+      }
+    );
+  }
+
+  public openTrackDialog(): void {
+    const dialogRef = this.dialog.open(TrackDocumentComponent);
+
+    dialogRef.componentInstance.searchAction.subscribe(
+      (event: DialogModel<UploadDocDTO>) => {
         console.log(event);
       }
     );

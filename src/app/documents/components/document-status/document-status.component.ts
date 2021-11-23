@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./document-status.component.scss']
 })
 export class DocumentStatusComponent implements OnInit {
+  public toggled: boolean = false;
+  public message: string = '';
   public userChats = [
     {id: 1, user: 'recipient',  message: 'Lorem ipsum dolor sit amet,', time: '2:00pm'},
     {id: 2, user: 'sender',  message: 'Lorem ipsum dolor sit amet,', time: '2:05pm'},
@@ -21,8 +23,27 @@ export class DocumentStatusComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(event: any) {
-    console.log(event.value)
+  handleSelection(event: any) {
+    this.message += event.char;
+  }
+
+  submit() {
+    let date = new Date();
+    let hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+    let am_pm = date.getHours() >= 12 ? "pm" : "am";
+    hours = hours < 10 ? 0 + hours : hours;
+    let minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    let time = hours + ":" + minutes + " " + am_pm;
+    const chat = {
+      id: 5,
+      user: 'sender',
+      message: this.message,
+      time: time
+    }
+    if(this.message != '') {
+      this.userChats.push(chat);
+    }
+    this.message = ''
   }
 
 }

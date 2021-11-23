@@ -7,6 +7,8 @@ import { SharedModule } from '@shared/shared.module';
 import { FilterComponent } from './dialogs/filter/filter.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DocumentStatusComponent } from './components/document-status/document-status.component';
+import { NgxEmojiPickerModule } from 'ngx-emoji-picker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DocumentComponent, DocumentStatusComponent, FilterComponent],
@@ -15,6 +17,9 @@ import { DocumentStatusComponent } from './components/document-status/document-s
     DocumentsRoutingModule,
     SharedModule,
     MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxEmojiPickerModule.forRoot()
   ],
 })
 export class DocumentsModule {}

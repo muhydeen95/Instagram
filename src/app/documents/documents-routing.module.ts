@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DocumentStatusComponent } from './components/document-status/document-status.component';
 import { DocumentComponent } from './components/document/document.component';
 
-const routes: Routes = [{ path: '', component: DocumentComponent }];
+const routes: Routes = [{ path: '', component: DocumentComponent }, { path: 'document-status', component: DocumentStatusComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -6,9 +6,10 @@ import { DocumentComponent } from './components/document/document.component';
 import { SharedModule } from '@shared/shared.module';
 import { FilterComponent } from './dialogs/filter/filter.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DocumentStatusComponent } from './components/document-status/document-status.component';
 
 @NgModule({
-  declarations: [DocumentComponent, FilterComponent],
+  declarations: [DocumentComponent, DocumentStatusComponent, FilterComponent],
   imports: [
     CommonModule,
     DocumentsRoutingModule,

@@ -19,6 +19,27 @@ const routes: Routes = [
             (m) => m.LoginModule
           ),
       },
+      {
+        path: 'register',
+        loadChildren: () =>
+          import('../authentication/components/registration/registration.module').then(
+            (m) => m.RegistrationModule
+          ),
+      },
+      {
+        path: 'forgot-password',
+        loadChildren: () =>
+          import('../authentication/components/forgot-password/forgot-password.module').then(
+            (m) => m.ForgotPasswordModule
+          ),
+      },
+      {
+        path: 'reset-password',
+        loadChildren: () =>
+          import('../authentication/components/reset-password/reset-password.module').then(
+            (m) => m.ResetPasswordModule
+          ),
+      },
     ],
   },
 ];

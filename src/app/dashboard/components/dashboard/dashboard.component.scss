@@ -1,76 +1,24 @@
 @import "partials/abstract/variables";
 
 .dashboard-wrapper {
-  .admin_wrapper {
-    h2 {
-      font-weight: bold;
-      font-size: 2.35rem;
-    }
-    p {
-      font-size: 1.35rem;
-    }
-  }
-  img {
-    transition: all ease-in 0.2s;
-  }
-  .text {
-    transition: all ease-out 0.3s;
-    margin-left: 1rem;
-  }
-  .btn:hover {
-    img {
-      visibility: hidden;
-    }
-    .text {
-      margin-left: 0rem;
-    }
-  }
-
-  .btn:hover img {
-    visibility: hidden;
-    // display: none;
-  }
-
   .dashboard-content {
     margin-top: 3rem;
-  }
 
-  .dashboard-table {
-    h5 {
-      font-size: 1.75rem;
-      font-weight: bold;
-    }
-    table {
-      margin-bottom: 3rem !important;
-      thead {
-        background: $white-300;
-        border: 0.05rem solid $white-700;
-        tr {
-          th {
-            border-color: transparent;
-            color: $black-100;
-            padding: 1.5rem;
-            text-transform: capitalize;
-            font-size: 1.4rem;
-            font-weight: bold;
-          }
-        }
+    .table-head {
+      color: $blue-700;
+      h4 {
+        font-size: 1.75rem;
+        font-weight: bold;
       }
-      tbody {
-        tr {
-          border: 0.05rem solid $white-700;
-          td {
-            font-size: 1.4rem;
-            padding: 1.5rem;
-            border: transparent;
-            vertical-align: middle;
-            color: $text-body;
-          }
-          td:last-child {
-            color: $blue-300;
-          }
-        }
+      h6 {
+        font-size: 1.4rem;
+        text-decoration: underline;
       }
     }
+  }
+  .quick-actions-wrapper {
+    background-color: $blue-100;
+    border-radius: 0.8rem;
+    padding: 1.6rem 2.4rem;
   }
 }

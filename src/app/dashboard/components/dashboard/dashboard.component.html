@@ -1,121 +1,165 @@
 <div class="dashboard-wrapper m-0">
   <div class="container">
-    <div class="d-flex justify-content-between py-5 mb-5">
-      <div class="admin_wrapper">
-        <h2 class="font-weight-bold">
-          Good
-          {{
-            hour < 12
-              ? "morning"
-              : hour >= 12 && hour <= 17
-              ? "afternoon"
-              : "evening"
-          }}
-          {{ unique_name }}, wash your hands
+    <section class="dashboard-content mt-5">
+      <section class="my-5 quick-actions-wrapper">
+        <h4>Quick Actions</h4>
+        <div class="pt-4 row">
+          <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
+            <app-quick-actions-cards
+              tag="Click to upload Documents"
+              (clickAction)="openUploadDialog()"
+              route=""
+              image="folder"
+            ></app-quick-actions-cards>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
+            <app-quick-actions-cards
+              tag="Submit LC Application"
+              route="/application"
+              image="application"
+            ></app-quick-actions-cards>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
+            <app-quick-actions-cards
+              tag="Track my Documents"
+              route=""
+              (clickAction)="openTrackDialog()"
+              image="document"
+            ></app-quick-actions-cards>
+          </div>
+        </div>
+      </section>
+      <section class="row my-5">
+        <div class="col-md-6 col-lg-4">
+          <app-card
+            [name]="'Untreated Documents'"
+            [dayCount]="'0 Today'"
+            [count]="4"
+            color="info"
+            [loading]="false"
+            [route]="'documents'"
+          ></app-card>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <app-card
+            [name]="'Pending Documents'"
+            [dayCount]="'0 Today'"
+            [count]="10"
+            color="warning"
+            [loading]="false"
+            [route]="'documents'"
+          ></app-card>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <app-card
+            [name]="'Uploaded Documents'"
+            [dayCount]="'0 Today'"
+            [count]="10"
+            color="success"
+            [loading]="false"
+            [route]="'documents'"
+          ></app-card>
+        </div>
+      </section>
+
+      <section class="table-responsive my-5 pt-5">
+        <div class="d-flex justify-content-between table-head mb-4">
+          <h4>Recent Documents</h4>
+          <h6 class="click" routerLink="/documents">View All</h6>
+        </div>
+        <table class="table caption-top text-nowrap">
           <ng-container>
-            {{
-              hour < 12 ? "🌞" : hour >= 12 && hour <= 17 ? "🌤️" : "🌚"
-            }}</ng-container
-          >
-        </h2>
-        <p>Welcome to your dashboard</p>
-      </div>
-      <div>
-        <button
-          class="btn btn-green btn-lg text-center"
-          (click)="openDialog({ isEditing: false })"
-        >
-          <img class="pe-3" src="assets/icons/pen.svg" alt="" />
-          <div class="text">Company Info</div>
-        </button>
-      </div>
-    </div>
-    <div></div>
-
-    <div class="dashboard-content mt-5">
-      <div class="row">
-        <div class="col-md-6 col-lg-4">
-          <app-card [name]="'users'" [count]="4" [route]="'users'"></app-card>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <app-card
-            [name]="'departments'"
-            [count]="6"
-            [route]="'organization/departments'"
-          ></app-card>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <app-card
-            [name]="'units'"
-            [count]="10"
-            [route]="'organization/departments'"
-          ></app-card>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <app-card
-            [name]="'positions'"
-            [count]="10"
-            [route]="'organization/positions'"
-          ></app-card>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <app-card
-            [name]="'regions'"
-            [count]="10"
-            [route]="'organization/regions'"
-          ></app-card>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <app-card
-            [name]="'branches'"
-            [count]="10"
-            [route]="'organization/branches'"
-          ></app-card>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="dashboard-table table-responsive bg-white">
-          <h5 class="font-weight-bold py-3">Key Personnel</h5>
-          <table class="table text-nowrap" datatable>
             <thead>
-              <tr class="py-3">
-                <th>Name</th>
-                <th>Position</th>
+              <tr>
+                <th>Refrence No.</th>
+                <th>Document Type</th>
+                <th>Subject</th>
+                <th>Date submitted</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Oluwole Asalu</td>
-                <td>Head of Organization</td>
-                <td class="click" (click)="openDialog({ isEditing: false })">
-                  <img class="pr-2" src="assets/icons/update.svg" alt="" />
-                  Update
+          </ng-container>
+          <tbody>
+            <ng-container *ngIf="isFetchingDashboard">
+              <tr *ngFor="let dummy of [1, 2, 3, 4, 5]">
+                <td *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]">
+                  <app-docstream-skeleton-loader
+                    width="10rem"
+                    height="2rem"
+                  ></app-docstream-skeleton-loader>
+                </td></tr
+            ></ng-container>
+            <ng-container>
+              <tr *ngFor="let user of [1, 2, 3, 4, 5]">
+                <td>Table cell Ref</td>
+                <td>Table cell Doc type</td>
+                <td>Table cell Subject</td>
+                <td>Table cell Date</td>
+                <td>
+                  <span
+                    class="text-light-blue click"
+                    (click)="openDialog({ isEditing: false, editObj: user })"
+                  >
+                    <img src="assets/icons/eye.svg" class="me-2" />
+                    View details
+                  </span>
                 </td>
               </tr>
-              <tr>
-                <td>Jessica Timon</td>
-                <td>Head of Human Resource Unit</td>
-                <td class="click" (click)="openDialog({ isEditing: false })">
-                  <img class="pr-2" src="assets/icons/update.svg" alt="" />
-                  Update
-                </td>
-              </tr>
-              <tr>
-                <td>Abdulmateen Bello</td>
-                <td>Head of Archive</td>
-                <td class="click" (click)="openDialog({ isEditing: false })">
-                  <img class="pr-2" src="assets/icons/update.svg" alt="" />
-                  Update
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            </ng-container>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="table-responsive my-5 pt-5">
+        <div class="d-flex justify-content-between table-head mb-4">
+          <h4>Recent LC Application</h4>
+          <h6 class="click">View All</h6>
         </div>
-      </div>
-    </div>
+        <table class="table caption-top text-nowrap">
+          <ng-container>
+            <thead>
+              <tr>
+                <th>Applicant's Name</th>
+                <th>Beneficiary's Name</th>
+                <th>LC Value in figures</th>
+                <th>LC Expiry Date</th>
+                <th>Date Submitted</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+          </ng-container>
+          <tbody>
+            <ng-container *ngIf="isFetchingDashboard">
+              <tr *ngFor="let dummy of [1, 2, 3, 4, 5]">
+                <td *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]">
+                  <app-docstream-skeleton-loader
+                    width="10rem"
+                    height="2rem"
+                  ></app-docstream-skeleton-loader>
+                </td></tr
+            ></ng-container>
+            <ng-container>
+              <tr *ngFor="let user of [1, 2, 3, 4, 5]">
+                <td>Table cell Applicant's name</td>
+                <td>Table cell Beneficiary's Name</td>
+                <td>Table cell LC Value</td>
+                <td>Table cell Date</td>
+                <td>Table cell submitted</td>
+                <td>
+                  <span
+                    class="text-light-blue click"
+                    (click)="openDialog({ isEditing: false, editObj: user })"
+                  >
+                    <img src="assets/icons/eye.svg" class="me-2" />
+                    View details
+                  </span>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </section>
+    </section>
   </div>
 </div>

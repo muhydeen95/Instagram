@@ -13,6 +13,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LayoutComponent } from './components/layout/layout.component';
+import { CardComponent } from './components/card/card.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { HelpCenterComponent } from './components/help-center/help-center.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { LayoutComponent } from './components/layout/layout.component';
     DocstreamSkeletonLoaderComponent,
     NoDataComponent,
     ConfirmationModalComponent,
+    CardComponent,
+    SearchbarComponent,
+    HelpCenterComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +50,9 @@ import { LayoutComponent } from './components/layout/layout.component';
     NgxSkeletonLoaderModule,
     NoDataComponent,
     ConfirmationModalComponent,
+    CardComponent,
+    SearchbarComponent,
+    HelpCenterComponent
   ],
 })
 export class SharedModule {}

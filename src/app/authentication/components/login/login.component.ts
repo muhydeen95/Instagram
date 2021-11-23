@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from '@core/base/base/base.component';
 
 @Component({
@@ -7,10 +8,24 @@ import { BaseComponent } from '@core/base/base/base.component';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  public loginForm!: FormGroup;
   public isLoggingIn: boolean = false;
-  constructor(private _base: BaseComponent) {}
+  public showPassword: boolean = false;
+  constructor(
+    private _base: BaseComponent,
+    private fb: FormBuilder
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initLoginForm();
+  }
+
+  initLoginForm() {
+    this.loginForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    })
+  }
 
   public login(): void {
     this.isLoggingIn = true;

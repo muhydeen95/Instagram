@@ -1,0 +1,80 @@
+<form [formGroup]="stepFourForm">
+  <div class="info"><app-info></app-info></div>
+
+  <div class="row">
+    <div class="col-lg-6 mt-5">
+      <div class="form_group mb-5">
+        <label for="Shipment" class="form-label">Shipment/Dispatch from</label>
+        <input
+          type="text"
+          id="Shipment"
+          class="form-control"
+          placeholder="Enter Origin"
+        />
+      </div>
+    </div>
+    <div class="col-lg-6 mt-5">
+      <div class="form_group mb-5">
+        <label for="to" class="form-label">Shipment/Dispatch to </label>
+        <input
+          type="text"
+          id="to"
+          class="form-control"
+          placeholder="Enter Destination"
+        />
+      </div>
+    </div>
+    <div class="form_section">
+      <p>Partial Shipment</p>
+      <div class="line"></div>
+    </div>
+    <div *ngFor="let item of [1, 2]" class="col-12 mb-4">
+      <div>
+        <label class="check-container">
+          <input type="checkbox" name="permissions" id="{{ item }}" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <label for="{{ item }}" class="click ms-5"> Allowed </label>
+    </div>
+
+    <div class="form_section">
+      <p>Trans- shipment</p>
+      <div class="line"></div>
+    </div>
+    <div *ngFor="let item of [1, 2]" class="col-12 mb-4">
+      <div>
+        <label class="check-container">
+          <input type="checkbox" name="permissions" id="{{ item }}" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <label for="{{ item }}" class="click ms-5"> Allowed </label>
+    </div>
+  </div>
+  <div class="form_section">
+    <p>Oversees bank charges are for</p>
+    <div class="line"></div>
+  </div>
+  <div *ngFor="let item of [1, 2]" class="col-12 mb-4">
+    <div>
+      <label class="check-container">
+        <input type="checkbox" name="permissions" id="{{ item }}" />
+        <span class="checkmark"></span>
+      </label>
+    </div>
+    <label for="{{ item }}" class="click ms-5"> Beneficiary </label>
+  </div>
+
+  <div class="info">
+    <app-info [info_message]="'Special Condition'"></app-info>
+  </div>
+  <div class="footer">
+    <button class="btn btn-outline-grey btn-md me-4" (click)="back()">
+      Back
+    </button>
+    <button class="btn btn-green btn-md" (click)="openTermsDialog()">
+      Continue
+    </button>
+  </div>
+</form>

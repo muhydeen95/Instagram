@@ -1,0 +1,53 @@
+<form [formGroup]="stepThreeForm">
+  <div class="info"><app-info></app-info></div>
+
+  <div class="form_section">
+    <p>Available for payment upon presentation of the following Documents</p>
+    <div class="line"></div>
+  </div>
+  <div class="row">
+    <div *ngFor="let item of [1, 2, 3, 4]" class="col-12 mb-4">
+      <div>
+        <label class="check-container">
+          <input type="checkbox" name="permissions" id="{{ item }}" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <label for="{{ item }}" class="click ms-5">
+        2 Original Combined Certificate of Value and Origin (CCVO and 3 copies)
+      </label>
+    </div>
+    <div class="col-12 mt-4">
+      <div class="form_group mb-5">
+        <label for="firstName" class="form-label"
+          >Airway bill consigned to</label
+        >
+        <textarea
+          cols="30"
+          placeholder="Message"
+          rows="10"
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form_group mb-5">
+        <label for="others" class="form-label">Others</label>
+        <textarea
+          name=""
+          id="others"
+          cols="30"
+          placeholder="Message"
+          rows="10"
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <button class="btn btn-outline-grey btn-md me-4" (click)="back()">
+      Back
+    </button>
+    <button class="btn btn-green btn-md" (click)="continue()">Continue</button>
+  </div>
+</form>

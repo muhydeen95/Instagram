@@ -13,13 +13,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'register',
-    loadChildren: () =>
-      import('./authentication/authentication.module').then(
-        (m) => m.AuthenticationModule
-      ),
-  },
-  {
     path: '',
     component: LayoutComponent,
     // canActivate: [RouteGuard],
@@ -49,11 +42,6 @@ const routes: Routes = [
   {
     path: 'offline',
     component: OfflineComponent,
-  },
-  {
-    path: 'documents',
-    loadChildren: () =>
-      import('./documents/documents.module').then((m) => m.DocumentsModule),
   },
   {
     path: '**',

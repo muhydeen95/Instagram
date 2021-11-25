@@ -44,6 +44,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./profile/profile.module').then((m) => m.ProfileModule),
       },
+      {
+        path: 'application',
+        loadChildren: () =>
+          import('./application/application.module').then(
+            (m) => m.ApplicationModule
+          ),
+      },
     ],
   },
   {
@@ -55,6 +62,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./documents/documents.module').then((m) => m.DocumentsModule),
   },
+
   {
     path: '**',
     component: NotFoundComponent,

@@ -16,6 +16,7 @@ import {
 export class SearchbarComponent implements OnInit {
   @ViewChild('searchQuery') searchQueryElement!: ElementRef;
   @Input() btnName: string = '';
+  @Input() btnIcon: string = '';
   @Input() currentSort: string = 'Department';
   @Input() filterList: Array<string> = [];
   @Input() sortList: Array<string> = [];

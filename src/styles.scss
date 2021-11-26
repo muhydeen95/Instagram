@@ -74,7 +74,7 @@ $docstream-theme: mat.define-light-theme(
 
 .docstream_snackbar_success {
   background: $white-100;
-  box-shadow: 0rem 0.4rem 0.8rem rgba(24, 34, 83, 0.15);
+  box-shadow: 0rem 0.4rem 0.8rem rgba($blue-700, 0.15);
   border-radius: 0.8rem;
   font-size: 1.4rem;
   line-height: 2.1rem;

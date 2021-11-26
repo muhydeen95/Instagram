@@ -16,7 +16,7 @@ export class AllApplicationsComponent implements OnInit {
   }
 
   public gotToNewApplication() {
-    this.router.navigate(['/application/application-form/step-one'])
+    return this.router.navigate(['/application/application-form/step-one'])
   }
 
 }

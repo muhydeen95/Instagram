@@ -4,6 +4,7 @@
   font-family: $docstream_font !important;
   label {
     color: $blue-700;
+    font-weight: 600;
     font-size: 1.2rem;
     line-height: 1.8rem;
     span {
@@ -13,7 +14,8 @@
   }
 
   input,
-  select {
+  select,
+  textarea {
     width: 100%;
     margin-top: 0.4rem;
     height: 4.8rem;
@@ -33,6 +35,23 @@
       border: 0.1rem solid rgba($blue-700, 0.4);
       box-shadow: none;
     }
+  }
+  textarea {
+    height: 13.4rem;
+  }
+
+  input[type="date"] {
+    background: rgba($blue-700, 0.07) url("../../assets/icons/Calendar.svg")
+      no-repeat 97% 50%;
+    &:focus {
+      background: $white-100 url("../../assets/icons/Calendar.svg") no-repeat
+        97% 50%;
+    }
+  }
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    -webkit-appearance: none;
   }
 
   select {

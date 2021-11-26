@@ -16,6 +16,8 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { CardComponent } from './components/card/card.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { HelpCenterComponent } from './components/help-center/help-center.component';
+import { InfoComponent } from './components/info/info.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { HelpCenterComponent } from './components/help-center/help-center.compon
     ConfirmationModalComponent,
     CardComponent,
     SearchbarComponent,
-    HelpCenterComponent
+    HelpCenterComponent,
+    InfoComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +41,7 @@ import { HelpCenterComponent } from './components/help-center/help-center.compon
     RouterModule,
     NgxSkeletonLoaderModule,
     MatDialogModule,
+    NgSelectModule,
   ],
   exports: [
     LoadingButtonComponent,
@@ -52,7 +56,9 @@ import { HelpCenterComponent } from './components/help-center/help-center.compon
     ConfirmationModalComponent,
     CardComponent,
     SearchbarComponent,
-    HelpCenterComponent
+    HelpCenterComponent,
+    InfoComponent,
+    NgSelectModule,
   ],
 })
 export class SharedModule {}

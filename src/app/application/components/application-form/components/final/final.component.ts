@@ -8,8 +8,11 @@ import {
 } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 // import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
+import { SuccessModalComponent } from '@shared/components/success-modal/success-modal.component';
 import { ApplicationStepRoute } from '../../models/step.model';
 
 @Component({
@@ -55,7 +58,8 @@ export class FinalComponent implements OnInit {
   public options: any;
   constructor(
     private router: Router,
-    private fb: FormBuilder // private dialog: MatDialog
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -106,5 +110,45 @@ export class FinalComponent implements OnInit {
 
   public changeTab(tab: string): void {
     this.tab = tab;
+  }
+
+  public confirmApplication(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.height = '350px';
+    dialogConfig.width = '500px';
+    dialogConfig.data = {
+      title: 'Confirm Action',
+      modalMessage: `Would you like to crosscheck information you’ve provided or continue to submit form`,
+      actionButtonText: 'Submit form'
+    };
+    const dialogRef = this.dialog.open(
+      ConfirmationModalComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.applicationSuccess();
+      }
+    });
+  }
+
+  public applicationSuccess(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.height = '450px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = {
+      // title: 'Confirm Action',
+      modalMessage: `Your LC application has been submitted successfully. You will be notified once there is an update on you application `,
+      actionButtonText: 'Continue'
+    };
+    const dialogRef = this.dialog.open(
+      SuccessModalComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        
+      }
+    });
   }
 }

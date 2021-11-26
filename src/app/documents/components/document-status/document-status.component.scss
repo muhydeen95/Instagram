@@ -87,7 +87,7 @@
     }
     .chat_wrapper {
         min-height: 70vh;
-        padding: 3rem 3rem 2rem 3rem;
+        padding: 3rem 1rem 2rem 3rem;
         border-radius: .85rem;
         position: relative;
        #chatTemplate {
@@ -95,10 +95,6 @@
             overflow-y: scroll;
             padding-right: 2rem;
             padding-bottom: 3rem;
-            &::-webkit-scrollbar {
-                width: .5rem;
-                background: $blue-700;
-            }
         .recipient-message,
         .sender-message {
             max-width: 65%;
@@ -221,31 +217,36 @@
         }
         .chat_wrapper {
             min-height: 40vh;
-            padding: 3rem 3rem 2rem 3rem;
+            padding: 1.5rem;
             border-radius: .85rem;
-           .chat-template {
-               max-height: 100vh;
-                overflow-y: scroll;
-                &::-webkit-scrollbar {
-                    width: .5rem;
-                    background: $blue-700;
-                }
-            .recipient-message,
-            .sender-message {
-                max-width: 80%;
-                margin-top: 0rem;
+            #chatTemplate {
+              padding-right: 0rem;
+              .chat-template {
+                max-height: 100vh;
+                 overflow-y: scroll;
+                 &::-webkit-scrollbar {
+                     width: .5rem;
+                     background: $blue-700;
+                 }
+              .recipient-message,
+              .sender-message {
+                  max-width: 90%;
+                  margin-top: 0rem;
+              }
             }
-           }
+          }
         }
     }
 }
 
 @include maxSize($canvas: S) {
-    .chat-template {
-        max-height: 100vh;
-         overflow-y: scroll;
-         &::-webkit-scrollbar {
-            display: none;
-         }
+  .chat_wrapper {
+    #chatTemplate {
+      max-height: 100vh;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
+  }
 }

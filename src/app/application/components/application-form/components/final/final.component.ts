@@ -49,8 +49,8 @@ import { ApplicationStepRoute } from '../../models/step.model';
 export class FinalComponent implements OnInit {
   @ViewChild('signaturePad', { static: false }) signaturePad: any;
   public finalForm!: FormGroup;
-  public isSignatureUploaded: boolean = false;
   public tab: string = 'sign';
+  public isSignatureUploaded: boolean = false;
   public signaturePreview: any;
   public options: any;
   constructor(
@@ -62,9 +62,7 @@ export class FinalComponent implements OnInit {
     window.scroll(0, 0);
     this.initFinalForm();
     this.options = {
-      // minWidth: 5,
-      // maxWidth: 10,
-      penColor: 'rgb(0, 0, 0)',
+      penColor: 'rgb(70, 78, 117)',
       backgroundColor: 'transparent',
     };
   }

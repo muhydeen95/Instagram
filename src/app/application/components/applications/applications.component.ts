@@ -25,6 +25,7 @@ export class ApplicationsComponent implements OnInit {
   private sub: Subscription = new Subscription();
   public isFetchingLcApplications: boolean = false;
   public loading: boolean = false;
+  public btnName: string = 'New Application';
   public isInitialRequest: boolean = true;
   public date: string = new Date().toISOString();
   public lcApllications: any[] = [];

@@ -5,7 +5,8 @@
         <app-searchbar
           [canFilter]="true"
           (filterAction)="filterAction()"
-          btnName="New Application"
+          [btnName]="btnName"
+          [btnIcon]="'edit'"
           (btnAction)="openUploadDialog()"
         ></app-searchbar>
       </section>

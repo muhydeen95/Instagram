@@ -6,19 +6,16 @@ import { FilterDTO } from 'app/documents/models/documents.model';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
+  public date: string = new Date().toISOString();
+  @Output() event: EventEmitter<string> = new EventEmitter<string>();
 
-  @Output() event: EventEmitter<{
-    editObj: FilterDTO;
-    isEditing?: boolean;
-  }> = new EventEmitter<{ editObj: FilterDTO; isEditing?: boolean }>();
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogModel<FilterDTO>) {}
+  ngOnInit(): void {}
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogModel<FilterDTO>
-  ) {}
-  ngOnInit(): void {
+  public getDate(date: any): void {
+    this.event.emit(new Date(date).toISOString());
   }
-
 }

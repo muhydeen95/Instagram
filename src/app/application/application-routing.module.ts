@@ -10,7 +10,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'applications',
+    path: 'application',
     loadChildren: () =>
       import('./components/applications/applications.module').then(
         (m) => m.ApplicationsModule
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'application-form',
+    redirectTo: 'application',
     pathMatch: 'full',
   },
 ];

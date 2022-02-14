@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LocalStorageService } from '@shared/services/local-storage.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     }),
   ],
   providers: [
+    LocalStorageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -1,3 +1,3 @@
-export interface FilterDTO{
-
+export interface FilterDTO {
+  lCApplicationDate: string;
 }

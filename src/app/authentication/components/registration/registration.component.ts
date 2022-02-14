@@ -1,8 +1,14 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { BaseComponent } from '@core/base/base/base.component';
+// import { Router } from '@angular/router';
+import { AuthService } from '@auth/services/auth.service';
+import { RegisterRequestDTO } from '@auth/models/auth.model';
+// import { CurrentUserService } from '@core/services/current-user.service';
+import { Subscription } from 'rxjs';
 import { RegistrationDialogComponent } from './dialogs/registration-dialog/registration-dialog.component';
+import { ResponseModel } from 'app/models/response.model';
 
 @Component({
   selector: 'app-registration',
@@ -14,11 +20,18 @@ export class RegistrationComponent implements OnInit {
   public isLoggingIn: boolean = false;
   public showPassword: boolean = false;
   public showConfirmPassword: boolean = false;
+  public loginForm!: FormGroup;
+  private sub: Subscription = new Subscription();
+  public isSiginingUp: boolean = false;
+  public registerFormSubmitted: boolean = false;
+  public error_message: string = '';
 
   constructor(
-    private _base: BaseComponent, 
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    // private router: Router,
+    private _auth: AuthService,
+    // private _current: CurrentUserService
   ) { }
 
   ngOnInit() {
@@ -30,23 +43,47 @@ export class RegistrationComponent implements OnInit {
         firstName: ['', Validators.required],
         middleName: [''],
         lastName: ['', Validators.required],
-        phoneNumber1: ['', Validators.required],
+        PhoneNumber: ['', Validators.required],
         phoneNumber2: [''],
-        email: ['', Validators.required],
-        altEmail: [''],
+        email: ['', [Validators.required,  Validators.email]],
+        altEmail: ['',  Validators.email],
         organizationName: [''],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
-    })
+    }, {validators: [ this.passwordMatchValidator]})
   }
 
+  passwordMatchValidator(f: FormGroup) {
+    return f.get('password')?.value === f.get('confirmPassword')?.value ? null : {'passwordMismatch' : true};
+}
+
+
   public register(): void {
-    this.isLoggingIn = true;
-    setTimeout(() => {
-      this.isLoggingIn = false;
-      this._base.openSnackBar('Registration successfully', 'success');
-      this.openModal();
-    }, 3000);
+    this.registerFormSubmitted = true;
+    if (this.registrationForm.valid) {
+      this.isSiginingUp = true;
+      this._auth.register(this.registrationForm.value).subscribe({
+        next: (res: ResponseModel<RegisterRequestDTO>) => {
+          console.log(res);
+          this.isSiginingUp = false;
+          this.registerFormSubmitted = true;
+          // this.router.navigate(['authentication/login']);
+          this.openModal();
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error)
+          this.isSiginingUp = false;
+          this.registerFormSubmitted = true;
+          this.error_message = error?.error?.message;
+        },
+      });
+    }
+  }
+  public checkForKeyEnter(event: KeyboardEvent): void {
+    var key = event.key || event.keyCode;
+    if (key == 'Enter' || key == 8) {
+      this.register();
+    }
   }
 
   public openModal():void {
@@ -54,13 +91,17 @@ export class RegistrationComponent implements OnInit {
     dialogConfig.height = "365px";
     dialogConfig.width = "600px";
     dialogConfig.data = {
-      email: "firstname.lastname@domain.com",
+      email: `${this.registrationForm.get('email')?.value}`,
       counter: "00:05",
     }
     const dialogRef = this.dialog.open(RegistrationDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

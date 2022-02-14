@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CurrentUserService } from '@core/services/current-user.service';
 import { ResponseModel } from 'app/models/response.model';
 import { ChangePasswordDialogComponent } from 'app/profile/dialogs/change-password-dialog/change-password-dialog.component';
 import { Profile } from 'app/profile/models/user-profile.model';
@@ -22,10 +23,13 @@ export class ProfileComponent implements OnInit {
   constructor(
     public dialog: MatDialog, 
     private fb: FormBuilder,
-    private _profile: ProfileService
+    private _profile: ProfileService,
+    private _current: CurrentUserService
   ) { }
 
   ngOnInit() {
+    this.profile = this._current.getUserDetails();
+    this.getUserProfile();
     this.initUpdateProfileForm();
   }
 
@@ -62,10 +66,6 @@ export class ProfileComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = "480px";
     dialogConfig.width = "700px";
-    dialogConfig.data = {
-      email: "firstname.lastname@domain.com",
-      counter: "00:05",
-    }
     const dialogRef = this.dialog.open(ChangePasswordDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
       // console.log(`Dialog result: ${result}`);

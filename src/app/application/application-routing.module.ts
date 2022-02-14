@@ -17,8 +17,16 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'all-applications',
+    loadChildren: () =>
+      import('./components/all-applications/all-applications.module').then(
+        (m) => m.AllApplicationsModule
+      ),
+  },
+  {
     path: '',
-    redirectTo: 'application',
+
+    redirectTo: 'all-applications',
     pathMatch: 'full',
   },
 ];

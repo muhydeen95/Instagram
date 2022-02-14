@@ -74,7 +74,7 @@
   </div>
 
   <div class="profile__form mt-5">
-    <form [formGroup]="updateProfileForm">
+    <form [formGroup]="updateProfileForm" *ngIf="!isFetchingProfile" >
       <div class="row">
         <div class="col-lg-4">
           <div class="form_group mb-5">
@@ -199,5 +199,15 @@
         </button>
       </div>
     </form>
+
+    <div *ngIf="isFetchingProfile">
+      <div class="col-12" *ngFor="let item of [1,2,3,4]">
+        <app-docstream-skeleton-loader
+          class="pt-4 my-4"
+          width="100%"
+          height="2rem"
+        ></app-docstream-skeleton-loader>
+      </div>
+    </div>
   </div>
 </section>

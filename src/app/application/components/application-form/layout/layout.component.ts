@@ -60,6 +60,26 @@ export class LayoutComponent implements OnInit {
     return num < this.currentStep ? true : false;
   }
 
+  public step(step: number): void {
+    switch (true) {
+      case step == 1:
+        this.router.navigate([ApplicationStepRoute.step_one]);
+        break;
+      case step == 2:
+        this.router.navigate([ApplicationStepRoute.step_two]);
+        break;
+      case step == 3:
+        this.router.navigate([ApplicationStepRoute.step_three]);
+        break;
+      case step == 4:
+        this.router.navigate([ApplicationStepRoute.step_four]);
+        break;
+
+      default:
+        break;
+    }
+  }
+
   public setIsCurrent(num: number): boolean {
     return num === this.currentStep ? true : false;
   }

@@ -6,7 +6,7 @@
     <div class="line"></div>
   </div>
   <div class="row">
-    <div *ngFor="let item of [1, 2, 3, 4]" class="col-12 mb-4">
+    <div *ngFor="let item of presentations" class="col-12 mb-4">
       <div>
         <label class="check-container">
           <input type="checkbox" name="permissions" id="{{ item }}" />
@@ -14,7 +14,7 @@
         </label>
       </div>
       <label for="{{ item }}" class="click ms-5">
-        2 Original Combined Certificate of Value and Origin (CCVO and 3 copies)
+        {{ item }}
       </label>
     </div>
     <div class="col-12 mt-4">

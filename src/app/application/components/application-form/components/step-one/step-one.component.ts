@@ -15,6 +15,9 @@ export class StepOneComponent implements OnInit {
   public types: LCType[] = [{ name: 'New type', id: 1 }];
   public isFetchingTypes: boolean = false;
   public isFetchingTypesFailed: boolean = false;
+  public isLoading: boolean = false;
+  public isFetchingUssances: boolean = false;
+  public isFetchingUssancesFailed: boolean = false;
   public stepOneFormSubmitted: boolean = false;
   constructor(
     private _location: Location,
@@ -31,12 +34,31 @@ export class StepOneComponent implements OnInit {
     this.types.push({ id: Math.random(), name: `user${Math.random()}` });
   }
   public initStepOneForm(): void {
-    this.stepOneForm = this.fb.group({ id: [null, Validators.required] });
+    this.stepOneForm = this.fb.group({
+      lCApplicationDate: ['', Validators.required],
+      applicantName: ['', Validators.required],
+      applicantAddress: ['', Validators.required],
+      beneficiaryName: ['', Validators.required],
+      beneficiaryPhoneNumber: ['', Validators.required],
+      beneficiaryAddress: ['', Validators.required],
+      type: [null, Validators.required],
+      ussance: [null, Validators.required],
+      cFR: ['', Validators.required],
+      sight: [null, Validators.required],
+      location: ['', Validators.required],
+    });
   }
   public back(): void {
     this._location.back();
   }
+
   public continue(): void {
+    this.stepOneFormSubmitted = true;
+    if (this.stepOneForm.valid) {
+      this.isLoading = true;
+      const payload = this.stepOneForm.value;
+      console.log(payload);
+    }
     this.router.navigate([ApplicationStepRoute.step_two]);
   }
 }

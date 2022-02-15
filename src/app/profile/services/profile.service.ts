@@ -19,17 +19,17 @@ constructor(private http: HttpService) { }
   }
 
   public updateProfile(
-      getProfile: Profile
+      updateProfile: Profile
     ): Observable<ResponseModel<Profile>> {
       const endpoint = 'customer/profile/customer-update-profile';
-      return this.http.makeRequestWithData('post', endpoint, {}, getProfile);
+      return this.http.makeRequestWithData('post', endpoint, {}, updateProfile);
   }
 
   public changePassword(
-      getPassword: Password
+      changePassword: Password
     ): Observable<ResponseModel<Password>> {
       const endpoint = 'customer/profile/customer-update-profile';
-      return this.http.makeRequestWithData('post', endpoint, {}, getPassword);
+      return this.http.makeRequestWithData('post', endpoint, {}, changePassword);
   }
 
 }

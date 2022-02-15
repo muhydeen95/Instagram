@@ -28,8 +28,8 @@ export class ApplicationsComponent implements OnInit {
   public btnName: string = 'New Application';
   public isInitialRequest: boolean = true;
   public date: string = new Date().toISOString();
-  public lcApllications: any[] = [];
-  public searchQuery: SearchDTO = { ...InitialSearchDTO, search: '' };
+  public lcAplications: any[] = [];
+  public searchQuery: SearchDTO = { ...InitialSearchDTO, Search: '' };
   public paginatedResponse: PaginationResponse<any[]> = new PaginationResponse<
     any[]
   >();
@@ -47,10 +47,10 @@ export class ApplicationsComponent implements OnInit {
   ): void {
     if (pageEvent) {
       this.searchQuery = {
-        search: this.searchQuery.search,
-        pageNumber: pageEvent?.pageIndex + 1,
-        pageSize: pageEvent?.pageSize,
-        lCApplicationDate: this.date,
+        Search: this.searchQuery.Search,
+        PageNumber: pageEvent?.pageIndex + 1,
+        PageSize: pageEvent?.pageSize,
+        LCApplicationDate: this.date,
       };
     }
     initial ? (this.isInitialRequest = true) : (this.isInitialRequest = false);
@@ -58,11 +58,12 @@ export class ApplicationsComponent implements OnInit {
     this.sub.add(
       this._lc.searchAllLcApplications(this.searchQuery).subscribe({
         next: (res: ResponseModel<PaginationResponse<any[]>>) => {
+          console.log(res)
           this.isFetchingLcApplications = false;
           this.paginatedResponse = res?.response;
-          this.lcApllications = this.paginatedResponse.result;
-          this.searchQuery.pageNumber = this.paginatedResponse.pageNumber;
-          this.searchQuery.pageSize = this.paginatedResponse.pageSize;
+          this.lcAplications = this.paginatedResponse.result;
+          this.searchQuery.PageNumber = this.paginatedResponse.pageNumber;
+          this.searchQuery.PageSize = this.paginatedResponse.pageSize;
         },
         error: (error: ResponseModel<null>) => {
           this.isFetchingLcApplications = false;

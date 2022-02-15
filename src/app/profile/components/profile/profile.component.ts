@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { BaseComponent } from '@core/base/base/base.component';
 import { CurrentUserService } from '@core/services/current-user.service';
 import { ResponseModel } from 'app/models/response.model';
 import { ChangePasswordDialogComponent } from 'app/profile/dialogs/change-password-dialog/change-password-dialog.component';
@@ -19,12 +21,15 @@ export class ProfileComponent implements OnInit {
   public isFetchingProfile: boolean = false;
   public updateProfileForm!: FormGroup;
   public profile!: Profile;
+  public error_message: string = '';
+  public isError: boolean = false;
 
   constructor(
     public dialog: MatDialog, 
     private fb: FormBuilder,
     private _profile: ProfileService,
-    private _current: CurrentUserService
+    private _current: CurrentUserService,
+    private _base: BaseComponent
   ) { }
 
   ngOnInit() {
@@ -74,6 +79,23 @@ export class ProfileComponent implements OnInit {
 
   public submit() {
     this.isLoading = true;
+    this.sub.add(
+      this._profile.updateProfile(this.profile).subscribe({
+        next: (res: any) => {
+          this.isLoading = false;
+          this._base.openSnackBar(
+            'Great...!!!, Your action was successful',
+            'success'
+          );
+        },
+        error: (error: HttpErrorResponse) => {
+          this.isLoading = false;
+          this.isError = true;
+          console.log(error);
+          this.error_message = error?.error?.Id[0];
+        },
+      })
+    );
   }
 
 }

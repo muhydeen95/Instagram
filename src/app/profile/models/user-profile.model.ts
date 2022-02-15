@@ -8,3 +8,9 @@ export interface Profile {
     phoneNumber2: string,
     organizationName: string,
 }
+
+export interface Password {
+    oldPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
+}

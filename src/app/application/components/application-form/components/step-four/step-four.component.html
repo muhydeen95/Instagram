@@ -48,34 +48,35 @@
         <div class="">
           <label class="check-container">
             <input
-              type="checkbox"
-              name="permissions"
-              id="Partial"
+              type="radio"
+              name="partialShipment"
+              id="Partial1"
+              [value]="shipmentStatusEnum.ALLOWED"
               formControlName="partialShipment"
-              [ngClass]="{
-                'is-invalid':
-                  (stepFourForm.get('partialShipment')!.errors &&
-                    stepFourForm.get('partialShipment')!.touched) ||
-                  (stepFourForm.get('partialShipment')!.errors &&
-                    stepFourFormSubmitted)
-              }"
             />
-            <span
-              class="checkmark"
-              [ngClass]="{
-                'is-invalid':
-                  (stepFourForm.get('partialShipment')!.errors &&
-                    stepFourForm.get('partialShipment')!.touched) ||
-                  (stepFourForm.get('partialShipment')!.errors &&
-                    stepFourFormSubmitted)
-              }"
-            ></span>
+            <span class="checkmark"></span>
           </label>
         </div>
         <label for="Partial" class="click ms-5"> Allowed </label>
       </div>
     </div>
-
+    <div class="col-12 mb-4">
+      <div class="form_group">
+        <div class="">
+          <label class="check-container">
+            <input
+              type="radio"
+              name="partialShipment"
+              id="partial2"
+              formControlName="partialShipment"
+              [value]="shipmentStatusEnum.PROHIBITED"
+            />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <label for="Partial" class="click ms-5"> Prohibited </label>
+      </div>
+    </div>
     <div class="form_section">
       <p>Trans- shipment</p>
       <div class="line"></div>
@@ -85,31 +86,33 @@
         <div class="">
           <label class="check-container">
             <input
-              type="checkbox"
-              name="permissions"
+              type="radio"
+              name="transShipment"
               id="Trans"
               formControlName="transShipment"
-              [ngClass]="{
-                'is-invalid':
-                  (stepFourForm.get('transShipment')!.errors &&
-                    stepFourForm.get('transShipment')!.touched) ||
-                  (stepFourForm.get('transShipment')!.errors &&
-                    stepFourFormSubmitted)
-              }"
+              [value]="shipmentStatusEnum.ALLOWED"
             />
-            <span
-              class="checkmark"
-              [ngClass]="{
-                'is-invalid':
-                  (stepFourForm.get('transShipment')!.errors &&
-                    stepFourForm.get('transShipment')!.touched) ||
-                  (stepFourForm.get('transShipment')!.errors &&
-                    stepFourFormSubmitted)
-              }"
-            ></span>
+            <span class="checkmark"></span>
           </label>
         </div>
         <label for="Trans" class="click ms-5"> Allowed </label>
+      </div>
+    </div>
+    <div class="col-12 mb-4">
+      <div class="form_group">
+        <div class="">
+          <label class="check-container">
+            <input
+              type="radio"
+              name="transShipment"
+              id="Trans2"
+              formControlName="transShipment"
+              [value]="shipmentStatusEnum.PROHIBITED"
+            />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <label for="Trans2" class="click ms-5"> Prohibited </label>
       </div>
     </div>
   </div>
@@ -122,34 +125,35 @@
       <div class="">
         <label class="check-container">
           <input
-            type="checkbox"
-            name="permissions"
-            id="Oversees"
+            type="radio"
+            name="overseesBankCharges"
+            id="overseesBankCharges1"
+            [value]="bankChargesEnum.BENEFICIARY"
             formControlName="overseesBankCharges"
-            [ngClass]="{
-              'is-invalid':
-                (stepFourForm.get('overseesBankCharges')!.errors &&
-                  stepFourForm.get('overseesBankCharges')!.touched) ||
-                (stepFourForm.get('overseesBankCharges')!.errors &&
-                  stepFourFormSubmitted)
-            }"
           />
-          <span
-            class="checkmark"
-            [ngClass]="{
-              'is-invalid':
-                (stepFourForm.get('overseesBankCharges')!.errors &&
-                  stepFourForm.get('overseesBankCharges')!.touched) ||
-                (stepFourForm.get('overseesBankCharges')!.errors &&
-                  stepFourFormSubmitted)
-            }"
-          ></span>
+          <span class="checkmark"></span>
         </label>
       </div>
-      <label for="Oversees" class="click ms-5"> Allowed </label>
+      <label for="Oversees" class="click ms-5"> Beneficiary </label>
     </div>
   </div>
-
+  <div class="col-12 mb-5">
+    <div class="form_group">
+      <div class="">
+        <label class="check-container">
+          <input
+            type="radio"
+            name="overseesBankCharges"
+            id="overseesBankCharges2"
+            formControlName="overseesBankCharges"
+            [value]="bankChargesEnum.APPLICANT"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <label for="Oversees" class="click ms-5"> Applicant </label>
+    </div>
+  </div>
   <div class="info">
     <app-info [info_message]="'Special Condition'">
       <div content>

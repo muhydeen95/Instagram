@@ -17,6 +17,7 @@
               name="file-1"
               id="file-1"
               accept="image/png,image/jpeg,image/jpg"
+              (change)="changeProfilePic($event)"
             />
           </div>
         </div>
@@ -74,7 +75,7 @@
 
   <div class="profile__form mt-5">
     <app-error *ngIf="isError">{{ error_message }}</app-error>
-    <form [formGroup]="updateProfileForm" *ngIf="!isFetchingProfile" >
+    <form novalidate [formGroup]="updateProfileForm" *ngIf="!isFetchingProfile" >
       <div class="row">
         <div class="col-lg-4">
           <div class="form_group mb-5">
@@ -87,6 +88,7 @@
               class="form-control"
               placeholder="Enter First Name"
               formControlName="firstName"
+              [readonly]="!isEditing"
             />
           </div>
         </div>
@@ -101,6 +103,7 @@
               class="form-control"
               placeholder="Enter Middle Name"
               formControlName="middleName"
+              [readonly]="!isEditing"
             />
           </div>
         </div>
@@ -115,6 +118,7 @@
               class="form-control"
               placeholder="Enter Last Name"
               formControlName="lastName"
+              [readonly]="!isEditing"
             />
           </div>
         </div>
@@ -129,6 +133,7 @@
               class="form-control"
               placeholder="Enter phone number"
               formControlName="phoneNumber"
+              [readonly]="!isEditing"
             />
           </div>
         </div>
@@ -143,6 +148,7 @@
               class="form-control"
               placeholder="Enter alternate phone number"
               formControlName="alternatePhoneNumber"
+              [readonly]="!isEditing"
             />
           </div>
         </div>
@@ -157,6 +163,7 @@
               class="form-control"
               placeholder="Email address"
               formControlName="email"
+              [readonly]="!isEditing"
             />
           </div>
         </div>
@@ -171,6 +178,7 @@
               class="form-control"
               placeholder="Enter alternate email address"
               formControlName="AlternateEmail"
+              [readonly]="!isEditing"
             />
           </div>
         </div>
@@ -185,15 +193,18 @@
               class="form-control"
               placeholder="Enter organization name"
               formControlName="organizationName"
+              [readonly]="!isEditing"
             />
           </div>
         </div>
       </div>
       <hr>
       <div class="d-flex justify-content-end">
-        <button class="btn wrapper__login_btn" (click)="submit()">
+        <button 
+          class="btn wrapper__login_btn" 
+          (click)="isEditing ? submit() : toggleEdit()">
           <app-loading-button
-            [text]="'Save Changes'"
+            [text]="isEditing ? 'Save Changes' : 'Edit Profile'"
             [condition]="isLoading"
           ></app-loading-button>
         </button>

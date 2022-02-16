@@ -4,9 +4,20 @@ export interface Dashboard {
 }
 
 export interface UploadDocDTO {
-  type: number;
-  subject: string;
-  file: string;
+  DocumentType: number;
+  SubjectMatter: string;
+  Files: Array<any>;
+}
+
+export interface DocTypeDTO {
+  createdDate: string;
+  documentTypeDepartments: Array<{
+    departmentId: number;
+    departmentName: string;
+  }>;
+  documentTypeId: number;
+  isActive: boolean;
+  name: string;
 }
 
 export interface DashboardResponseDTO {

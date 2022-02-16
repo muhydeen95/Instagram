@@ -3,24 +3,25 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'application-form',
+    path: '',
+    loadChildren: () =>
+      import('./components/applications/applications.module').then(
+        (m) => m.ApplicationsModule
+      ),
+  },
+  {
+    path: 'form',
     loadChildren: () =>
       import('./components/application-form/application-form.module').then(
         (m) => m.ApplicationFormModule
       ),
   },
   {
-    path: 'applications',
+    path: 'detail/:id',
     loadChildren: () =>
-      import('./components/applications/applications.module').then(
-        (m) => m.ApplicationsModule
-      ),
-  },
-
-  {
-    path: '',
-    redirectTo: 'applications',
-    pathMatch: 'full',
+      import(
+        './components/application-details/application-details.module'
+      ).then((m) => m.ApplicationDetailsModule),
   },
 ];
 

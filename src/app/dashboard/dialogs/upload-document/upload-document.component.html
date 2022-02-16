@@ -94,17 +94,6 @@
             }}<span class="mr-2" *ngIf="i != fileNames.length - 1">,</span>
           </span>
         </div>
-        <input
-          type="file"
-          name=""
-          hidden
-          id=""
-          #fileInput
-          class=""
-          [accept]="AcceptedFileTypes"
-          multiple
-          (change)="onFileDropped($event.target)"
-        />
       </label>
     </div>
     <mat-dialog-actions align="end">

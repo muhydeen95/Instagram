@@ -191,7 +191,9 @@ export class FinalComponent implements OnInit {
   public addFiles(event: any): void {
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.supportingDocuments.push(event.target.files[i]);
+        this.supportingDocuments.includes(event.target.files[i])
+          ? null
+          : this.supportingDocuments.push(event.target.files[i]);
       }
       this.finalForm.patchValue({
         supportingDocument: this.supportingDocuments,
@@ -241,6 +243,9 @@ export class FinalComponent implements OnInit {
         this.isLoading = false;
         this._step.clearFormFromStorage();
         this.openSucessDialog();
+      },
+      error: (e) => {
+        this.isLoading = false;
       },
     });
   }

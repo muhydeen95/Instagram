@@ -7,6 +7,8 @@ import { TermsComponent } from '../../dialogs/terms/terms.component';
 import {
   lCApplicationDTO,
   INITIAL_FORM_DATA,
+  ShipmentStatusEnum,
+  BankChargesEnum,
 } from '../../models/lc-application.model';
 import { ApplicationStepRoute } from '../../models/step.model';
 import { CurrentStepService } from '../../services/current-step.service';
@@ -21,6 +23,9 @@ export class StepFourComponent implements OnInit {
   public isLoading: boolean = false;
   public stepFourFormSubmitted: boolean = false;
   public applicationForm: lCApplicationDTO = INITIAL_FORM_DATA;
+  public shipmentStatusEnum = ShipmentStatusEnum;
+  public bankChargesEnum = BankChargesEnum;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -47,15 +52,15 @@ export class StepFourComponent implements OnInit {
       ],
       dispatchTo: [this.applicationForm.dispatchTo ?? '', Validators.required],
       partialShipment: [
-        this.applicationForm.partialShipment ?? null,
+        this.applicationForm.partialShipment ?? 1,
         Validators.required,
       ],
       transShipment: [
-        this.applicationForm.transShipment ?? null,
+        this.applicationForm.transShipment ?? 1,
         Validators.required,
       ],
       overseesBankCharges: [
-        this.applicationForm.overseesBankCharges ?? null,
+        this.applicationForm.overseesBankCharges ?? 1,
         Validators.required,
       ],
     });

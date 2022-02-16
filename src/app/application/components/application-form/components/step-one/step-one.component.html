@@ -85,7 +85,7 @@
           type="tel"
           id="benTel"
           class="form-control"
-          placeholder="Enter Phone Number"
+          placeholder="+234**********"
           formControlName="beneficiaryPhoneNumber"
           [ngClass]="{
             'is-invalid':
@@ -95,6 +95,17 @@
                 stepOneFormSubmitted)
           }"
         />
+        <div
+          class="invalid-feedback mt-0 p-0"
+          *ngIf="
+            (stepOneForm.get('beneficiaryPhoneNumber')!.touched &&
+              stepOneForm.get('beneficiaryPhoneNumber')!.hasError('pattern')) ||
+            (stepOneForm.get('beneficiaryPhoneNumber')!.hasError('pattern') &&
+              stepOneFormSubmitted)
+          "
+        >
+          Please enter a valid phone number
+        </div>
       </div>
     </div>
     <div class="col-12">

@@ -133,3 +133,12 @@ export const LC_Type: { id: number; type: string }[] = [
     type: 'Transferrable',
   },
 ];
+
+export enum ShipmentStatusEnum {
+  ALLOWED = 1,
+  PROHIBITED = 2,
+}
+export enum BankChargesEnum {
+  BENEFICIARY = 1,
+  APPLICANT = 2,
+}

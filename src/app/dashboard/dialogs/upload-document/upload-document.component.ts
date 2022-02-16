@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BaseComponent } from '@core/base/base/base.component';
 import { DialogModel } from '@shared/components/models/dialog.model';
 import { DocTypeDTO, UploadDocDTO } from 'app/dashboard/models/dashboard.model';
 import { DashboardService } from 'app/dashboard/services/dashboard.service';
@@ -30,8 +31,7 @@ export class UploadDocumentComponent implements OnInit {
     editObj: UploadDocDTO;
     isEditing?: boolean;
   }> = new EventEmitter<{ editObj: UploadDocDTO; isEditing?: boolean }>();
-  public AcceptedFileTypes: string =
-    'image/png,image/jpeg,image/jpg,application/PDF,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/plain,application/msword,text/csv,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+  public AcceptedFileTypes: string = 'application/PDF';
   public fileNames: Array<string> = [];
   public uploadForm!: FormGroup;
   public isLoading: boolean = false;
@@ -45,6 +45,7 @@ export class UploadDocumentComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private _base: BaseComponent,
     private dashboardService: DashboardService,
     @Inject(MAT_DIALOG_DATA) public data: DialogModel<UploadDocDTO>
   ) {}
@@ -91,6 +92,10 @@ export class UploadDocumentComponent implements OnInit {
               editObj: this.uploadForm.value,
             });
             this.close.nativeElement.click();
+            this._base.openSnackBar(
+              'Document uploaded successfully',
+              'success'
+            );
           },
           error: (error: HttpErrorResponse) => {
             this.isLoading = false;

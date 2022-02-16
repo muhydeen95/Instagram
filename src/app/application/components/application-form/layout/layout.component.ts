@@ -29,6 +29,27 @@ export class LayoutComponent implements OnInit {
 
   public back(): void {
     this._location.back();
+    switch (true) {
+      case this.currentStep == 1:
+        this.router.navigate(['application']);
+        break;
+      case this.currentStep == 2:
+        this.router.navigate([ApplicationStepRoute.step_one]);
+        break;
+      case this.currentStep == 3:
+        this.router.navigate([ApplicationStepRoute.step_two]);
+        break;
+      case this.currentStep == 4:
+        this.router.navigate([ApplicationStepRoute.step_three]);
+        break;
+      case this.currentStep == 5:
+        this.router.navigate([ApplicationStepRoute.step_four]);
+        break;
+
+      default:
+        this.router.navigate(['application']);
+        break;
+    }
   }
   public setStep() {
     this.router.events.subscribe((route) => {
@@ -58,6 +79,26 @@ export class LayoutComponent implements OnInit {
 
   public setIsCompleted(num: number): boolean {
     return num < this.currentStep ? true : false;
+  }
+
+  public step(step: number): void {
+    switch (true) {
+      case step == 1:
+        this.router.navigate([ApplicationStepRoute.step_one]);
+        break;
+      case step == 2:
+        this.router.navigate([ApplicationStepRoute.step_two]);
+        break;
+      case step == 3:
+        this.router.navigate([ApplicationStepRoute.step_three]);
+        break;
+      case step == 4:
+        this.router.navigate([ApplicationStepRoute.step_four]);
+        break;
+
+      default:
+        break;
+    }
   }
 
   public setIsCurrent(num: number): boolean {

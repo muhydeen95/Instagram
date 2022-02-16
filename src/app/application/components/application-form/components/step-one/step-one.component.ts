@@ -2,8 +2,14 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '@shared/services/local-storage.service';
+import {
+  INITIAL_FORM_DATA,
+  lCApplicationDTO,
+  LC_Type,
+} from '../../models/lc-application.model';
 import { ApplicationStepRoute } from '../../models/step.model';
-import { LCType } from '../../models/types.model';
+import { CurrentStepService } from '../../services/current-step.service';
 
 @Component({
   selector: 'app-step-one',
@@ -12,31 +18,79 @@ import { LCType } from '../../models/types.model';
 })
 export class StepOneComponent implements OnInit {
   public stepOneForm!: FormGroup;
-  public types: LCType[] = [{ name: 'New type', id: 1 }];
+  public types: { id: number; type: string }[] = LC_Type;
   public isFetchingTypes: boolean = false;
   public isFetchingTypesFailed: boolean = false;
+  public isLoading: boolean = false;
+  public isFetchingUssances: boolean = false;
+  public isFetchingUssancesFailed: boolean = false;
   public stepOneFormSubmitted: boolean = false;
+  public applicationForm: lCApplicationDTO = INITIAL_FORM_DATA;
   constructor(
     private _location: Location,
     private router: Router,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private _step: CurrentStepService,
+    private _localStorageAS: LocalStorageService
+  ) {
+    this._localStorageAS.watch('lc_application_form').subscribe((res) => {
+      if (res) {
+        this.applicationForm = JSON.parse(res);
+      }
+    });
+  }
 
   ngOnInit(): void {
     window.scroll(0, 0);
     this.initStepOneForm();
   }
 
-  public getTypes(): void {
-    this.types.push({ id: Math.random(), name: `user${Math.random()}` });
-  }
   public initStepOneForm(): void {
-    this.stepOneForm = this.fb.group({ id: [null, Validators.required] });
+    this.stepOneForm = this.fb.group({
+      lCApplicationDate: [
+        this.applicationForm.lCApplicationDate ?? '',
+        Validators.required,
+      ],
+      applicantName: [
+        this.applicationForm.applicantName ?? '',
+        Validators.required,
+      ],
+      applicantAddress: [
+        this.applicationForm.applicantAddress ?? '',
+        Validators.required,
+      ],
+      beneficiaryName: [
+        this.applicationForm.beneficiaryName ?? '',
+        Validators.required,
+      ],
+      beneficiaryPhoneNumber: [
+        this.applicationForm.beneficiaryPhoneNumber ?? '',
+        Validators.required,
+      ],
+      beneficiaryAddress: [
+        this.applicationForm.beneficiaryAddress ?? '',
+        Validators.required,
+      ],
+      type: [this.applicationForm.type ?? null, Validators.required],
+      ussance: [this.applicationForm.ussance ?? null, Validators.required],
+      cFR: [this.applicationForm.cFR ?? '', Validators.required],
+      sight: [this.applicationForm.sight ?? null, Validators.required],
+      location: [this.applicationForm.location ?? '', Validators.required],
+    });
   }
   public back(): void {
     this._location.back();
   }
+
   public continue(): void {
-    this.router.navigate([ApplicationStepRoute.step_two]);
+    this.stepOneFormSubmitted = true;
+    if (this.stepOneForm.valid) {
+      this.isLoading = true;
+      const stepOnePayload = this.stepOneForm.value;
+      const payload = { ...this.applicationForm, ...stepOnePayload };
+      console.log(payload);
+      this._step.storeCurrentStepData(payload);
+      this.router.navigate([ApplicationStepRoute.step_two]);
+    }
   }
 }

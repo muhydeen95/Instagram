@@ -69,9 +69,7 @@ export class StepOneComponent implements OnInit {
         this.applicationForm.beneficiaryPhoneNumber ?? '',
         [
           Validators.required,
-          Validators.pattern(
-            '^([0-9]{3})(((8)(0|1))|((7)(0))|((9)(0)))\\d{8}$'
-          ),
+          Validators.pattern('^0(((8)(0|1))|((7)(0))|((9)(0)))\\d{8}$'),
         ],
         ,
       ],

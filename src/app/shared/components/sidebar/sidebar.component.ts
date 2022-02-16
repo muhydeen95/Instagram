@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CurrentUserService } from '@core/services/current-user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,7 +11,7 @@ export class SidebarComponent implements OnInit {
   public showMinimizedMenu: boolean = false;
 
   @Output() showMinimized = new EventEmitter();
-  constructor() {}
+  constructor(private _currentUser: CurrentUserService) {}
 
   ngOnInit(): void {}
 
@@ -26,6 +27,6 @@ export class SidebarComponent implements OnInit {
   }
 
   public logout(): void {
-    // this._currentUser.logOut();
+    this._currentUser.logOut();
   }
 }

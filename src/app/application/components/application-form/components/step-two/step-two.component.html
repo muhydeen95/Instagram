@@ -11,6 +11,13 @@
           placeholder="Message"
           rows="10"
           class="form-control"
+          formControlName="itemsOfImport"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('itemsOfImport')!.errors &&
+                stepTwoForm.get('itemsOfImport')!.touched) ||
+              (stepTwoForm.get('itemsOfImport')!.errors && stepTwoFormSubmitted)
+          }"
         ></textarea>
       </div>
     </div>
@@ -21,7 +28,15 @@
           type="number"
           id="middleName"
           class="form-control"
-          placeholder="LC alue"
+          placeholder="LC value"
+          formControlName="valueInFigures"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('valueInFigures')!.errors &&
+                stepTwoForm.get('valueInFigures')!.touched) ||
+              (stepTwoForm.get('valueInFigures')!.errors &&
+                stepTwoFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -35,6 +50,13 @@
           placeholder="LC Value in Words"
           rows="10"
           class="form-control"
+          formControlName="valueInWords"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('valueInWords')!.errors &&
+                stepTwoForm.get('valueInWords')!.touched) ||
+              (stepTwoForm.get('valueInWords')!.errors && stepTwoFormSubmitted)
+          }"
         ></textarea>
       </div>
     </div>
@@ -48,6 +70,14 @@
           id="phoneNo"
           class="form-control"
           placeholder="Enter a Number"
+          formControlName="proformaInvoiceNumber"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('proformaInvoiceNumber')!.errors &&
+                stepTwoForm.get('proformaInvoiceNumber')!.touched) ||
+              (stepTwoForm.get('proformaInvoiceNumber')!.errors &&
+                stepTwoFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -57,10 +87,18 @@
           >Performance Invoice Date
         </label>
         <input
-          type="date"
+          type="datetime-local"
           id="altPhoneNo"
           class="form-control"
           placeholder="Select Date"
+          formControlName="proformaInvoiceDate"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('proformaInvoiceDate')!.errors &&
+                stepTwoForm.get('proformaInvoiceDate')!.touched) ||
+              (stepTwoForm.get('proformaInvoiceDate')!.errors &&
+                stepTwoFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -76,6 +114,13 @@
           id="mfNumber"
           class="form-control"
           placeholder="Email a Number"
+          formControlName="mFNumber"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('mFNumber')!.errors &&
+                stepTwoForm.get('mFNumber')!.touched) ||
+              (stepTwoForm.get('mFNumber')!.errors && stepTwoFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -88,6 +133,13 @@
           id="ba/ca number"
           class="form-control"
           placeholder="Enter a Number"
+          formControlName="bANumber"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('bANumber')!.errors &&
+                stepTwoForm.get('bANumber')!.touched) ||
+              (stepTwoForm.get('bANumber')!.errors && stepTwoFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -95,10 +147,17 @@
       <div class="form_group mb-5">
         <label for="validUntil" class="form-label">Valid Until </label>
         <input
-          type="date"
+          type="datetime-local"
           id="validUntil"
           class="form-control"
           placeholder="Select a date"
+          formControlName="validUntil"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('validUntil')!.errors &&
+                stepTwoForm.get('validUntil')!.touched) ||
+              (stepTwoForm.get('validUntil')!.errors && stepTwoFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -108,22 +167,37 @@
           >Latest Shipment/Airlift Date</label
         >
         <input
-          type="date"
+          type="datetime-local"
           id="shipment"
           class="form-control"
           placeholder="Select date"
+          formControlName="latestShipment"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('latestShipment')!.errors &&
+                stepTwoForm.get('latestShipment')!.touched) ||
+              (stepTwoForm.get('latestShipment')!.errors &&
+                stepTwoFormSubmitted)
+          }"
         />
       </div>
     </div>
+
     <div class="col-lg-6">
       <div class="form_group">
         <label for="expiry" class="form-label">LC Expiry Date </label>
         <input
-          type="date"
+          type="datetime-local"
           id="expiry"
           class="form-control"
-          placeholder="Select Date
-                "
+          placeholder="Select Date"
+          formControlName="expiryDate"
+          [ngClass]="{
+            'is-invalid':
+              (stepTwoForm.get('expiryDate')!.errors &&
+                stepTwoForm.get('expiryDate')!.touched) ||
+              (stepTwoForm.get('expiryDate')!.errors && stepTwoFormSubmitted)
+          }"
         />
       </div>
     </div>

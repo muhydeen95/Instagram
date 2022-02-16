@@ -13,13 +13,18 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button
+    (click)="action(false)"
     [mat-dialog-close]="false"
     class="btn btn-outline-green btn-md me-4 px-4"
     #close
   >
     Go Back
   </button>
-  <button [mat-dialog-close]="true" class="btn btn-green btn-md px-4">
+  <button
+    [mat-dialog-close]="true"
+    class="btn btn-green btn-md px-4"
+    (click)="action(true)"
+  >
     {{ modalData.actionButtonText }}
   </button>
 </mat-dialog-actions>

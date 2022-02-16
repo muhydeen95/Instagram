@@ -17,12 +17,14 @@ export interface SearchDTO {
   search: string;
   pageNumber: number;
   pageSize: number;
+  lCApplicationDate?: string;
 }
 
 export const InitialSearchDTO = {
   search: '',
   pageNumber: 1,
   pageSize: 5,
+  lCApplicationDate: new Date().toISOString(),
 };
 
 export const pageSizeOptionsDTO = [5, 10, 25, 100];

@@ -14,7 +14,7 @@ constructor(private http: HttpService) { }
   public getProfile(
       getProfile: Profile
     ): Observable<ResponseModel<Profile>> {
-      const endpoint = 'ArchiveFolders/search-archives';
+      const endpoint = 'customer/profile/customer-update-profile';
       return this.http.makeRequestWithData('post', endpoint, {}, getProfile);
   }
 

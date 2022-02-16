@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="wrapper_top">
+  <div class="wrapper_top click">
     <img src="assets/icons/back.svg" alt="" (click)="back()" />
     <span class="px-3">Go Back</span>
   </div>
@@ -10,6 +10,7 @@
     <div class="wrapper_form-wrapper--body">
       <div class="stepper-wrapper" *ngIf="currentStep != 5">
         <div
+          (click)="step(1)"
           class="stepper-item"
           [ngClass]="{
             active: setIsCurrent(1),
@@ -19,6 +20,7 @@
           <div class="step-counter">1</div>
         </div>
         <div
+          (click)="step(2)"
           class="stepper-item"
           [ngClass]="{
             active: setIsCurrent(2),
@@ -28,6 +30,7 @@
           <div class="step-counter">2</div>
         </div>
         <div
+          (click)="step(3)"
           class="stepper-item"
           [ngClass]="{
             active: setIsCurrent(3),
@@ -37,6 +40,7 @@
           <div class="step-counter">3</div>
         </div>
         <div
+          (click)="step(4)"
           class="stepper-item"
           [ngClass]="{
             active: setIsCurrent(4),

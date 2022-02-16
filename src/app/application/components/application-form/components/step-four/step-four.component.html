@@ -10,6 +10,14 @@
           id="Shipment"
           class="form-control"
           placeholder="Enter Origin"
+          formControlName="dispatchFrom"
+          [ngClass]="{
+            'is-invalid':
+              (stepFourForm.get('dispatchFrom')!.errors &&
+                stepFourForm.get('dispatchFrom')!.touched) ||
+              (stepFourForm.get('dispatchFrom')!.errors &&
+                stepFourFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -21,6 +29,13 @@
           id="to"
           class="form-control"
           placeholder="Enter Destination"
+          formControlName="dispatchTo"
+          [ngClass]="{
+            'is-invalid':
+              (stepFourForm.get('dispatchTo')!.errors &&
+                stepFourForm.get('dispatchTo')!.touched) ||
+              (stepFourForm.get('dispatchTo')!.errors && stepFourFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -28,53 +43,135 @@
       <p>Partial Shipment</p>
       <div class="line"></div>
     </div>
-    <div *ngFor="let item of [1, 2]" class="col-12 mb-4">
-      <div>
-        <label class="check-container">
-          <input type="checkbox" name="permissions" id="{{ item }}" />
-          <span class="checkmark"></span>
-        </label>
+    <div class="col-12 mb-4">
+      <div class="form_group">
+        <div class="">
+          <label class="check-container">
+            <input
+              type="checkbox"
+              name="permissions"
+              id="Partial"
+              formControlName="partialShipment"
+              [ngClass]="{
+                'is-invalid':
+                  (stepFourForm.get('partialShipment')!.errors &&
+                    stepFourForm.get('partialShipment')!.touched) ||
+                  (stepFourForm.get('partialShipment')!.errors &&
+                    stepFourFormSubmitted)
+              }"
+            />
+            <span
+              class="checkmark"
+              [ngClass]="{
+                'is-invalid':
+                  (stepFourForm.get('partialShipment')!.errors &&
+                    stepFourForm.get('partialShipment')!.touched) ||
+                  (stepFourForm.get('partialShipment')!.errors &&
+                    stepFourFormSubmitted)
+              }"
+            ></span>
+          </label>
+        </div>
+        <label for="Partial" class="click ms-5"> Allowed </label>
       </div>
-      <label for="{{ item }}" class="click ms-5"> Allowed </label>
     </div>
 
     <div class="form_section">
       <p>Trans- shipment</p>
       <div class="line"></div>
     </div>
-    <div *ngFor="let item of [1, 2]" class="col-12 mb-4">
-      <div>
-        <label class="check-container">
-          <input type="checkbox" name="permissions" id="{{ item }}" />
-          <span class="checkmark"></span>
-        </label>
+    <div class="col-12 mb-4">
+      <div class="form_group">
+        <div class="">
+          <label class="check-container">
+            <input
+              type="checkbox"
+              name="permissions"
+              id="Trans"
+              formControlName="transShipment"
+              [ngClass]="{
+                'is-invalid':
+                  (stepFourForm.get('transShipment')!.errors &&
+                    stepFourForm.get('transShipment')!.touched) ||
+                  (stepFourForm.get('transShipment')!.errors &&
+                    stepFourFormSubmitted)
+              }"
+            />
+            <span
+              class="checkmark"
+              [ngClass]="{
+                'is-invalid':
+                  (stepFourForm.get('transShipment')!.errors &&
+                    stepFourForm.get('transShipment')!.touched) ||
+                  (stepFourForm.get('transShipment')!.errors &&
+                    stepFourFormSubmitted)
+              }"
+            ></span>
+          </label>
+        </div>
+        <label for="Trans" class="click ms-5"> Allowed </label>
       </div>
-      <label for="{{ item }}" class="click ms-5"> Allowed </label>
     </div>
   </div>
   <div class="form_section">
     <p>Oversees bank charges are for</p>
     <div class="line"></div>
   </div>
-  <div *ngFor="let item of [1, 2]" class="col-12 mb-4">
-    <div>
-      <label class="check-container">
-        <input type="checkbox" name="permissions" id="{{ item }}" />
-        <span class="checkmark"></span>
-      </label>
+  <div class="col-12 mb-5">
+    <div class="form_group">
+      <div class="">
+        <label class="check-container">
+          <input
+            type="checkbox"
+            name="permissions"
+            id="Oversees"
+            formControlName="overseesBankCharges"
+            [ngClass]="{
+              'is-invalid':
+                (stepFourForm.get('overseesBankCharges')!.errors &&
+                  stepFourForm.get('overseesBankCharges')!.touched) ||
+                (stepFourForm.get('overseesBankCharges')!.errors &&
+                  stepFourFormSubmitted)
+            }"
+          />
+          <span
+            class="checkmark"
+            [ngClass]="{
+              'is-invalid':
+                (stepFourForm.get('overseesBankCharges')!.errors &&
+                  stepFourForm.get('overseesBankCharges')!.touched) ||
+                (stepFourForm.get('overseesBankCharges')!.errors &&
+                  stepFourFormSubmitted)
+            }"
+          ></span>
+        </label>
+      </div>
+      <label for="Oversees" class="click ms-5"> Allowed </label>
     </div>
-    <label for="{{ item }}" class="click ms-5"> Beneficiary </label>
   </div>
 
   <div class="info">
-    <app-info [info_message]="'Special Condition'"></app-info>
+    <app-info [info_message]="'Special Condition'">
+      <div content>
+        <ul class="ms-4 mt-2">
+          <li>
+            All documents must bear LC Number and Form M MF and BA/CB Number
+          </li>
+          <li>
+            Documents must be presented not later than 21 days after shipment
+          </li>
+          <li>
+            Shipment document including bill of lading dated prior to LC opening
+            date is not acceptable
+          </li>
+        </ul>
+      </div></app-info
+    >
   </div>
   <div class="footer">
     <button class="btn btn-outline-grey btn-md me-4" (click)="back()">
       Back
     </button>
-    <button class="btn btn-green btn-md" (click)="openTermsDialog()">
-      Continue
-    </button>
+    <button class="btn btn-green btn-md" (click)="continue()">Continue</button>
   </div>
 </form>

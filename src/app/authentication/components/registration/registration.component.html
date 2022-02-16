@@ -288,8 +288,8 @@
                 formControlName="ConfirmPassword"
                 [ngClass]="{
                   'is-invalid':
-                    (registrationForm.get('ConfirmPassword')?.errors &&
-                    registrationForm.get('ConfirmPassword')?.touched)
+                    registrationForm.errors &&
+                    registrationForm.get('ConfirmPassword')?.touched
                 }"
               />
               <i

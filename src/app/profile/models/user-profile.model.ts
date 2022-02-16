@@ -3,9 +3,9 @@ export interface Profile {
     middleName: string,
     lastName: string,
     email: string,
-    altEmail: string,
-    phoneNumber1: string,
-    phoneNumber2: string,
+    alternateEmail: string,
+    phoneNumber: string,
+    alternatePhoneNumber: string,
     organizationName: string,
 }
 

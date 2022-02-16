@@ -48,13 +48,13 @@ export class RegistrationComponent implements OnInit {
         Email: ['', [Validators.required,  Validators.email]],
         AlternateEmail: ['',  Validators.email],
         OrganizationName: [''],
-        Password: ['', Validators.required],
-        ConfirmPassword: ['', Validators.required],
+        Password: ['', [Validators.required]],
+        ConfirmPassword: ['', [Validators.required]],
     }, {validators: [ this.passwordMatchValidator]})
   }
 
-  passwordMatchValidator(f: FormGroup) {
-    return f.get('password')?.value === f.get('confirmPassword')?.value ? null : {'passwordMismatch' : true};
+passwordMatchValidator(f: FormGroup) {
+    return f.get('Password')?.value === f.get('ConfirmPassword')?.value ? null : {'passwordMismatch' : true};
 }
 
 

@@ -11,17 +11,15 @@ export class ProfileService {
 
 constructor(private http: HttpService) { }
 
-  public getProfile(
-      getProfile: Profile
-    ): Observable<ResponseModel<Profile>> {
-      const endpoint = 'customer/profile/customer-update-profile';
-      return this.http.makeRequestWithData('post', endpoint, {}, getProfile);
+  public getProfile(): Observable<ResponseModel<Profile>> {
+      const endpoint = 'CustomerAuth/details';
+      return this.http.makeRequestWithData('post', endpoint, {});
   }
 
   public updateProfile(
       updateProfile: Profile
     ): Observable<ResponseModel<Profile>> {
-      const endpoint = 'customer/profile/customer-update-profile';
+      const endpoint = 'CustomerAuth/update-details';
       return this.http.makeRequestWithData('post', endpoint, {}, updateProfile);
   }
 

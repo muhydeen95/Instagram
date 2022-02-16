@@ -43,7 +43,7 @@ export class LcApplicationService {
     const endpoint = 'LCApplication/add-lc-application';
     const formData: FormData = new FormData();
     Object.entries(addLcApplicationDTO).forEach(([key, value]) => {
-      formData.append(key, JSON.stringify(value));
+      formData.set(key, JSON.stringify(value));
     });
     return this.http.makeRequestWithData('post', endpoint, {}, formData);
   }

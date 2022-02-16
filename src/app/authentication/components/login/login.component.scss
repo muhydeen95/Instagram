@@ -2,12 +2,8 @@
 @import "partials/abstract/mixins";
 @import "partials/components/forms";
 
-$side_padding: 12.4rem 20rem 12.4rem 12.2rem;
-$mobile_side_padding: 3rem;
-
 .wrapper {
   height: 100%;
-  padding: $side_padding;
   &__logo {
     margin-bottom: 5.6rem;
   }
@@ -23,14 +19,6 @@ $mobile_side_padding: 3rem;
       line-height: 2.1rem;
       color: $blue-700;
       margin-bottom: 5.6rem;
-    }
-  }
-  .position-relative {
-    .fa {
-      position: absolute;
-      font-size: 1.5rem;
-      top: 1.8rem;
-      right: 1.5rem;
     }
   }
   &__forgot, &__sign_up {
@@ -65,11 +53,5 @@ $mobile_side_padding: 3rem;
     &:hover {
       background: $green-700;
     }
-  }
-}
-
-@include maxSize($canvas: M) {
-  .wrapper {
-    padding: $mobile_side_padding;
   }
 }

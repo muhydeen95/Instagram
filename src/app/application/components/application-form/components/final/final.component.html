@@ -24,27 +24,55 @@
             ></ngx-signaturepad>
           </div>
 
-          <div class="attachment_wrapper" *ngIf="tab == 'upload'">
-            <h4>Drag and drop signature image</h4>
-            <p>or</p>
-            <div class="d-flex justify-content-center">
-              <button class="btn btn-green btn-md">Browse files</button>
-            </div>
+          <div class="sign_wrapper--upload" *ngIf="tab == 'upload'">
+            <img
+              class="passport-preview"
+              *ngIf="isSignatureUploaded"
+              [src]="signaturePreview"
+              alt=""
+            />
+            <p class="info" *ngIf="!isSignatureUploaded">
+              Uploaded signature will appear here!!!
+            </p>
+            <input
+              type="file"
+              name="file-sig"
+              id="file-sig"
+              accept="image/png,image/jpeg,image/jpg"
+              (change)="changeSignature($event)"
+            />
+          </div>
+          <div
+            *ngIf="
+              finalFormSubmitted && finalForm.get('signature')?.value == ''
+            "
+            class="text-danger"
+          >
+            Signature is required please sign and accept
           </div>
           <div class="sign_wrapper--actions">
             <button
               class="btn btn-outline-grey btn-md me-4"
               (click)="clearSignature()"
+              *ngIf="signatureFile != null"
             >
               Clear
             </button>
             <button
+              [disabled]="signaturePad?.isEmpty()"
               class="btn btn-green btn-md"
               (click)="savePng()"
-              *ngIf="tab == 'sign'"
+              *ngIf="tab == 'sign' && signatureFile == null"
             >
               Accept & Sign
             </button>
+            <label
+              class="btn btn-green btn-md"
+              for="file-sig"
+              *ngIf="tab == 'upload' && signatureFile == null"
+            >
+              Upload Now
+            </label>
           </div>
         </div>
       </div>
@@ -53,10 +81,45 @@
       <div class="form_group mb-5">
         <label for="to" class="form-label">Stamp/seal </label>
         <div class="attachment_wrapper">
-          <h4>Drag and drop file</h4>
-          <p>or</p>
-          <div class="d-flex justify-content-center">
-            <button class="btn btn-green btn-md">Browse files</button>
+          <div class="attachment_wrapper--pad">
+            <img
+              class="passport-preview"
+              *ngIf="isStampUploaded"
+              [src]="stampPreview"
+              alt=""
+            />
+            <p class="info" *ngIf="!isStampUploaded">
+              Uploaded stamp will appear here!!!
+            </p>
+            <input
+              type="file"
+              name="file-1"
+              id="file-1"
+              accept="image/png,image/jpeg,image/jpg"
+              (change)="changeStamp($event)"
+            />
+          </div>
+          <div
+            *ngIf="finalFormSubmitted && finalForm.get('stamp')?.value == ''"
+            class="text-danger"
+          >
+            Stamp is required please sign and accept
+          </div>
+          <div class="attachment_wrapper--actions">
+            <button
+              *ngIf="stampFile != null"
+              class="btn btn-outline-grey btn-md me-4"
+              (click)="clearStamp()"
+            >
+              Clear
+            </button>
+            <label
+              class="btn btn-green btn-md"
+              for="file-1"
+              *ngIf="stampFile == null"
+            >
+              Upload Now
+            </label>
           </div>
         </div>
       </div>
@@ -65,10 +128,47 @@
       <div class="form_group mb-5">
         <label for="to" class="form-label">Attach supporting documents </label>
         <div class="attachment_wrapper">
-          <h4>Drag and drop file</h4>
-          <p>or</p>
-          <div class="d-flex justify-content-center">
-            <button class="btn btn-green btn-md">Browse files</button>
+          <div class="attachment_wrapper--pad">
+            <p class="info" *ngIf="supportingDocuments.length == 0">
+              Uploaded document(s) will appear here!!!
+            </p>
+            <input
+              type="file"
+              name="file-2"
+              multiple
+              id="file-2"
+              accept=".doc,.docx,application/msword,image/*,.pdf"
+              (change)="addFiles($event)"
+            />
+            <div class="row">
+              <div
+                class="col-12 col-lg-6"
+                *ngFor="let file of supportingDocuments; index as i"
+              >
+                <app-uploaded-doc
+                  [file_name]="file.name"
+                  [type]="file.type"
+                  [file_size]="file.size"
+                  (remove)="removeFile(i)"
+                ></app-uploaded-doc>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="finalFormSubmitted && supportingDocuments.length == 0"
+            class="text-danger"
+          >
+            Supporting Documents is required please upload
+          </div>
+          <div class="attachment_wrapper--actions">
+            <button
+              class="btn btn-outline-grey btn-md me-4"
+              *ngIf="supportingDocuments.length > 0"
+              (click)="clearSupporting()"
+            >
+              Clear All
+            </button>
+            <label class="btn btn-green btn-md" for="file-2"> Add Files </label>
           </div>
         </div>
       </div>
@@ -79,6 +179,11 @@
     <button class="btn btn-outline-grey btn-md me-4" (click)="back()">
       Back
     </button>
-    <button class="btn btn-green btn-md">Submit Form</button>
+    <button class="btn btn-green btn-md" (click)="submitForm()">
+      <app-loading-button
+        [text]="'Submit Form'"
+        [condition]="isLoading"
+      ></app-loading-button>
+    </button>
   </div>
 </form>

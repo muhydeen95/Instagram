@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '@shared/services/local-storage.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { lCApplicationDTO } from '../models/lc-application.model';
+import {
+  INITIAL_FORM_DATA,
+  lCApplicationDTO,
+} from '../models/lc-application.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CurrentStepService {
+  private initialFormData = INITIAL_FORM_DATA;
   private subject = new BehaviorSubject<number>(1);
   constructor(private localStorageAS: LocalStorageService) {}
 
@@ -23,6 +27,20 @@ export class CurrentStepService {
   }
 
   public storeCurrentStepData(applicationForm: lCApplicationDTO) {
-    this.localStorageAS.set('lc_application_form', applicationForm);
+    this.localStorageAS.set(
+      'lc_application_form',
+      JSON.stringify(applicationForm)
+    );
+  }
+
+  public initializeNewForm() {
+    this.localStorageAS.set(
+      'lc_application_form',
+      JSON.stringify(this.initialFormData)
+    );
+  }
+
+  public clearFormFromStorage() {
+    this.localStorageAS.remove('lc_application_form');
   }
 }

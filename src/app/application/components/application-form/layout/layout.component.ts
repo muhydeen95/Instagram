@@ -29,6 +29,27 @@ export class LayoutComponent implements OnInit {
 
   public back(): void {
     this._location.back();
+    switch (true) {
+      case this.currentStep == 1:
+        this.router.navigate(['application']);
+        break;
+      case this.currentStep == 2:
+        this.router.navigate([ApplicationStepRoute.step_one]);
+        break;
+      case this.currentStep == 3:
+        this.router.navigate([ApplicationStepRoute.step_two]);
+        break;
+      case this.currentStep == 4:
+        this.router.navigate([ApplicationStepRoute.step_three]);
+        break;
+      case this.currentStep == 5:
+        this.router.navigate([ApplicationStepRoute.step_four]);
+        break;
+
+      default:
+        this.router.navigate(['application']);
+        break;
+    }
   }
   public setStep() {
     this.router.events.subscribe((route) => {

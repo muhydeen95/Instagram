@@ -10,6 +10,9 @@
     span {
       color: $error;
       margin-left: 0.4rem;
+      &.is-invalid {
+        border: 0.1rem solid $error !important;
+      }
     }
   }
 

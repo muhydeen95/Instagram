@@ -5,11 +5,18 @@
       <div class="form_group mb-5">
         <label for="date" class="form-label">Date</label>
         <input
-          type="date"
+          type="datetime-local"
           id="date"
           class="form-control"
           placeholder="Select Date"
           formControlName="lCApplicationDate"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('lCApplicationDate')!.errors &&
+                stepOneForm.get('lCApplicationDate')!.touched) ||
+              (stepOneForm.get('lCApplicationDate')!.errors &&
+                stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -17,11 +24,17 @@
       <div class="form_group mb-5">
         <label for="applicantName" class="form-label">Applicant's Name</label>
         <input
-          type="number"
+          type="text"
           id="applicantName"
           class="form-control"
           placeholder="Enter Applicant's Name'"
           formControlName="applicantName"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('applicantName')!.errors &&
+                stepOneForm.get('applicantName')!.touched) ||
+              (stepOneForm.get('applicantName')!.errors && stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -31,11 +44,18 @@
           >Applicant's Address</label
         >
         <input
-          type="number"
+          type="text"
           id="applicantAddress"
           class="form-control"
           placeholder="Enter Address"
           formControlName="applicantAddress"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('applicantAddress')!.errors &&
+                stepOneForm.get('applicantAddress')!.touched) ||
+              (stepOneForm.get('applicantAddress')!.errors &&
+                stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -43,11 +63,18 @@
       <div class="form_group mb-5">
         <label for="benName" class="form-label">Beneficiary’s Name</label>
         <input
-          type="number"
+          type="text"
           id="benName"
           class="form-control"
           placeholder="Enter Beneficiary Name"
           formControlName="beneficiaryName"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('beneficiaryName')!.errors &&
+                stepOneForm.get('beneficiaryName')!.touched) ||
+              (stepOneForm.get('beneficiaryName')!.errors &&
+                stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -55,11 +82,18 @@
       <div class="form_group mb-5">
         <label for="benTel" class="form-label">Beneficiary’s Tel</label>
         <input
-          type="number"
+          type="tel"
           id="benTel"
           class="form-control"
           placeholder="Enter Phone Number"
           formControlName="beneficiaryPhoneNumber"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('beneficiaryPhoneNumber')!.errors &&
+                stepOneForm.get('beneficiaryPhoneNumber')!.touched) ||
+              (stepOneForm.get('beneficiaryPhoneNumber')!.errors &&
+                stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -67,18 +101,25 @@
       <div class="form_group mb-5">
         <label for="benAddress" class="form-label">Beneficiary's Address</label>
         <input
-          type="number"
+          type="text"
           id="benAddress"
           class="form-control"
           placeholder="Enter Address"
           formControlName="beneficiaryAddress"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('beneficiaryAddress')!.errors &&
+                stepOneForm.get('beneficiaryAddress')!.touched) ||
+              (stepOneForm.get('beneficiaryAddress')!.errors &&
+                stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>
     <div class="col-12">
       <div class="form_group mb-5">
         <label for="lastName" class="form-label">LC Type</label>
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="">
           <ng-select
             [items]="types"
             class=""
@@ -87,10 +128,9 @@
             [loading]="isFetchingTypes"
             [virtualScroll]="true"
             bindValue="id"
-            bindLabel="name"
-            placeholder="Select Region"
+            bindLabel="type"
+            placeholder="Select LC Type"
             formControlName="type"
-            (scrollToEnd)="getTypes()"
             (blur)="stepOneForm.get('type')!.value"
             [ngClass]="{
               'is-invalid':
@@ -100,15 +140,22 @@
             }"
           >
           </ng-select>
+          <div
+            class="invalid-feedback"
+            *ngIf="stepOneForm.get('type')!.errors && stepOneFormSubmitted"
+          >
+            Required
+          </div>
         </div>
-        <div
+
+        <!-- <div
           class="p-0 m-0 click d-flex justify-content-end align-items-center"
           (click)="getTypes()"
           *ngIf="isFetchingTypesFailed"
         >
           Retry &nbsp;
           <mat-icon [ngClass]="{ spin: isFetchingTypes }">refresh</mat-icon>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -121,11 +168,17 @@
       <div class="form_group mb-5">
         <label for="Ussance" class="form-label">Ussance</label>
         <input
-          type="text"
+          type="number"
           id="Enter Ussance"
           class="form-control"
           placeholder="Enter a Number"
           formControlName="ussance"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('ussance')!.errors &&
+                stepOneForm.get('ussance')!.touched) ||
+              (stepOneForm.get('ussance')!.errors && stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -138,6 +191,12 @@
           class="form-control"
           placeholder="Enter SRF/collapseTwo"
           formControlName="cFR"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('cFR')!.errors &&
+                stepOneForm.get('cFR')!.touched) ||
+              (stepOneForm.get('cFR')!.errors && stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>
@@ -150,8 +209,22 @@
               name="permissions"
               id="sight"
               formControlName="sight"
+              [ngClass]="{
+                'is-invalid':
+                  (stepOneForm.get('sight')!.errors &&
+                    stepOneForm.get('sight')!.touched) ||
+                  (stepOneForm.get('sight')!.errors && stepOneFormSubmitted)
+              }"
             />
-            <span class="checkmark"></span>
+            <span
+              class="checkmark"
+              [ngClass]="{
+                'is-invalid':
+                  (stepOneForm.get('sight')!.errors &&
+                    stepOneForm.get('sight')!.touched) ||
+                  (stepOneForm.get('sight')!.errors && stepOneFormSubmitted)
+              }"
+            ></span>
           </label>
         </div>
         <label for="sight" class="click ms-5"> Sight </label>
@@ -169,6 +242,12 @@
           class="form-control"
           placeholder="Enter Location"
           formControlName="location"
+          [ngClass]="{
+            'is-invalid':
+              (stepOneForm.get('location')!.errors &&
+                stepOneForm.get('location')!.touched) ||
+              (stepOneForm.get('location')!.errors && stepOneFormSubmitted)
+          }"
         />
       </div>
     </div>

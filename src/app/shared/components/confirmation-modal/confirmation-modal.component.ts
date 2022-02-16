@@ -1,19 +1,30 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirmation-modal',
   templateUrl: './confirmation-modal.component.html',
-  styleUrls: ['./confirmation-modal.component.scss']
+  styleUrls: ['./confirmation-modal.component.scss'],
 })
 export class ConfirmationModalComponent implements OnInit {
+  @Output() confirm: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() btnAction: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public modalData: any,
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public modalData: any
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
+  public action(action: boolean): void {
+    this.confirm.emit(action);
+  }
 }

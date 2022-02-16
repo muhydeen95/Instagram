@@ -41,12 +41,11 @@ export class LcApplicationService {
     addLcApplicationDTO: any
   ): Observable<ResponseModel<any>> {
     const endpoint = 'LCApplication/add-lc-application';
-    return this.http.makeRequestWithData(
-      'post',
-      endpoint,
-      {},
-      addLcApplicationDTO
-    );
+    const formData: FormData = new FormData();
+    Object.entries(addLcApplicationDTO).forEach(([key, value]) => {
+      formData.set(key, JSON.stringify(value));
+    });
+    return this.http.makeRequestWithData('post', endpoint, {}, formData);
   }
 
   //Treat LC application

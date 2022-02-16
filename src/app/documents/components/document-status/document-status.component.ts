@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-document-status',
@@ -18,9 +19,13 @@ export class DocumentStatusComponent implements OnInit {
     {id: 7, user: 'sender',  message: 'that tell a computer how an be done using a variety of computer programming languages, such as JavaScript, Python, and C++.,', time: '2:35pm'},
   ]
 
-  constructor() { }
+  constructor(private _location: Location) { }
 
   ngOnInit() {
+  }
+
+  public back(): void {
+    this._location.back();
   }
 
   handleSelection(event: any) {

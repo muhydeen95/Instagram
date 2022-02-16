@@ -7,6 +7,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -18,6 +19,7 @@ import {
   lCApplicationDTO,
   INITIAL_FORM_DATA,
 } from '../../models/lc-application.model';
+
 import { ApplicationStepRoute } from '../../models/step.model';
 import { CurrentStepService } from '../../services/current-step.service';
 
@@ -76,6 +78,7 @@ export class FinalComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+
     private _step: CurrentStepService,
     private _localStorageAS: LocalStorageService,
     public dialog: MatDialog,
@@ -87,6 +90,7 @@ export class FinalComponent implements OnInit {
       }
     });
   }
+
 
   ngOnInit(): void {
     window.scroll(0, 0);
@@ -154,6 +158,7 @@ export class FinalComponent implements OnInit {
   public changeTab(tab: string): void {
     this.tab = tab;
   }
+
 
   public changeStamp(event: any): void {
     if (event.target.files.length > 0) {

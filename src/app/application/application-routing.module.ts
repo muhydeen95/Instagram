@@ -16,6 +16,13 @@ const routes: Routes = [
         (m) => m.ApplicationFormModule
       ),
   },
+  {
+    path: 'detail/:id',
+    loadChildren: () =>
+      import(
+        './components/application-details/application-details.module'
+      ).then((m) => m.ApplicationDetailsModule),
+  },
 ];
 
 @NgModule({

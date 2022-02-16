@@ -14,17 +14,17 @@ export class PaginationResponse<T> {
 }
 
 export interface SearchDTO {
-  Search: string;
-  PageNumber: number;
-  PageSize: number;
-  LCApplicationDate?: string;
+  search: string;
+  pageNumber: number;
+  pageSize: number;
+  lCApplicationDate?: string;
 }
 
 export const InitialSearchDTO = {
-  Search: '',
-  PageNumber: 1,
-  PageSize: 5,
-  LCApplicationDate: new Date().toISOString(),
+  search: '',
+  pageNumber: 1,
+  pageSize: 5,
+  lCApplicationDate: new Date().toISOString(),
 };
 
 export const pageSizeOptionsDTO = [5, 10, 25, 100];

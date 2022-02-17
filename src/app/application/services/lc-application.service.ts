@@ -15,8 +15,8 @@ export class LcApplicationService {
   constructor(private http: HttpService) {}
 
   //Get LC application by ID
-  public getLcApplication(id: number): Observable<ResponseModel<any>> {
-    const endpoint = 'LCApplication/get-lc-application' + id;
+  public getLcApplicationById(id: number): Observable<ResponseModel<any>> {
+    const endpoint = 'LCApplication/get-lc-application/' + id;
     return this.http.getRequest(endpoint);
   }
 

@@ -27,7 +27,7 @@ export class ApplicationsComponent implements OnInit {
   public loading: boolean = false;
   public btnName: string = 'New Application';
   public isInitialRequest: boolean = true;
-  public date: string = new Date().toISOString();
+  public date: string = '';
   public lcAplications: LCApplicationDTO[] = [];
   public searchQuery: SearchDTO = { ...InitialSearchDTO, search: '' };
   public paginatedResponse: PaginationResponse<any[]> = new PaginationResponse<
@@ -60,7 +60,7 @@ export class ApplicationsComponent implements OnInit {
     initial ? (this.isInitialRequest = true) : (this.isInitialRequest = false);
     this.isFetchingLcApplications = true;
     this.sub.add(
-      this._lc.searchAllLcApplications(this.searchQuery).subscribe({
+      this._lc.searchUserLcApplications(this.searchQuery).subscribe({
         next: (res: ResponseModel<PaginationResponse<any[]>>) => {
           this.isFetchingLcApplications = false;
           this.paginatedResponse = res?.response;

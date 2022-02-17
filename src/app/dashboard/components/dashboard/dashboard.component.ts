@@ -16,6 +16,7 @@ import {
   InitialSearchDTO,
   SearchDTO,
   ApplicationResponseDTO,
+  ResponseModel,
 } from '../../../models/response.model';
 import { LcApplicationService } from '../../../application/services/lc-application.service';
 
@@ -47,10 +48,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getDocument(query: DocumentSearchDTO): void {
     this._docService.getDocument(query).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.isDocumentFetching = false;
         this.data = res.response.result;
         this.filterableData = this.data;
+      },
+      error: (error: ResponseModel<null>) => {
+        this.isDocumentFetching = false;
+        console.log(error);
       },
     });
   }
@@ -61,7 +65,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.applicationLoading = false;
         this.applicationData = res.response.result;
         this.applicationFilterableData = this.applicationData;
-        console.log(res);
+      },
+      error: (error: ResponseModel<null>) => {
+        this.applicationLoading = false;
+        console.log(error);
       },
     });
   }

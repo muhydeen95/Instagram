@@ -12,6 +12,7 @@ import {
   DocumentSearchDTO,
   DefaultDocumentSearchDTO,
 } from '../../models/documents.model';
+import { ResponseModel } from '../../../models/response.model';
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -34,6 +35,10 @@ export class DocumentComponent implements OnInit {
         this.documentLoading = false;
         this.data = res.response.result;
         this.filterableData = this.data;
+      },
+      error: (error: ResponseModel<null>) => {
+        this.documentLoading = false;
+        console.log(error);
       },
     });
   }

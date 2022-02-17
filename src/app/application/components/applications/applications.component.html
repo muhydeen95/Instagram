@@ -47,16 +47,14 @@
               ></ng-container>
               <ng-container>
                 <tr *ngFor="let lc of lcAplications">
-                  <td>{{ lc.ApplicantName }}</td>
-                  <td>{{ lc.BeneficiaryName }}</td>
-                  <td>{{ lc.ValueInFigures }}</td>
-                  <td>{{ lc.ExpiryDate | date }}</td>
-                  <td>{{ lc.CreatedAt | date }}</td>
+                  <td>{{ lc.applicantName }}</td>
+                  <td>{{ lc.beneficiaryName }}</td>
+                  <td>{{ lc.valueInFigure }}</td>
+                  <td>{{ lc.expiryDate }}</td>
+                  <td>{{ lc.dateSubmitted }}</td>
                   <td>
-                    <span
-                      class="text-light-blue click"
-                      routerLink="/application/detail/{{ lc.Id }}"
-                    >
+                    <span class="text-light-blue click">
+                      <!-- routerLink="/application/detail/{{ lc.id }}" -->
                       <img src="assets/icons/eye.svg" class="me-2" />
                       View details
                     </span>

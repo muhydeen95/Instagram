@@ -6,7 +6,12 @@ import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/u
 import { UploadDocDTO } from 'app/dashboard/models/dashboard.model';
 import { Subscription } from 'rxjs';
 import { FilterComponent } from '../../dialogs/filter/filter.component';
-
+import { DocumentService } from '../../services/document.service';
+import {
+  DocumentResponse,
+  DocumentSearchDTO,
+  DefaultDocumentSearchDTO,
+} from '../../models/documents.model';
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -14,11 +19,34 @@ import { FilterComponent } from '../../dialogs/filter/filter.component';
 })
 export class DocumentComponent implements OnInit {
   private sub: Subscription = new Subscription();
-  public loading: boolean = false;
+  public documentLoading: boolean = true;
+  filterableData: DocumentResponse[] = [];
+  data: DocumentResponse[] = [];
+  constructor(public dialog: MatDialog, private _docService: DocumentService) {}
 
-  constructor(public dialog: MatDialog) {}
+  ngOnInit() {
+    this.getDocument(DefaultDocumentSearchDTO);
+  }
 
-  ngOnInit() {}
+  getDocument(query: DocumentSearchDTO): void {
+    this._docService.getDocument(query).subscribe({
+      next: (res: any) => {
+        this.documentLoading = false;
+        this.data = res.response.result;
+        this.filterableData = this.data;
+      },
+    });
+  }
+
+  public searchQueryAction(searchQuery: string): void {
+    let query = searchQuery.toLocaleLowerCase().trim();
+    this.filterableData = this.data.filter(
+      ({ correspondenceNo, documentType, subject }) =>
+        documentType.toLocaleLowerCase().includes(query) ||
+        subject.toLocaleLowerCase().includes(query) ||
+        correspondenceNo.toLocaleLowerCase().includes(query)
+    );
+  }
 
   public openDialog(
     payload: { isEditing?: boolean; editObj?: any } | any
@@ -33,15 +61,14 @@ export class DocumentComponent implements OnInit {
     });
   }
 
-
   public filterAction(): void {
     const dialogRef = this.dialog.open(FilterComponent);
-
     dialogRef.componentInstance.event.subscribe((event: DialogModel<any>) => {
-      console.log(event);
+      this.filterableData = this.data.filter(({ createdAt }) => {
+        return new Date(createdAt).toDateString() === new Date().toDateString();
+      });
     });
   }
-
 
   public openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDocumentComponent);
@@ -52,7 +79,7 @@ export class DocumentComponent implements OnInit {
       }
     );
   }
-  
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

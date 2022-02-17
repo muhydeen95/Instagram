@@ -6,6 +6,18 @@ import { Subscription } from 'rxjs';
 import { Dashboard, UploadDocDTO } from 'app/dashboard/models/dashboard.model';
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
 import { TrackDocumentComponent } from 'app/dashboard/dialogs/track-document/track-document.component';
+import { DocumentService } from '../../../documents/services/document.service';
+import {
+  DocumentResponse,
+  DocumentSearchDTO,
+  DefaultDocumentSearchDTO,
+} from '../../../documents/models/documents.model';
+import {
+  InitialSearchDTO,
+  SearchDTO,
+  ApplicationResponseDTO,
+} from '../../../models/response.model';
+import { LcApplicationService } from '../../../application/services/lc-application.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +26,45 @@ import { TrackDocumentComponent } from 'app/dashboard/dialogs/track-document/tra
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private sub: Subscription = new Subscription();
-  public isFetchingDashboard: boolean = false;
+  public isDocumentFetching: boolean = true;
+  public applicationLoading: boolean = true;
+  data: DocumentResponse[] = [];
+  filterableData: DocumentResponse[] = [];
+  applicationData: ApplicationResponseDTO[] = [];
+  applicationFilterableData: ApplicationResponseDTO[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private _docService: DocumentService,
+    private _applicationService: LcApplicationService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getDocument(DefaultDocumentSearchDTO);
+    this.getApplications(InitialSearchDTO);
+  }
 
+  getDocument(query: DocumentSearchDTO): void {
+    this._docService.getDocument(query).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.isDocumentFetching = false;
+        this.data = res.response.result;
+        this.filterableData = this.data;
+      },
+    });
+  }
+
+  getApplications(query: SearchDTO): void {
+    this._applicationService.searchAllLcApplications(query).subscribe({
+      next: (res: any) => {
+        this.applicationLoading = false;
+        this.applicationData = res.response.result;
+        this.applicationFilterableData = this.applicationData;
+        console.log(res);
+      },
+    });
+  }
   public openDialog(
     payload: { isEditing?: boolean; editObj?: any } | any
   ): void {

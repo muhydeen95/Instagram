@@ -65,7 +65,7 @@ export class CurrentUserService {
   public storeUserDetails(userDetails: any) {
     const user_data_to_store = {
       firstName: userDetails.firstName,
-      lastName: userDetails.firstName,
+      lastName: userDetails.lastName,
       email: userDetails.email,
       phoneNumber: userDetails.phoneNumber,
     };

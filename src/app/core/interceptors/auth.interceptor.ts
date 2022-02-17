@@ -26,7 +26,6 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const headers: any = {
-      'Content-Type': 'application/json',
       'Cache-Control': 'no-cache',
       Pragma: 'no-cache',
     };
@@ -84,7 +83,6 @@ export class AuthInterceptor implements HttpInterceptor {
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
-            console.log(err);
             this.handleError(err);
           }
         }

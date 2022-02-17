@@ -18,6 +18,8 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { HelpCenterComponent } from './components/help-center/help-center.component';
 import { InfoComponent } from './components/info/info.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SuccessModalComponent } from './components/success-modal/success-modal.component';
+import { UploadedDocComponent } from './components/uploaded-doc/uploaded-doc.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     SearchbarComponent,
     HelpCenterComponent,
     InfoComponent,
+    SuccessModalComponent,
+    UploadedDocComponent,
   ],
   imports: [
     CommonModule,
@@ -59,6 +63,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     HelpCenterComponent,
     InfoComponent,
     NgSelectModule,
+    SuccessModalComponent,
+    UploadedDocComponent,
   ],
 })
 export class SharedModule {}

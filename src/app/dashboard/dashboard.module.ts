@@ -8,9 +8,22 @@ import { DashboardDialogComponent } from './dialogs/dashboard-dialog/dashboard-d
 import { UploadDocumentComponent } from './dialogs/upload-document/upload-document.component';
 import { QuickActionsCardsComponent } from './components/quick-actions-cards/quick-actions-cards.component';
 import { TrackDocumentComponent } from './dialogs/track-document/track-document.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [DashboardComponent, DashboardDialogComponent, UploadDocumentComponent, QuickActionsCardsComponent, TrackDocumentComponent],
-  imports: [CommonModule, DashboardRoutingModule, MatDialogModule, SharedModule],
+  declarations: [
+    DashboardComponent,
+    DashboardDialogComponent,
+    UploadDocumentComponent,
+    QuickActionsCardsComponent,
+    TrackDocumentComponent,
+  ],
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    MatDialogModule,
+    SharedModule,
+    ReactiveFormsModule,
+  ],
 })
 export class DashboardModule {}

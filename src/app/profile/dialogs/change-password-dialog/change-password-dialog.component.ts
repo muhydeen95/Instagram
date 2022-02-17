@@ -1,6 +1,6 @@
 // import { HttpErrorResponse } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
-import { 
+import {
   Component,
   Input,
   Inject,
@@ -39,11 +39,11 @@ export class ChangePasswordDialogComponent implements OnInit {
     private fb: FormBuilder,
     private _base: BaseComponent,
     private _profile: ProfileService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initChangePasswordForm();
-   }
+  }
 
   public initChangePasswordForm() {
     this.changePasswordForm = this.fb.group({

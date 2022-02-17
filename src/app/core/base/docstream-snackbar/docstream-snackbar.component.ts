@@ -15,9 +15,7 @@ export class DocstreamSnackbarComponent implements OnInit {
   constructor(
     @Inject(MAT_SNACK_BAR_DATA) public data: any,
     private _snackRef: MatSnackBarRef<DocstreamSnackbarComponent>
-  ) {
-    console.log(data);
-  }
+  ) {}
 
   ngOnInit(): void {}
 

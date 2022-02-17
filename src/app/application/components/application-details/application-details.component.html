@@ -1,0 +1,230 @@
+<section>
+  <p
+    class="d-flex align-items-center mb-5 click w-fit-content"
+    routerLink="/application"
+  >
+    <img src="assets/icons/back.svg" alt="" />
+    <span class="ps-3 font14 font-bold">Go Back</span>
+  </p>
+  <section class="row">
+    <div class="col-lg-4 col-md-5 col-sm-12 mb-4">
+      <div class="document_progress h-100">
+        <ng-container *ngIf="loading">
+          <div class="mb-5">
+            <div *ngFor="let dummy of [1, 2, 3, 4, 5]">
+              <app-docstream-skeleton-loader
+                width="100%"
+                height="2rem"
+              ></app-docstream-skeleton-loader>
+            </div>
+          </div>
+          <div *ngFor="let dummy of [1, 2, 3, 4, 5]">
+            <app-docstream-skeleton-loader
+              width="100%"
+              height="2rem"
+            ></app-docstream-skeleton-loader>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!loading">
+          <div class="accordion" id="formAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <div class="d-flex align-items-center">
+                  <div
+                    class="accordion-button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    <div class="circle">
+                      <img src="assets/images/document.svg" alt="" />
+                    </div>
+                    <span class="px-3">Document Info</span>
+                  </div>
+                  <div class="w-fill-available"></div>
+                </div>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+              >
+                <div class="accordion-body">
+                  <ul class="px-3 m-0">
+                    <li>
+                      <h4>Applicant’s Name</h4>
+                      <p>{{ lcAplicationDetail.applicantName }}</p>
+                    </li>
+                    <li>
+                      <h4>Beneficiary’s Name</h4>
+                      <p>{{ lcAplicationDetail.beneficiaryName }}</p>
+                    </li>
+                    <li>
+                      <h4>LC Value in figures</h4>
+                      <p>{{ lcAplicationDetail.valueInFigure }}</p>
+                    </li>
+                    <li>
+                      <h4>LC Expiry Date</h4>
+                      <p>{{ lcAplicationDetail.expiryDate | date }}</p>
+                    </li>
+                    <li>
+                      <h4>Date Submitted</h4>
+                      <p>{{ lcAplicationDetail.dateSubmitted | date }}</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="accordion"
+            id="formAccordion"
+            *ngFor="let file of lcAplicationDetail.files; let i = index"
+          >
+            <div class="accordion-item">
+              <h2 class="accordion-header" [attr.id]="'heading' + i">
+                <div class="d-flex align-items-center">
+                  <div
+                    class="accordion-button"
+                    data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapseTwo' + i"
+                    aria-expanded="true"
+                    [attr.aria-controls]="'collapseTwo' + i"
+                  >
+                    <div class="circle">
+                      <img src="assets/images/attachment.svg" alt="" />
+                    </div>
+                    <span class="px-3">{{
+                      file.stamp
+                        ? "Stamp"
+                        : file.signature
+                        ? "Signature"
+                        : "Supporting Documents"
+                    }}</span>
+                  </div>
+                  <div class="w-fill-available"></div>
+                </div>
+              </h2>
+              <div
+                [attr.id]="'collapseTwo' + i"
+                class="accordion-collapse collapse show"
+                [attr.aria-labelledby]="'heading' + i"
+              >
+                <div class="accordion-body">
+                  <ul class="px-3 m-0">
+                    <li class="d-flex align-items-center" *ngIf="file.stamp">
+                      <img src="assets/images/pdf.svg" alt="" />
+                      <p class="d-inline-block ps-3">{{ file.stamp.name }}</p>
+                    </li>
+                    <li
+                      class="d-flex align-items-center"
+                      *ngIf="file.supportingDocuments"
+                    >
+                      <img src="assets/images/word.svg" alt="" />
+                      <p class="d-inline-block ps-3">
+                        {{ file.supportingDocuments.name }}
+                      </p>
+                    </li>
+                    <li
+                      class="d-flex align-items-center"
+                      *ngIf="file.signature"
+                    >
+                      <img src="assets/images/ppt.svg" alt="" />
+                      <p class="d-inline-block ps-3">
+                        {{ file.signature.name }}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div></ng-container
+        >
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-7 col-sm-12 mb-4">
+      <div class="form-wrapper">
+        <ng-container *ngIf="loading">
+          <div *ngFor="let dummy of [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]">
+            <app-docstream-skeleton-loader
+              width="100%"
+              height="5rem"
+            ></app-docstream-skeleton-loader>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!loading">
+          <p class="title mb-0">LC Application</p>
+          <hr />
+          <form class="row">
+            <div class="col-12">
+              <div class="form_group mb-5">
+                <label class="form-label">Date</label>
+                <input type="date" class="form-control" />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form_group mb-5">
+                <label class="form-label">Applicant’s Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Name"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form_group mb-5">
+                <label class="form-label">Applicant’s Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Address"
+                />
+              </div>
+            </div>
+            <div class="col-md-7 col-12">
+              <div class="form_group mb-5">
+                <label class="form-label">Beneficiary’s Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Name"
+                />
+              </div>
+            </div>
+            <div class="col-md-5 col-12">
+              <div class="form_group mb-5">
+                <label class="form-label">Beneficiary’s Tel</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  placeholder="Enter Phone Number"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form_group mb-5">
+                <label class="form-label">Applicant’s Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Address"
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form_group mb-5">
+                <label class="form-label">LC Type</label>
+                <select name="" id="">
+                  <option value="">Select Type</option>
+                  <option value="">Name</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+</section>

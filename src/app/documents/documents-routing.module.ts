@@ -4,12 +4,12 @@ import { DocumentStatusComponent } from './components/document-status/document-s
 import { DocumentComponent } from './components/document/document.component';
 
 const routes: Routes = [
-  { path: '', component: DocumentComponent }, 
-  { path: 'document-status', component: DocumentStatusComponent }
+  { path: '', component: DocumentComponent },
+  { path: 'status/:id', component: DocumentStatusComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DocumentsRoutingModule { }
+export class DocumentsRoutingModule {}

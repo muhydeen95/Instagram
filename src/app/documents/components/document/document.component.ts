@@ -61,9 +61,9 @@ export class DocumentComponent implements OnInit {
       data: object,
     });
 
-    dialogRef.componentInstance.event.subscribe((event: DialogModel<any>) => {
-      console.log(event);
-    });
+    dialogRef.componentInstance.event.subscribe(
+      (event: DialogModel<any>) => {}
+    );
   }
 
   public filterAction(): void {
@@ -73,15 +73,17 @@ export class DocumentComponent implements OnInit {
         return new Date(createdAt).toDateString() === new Date().toDateString();
       });
     });
+
+    dialogRef.componentInstance.event.subscribe(
+      (event: DialogModel<any>) => {}
+    );
   }
 
   public openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDocumentComponent);
 
     dialogRef.componentInstance.event.subscribe(
-      (event: DialogModel<UploadDocDTO>) => {
-        console.log(event);
-      }
+      (event: DialogModel<UploadDocDTO>) => {}
     );
   }
 

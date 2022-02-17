@@ -88,13 +88,17 @@
           (change)="onFileDropped($event)"
           [accept]="AcceptedFileTypes"
         />
-        <div class="d-flex justify-content-center flex-wrap">
-          <span class="names" *ngFor="let name of fileNames; let i = index">
-            {{ name
-            }}<span class="mr-2" *ngIf="i != fileNames.length - 1">,</span>
-          </span>
-        </div>
       </label>
+      <div class="row mt-4">
+        <div class="col-12 col-lg-6 doc" *ngFor="let file of files; index as i">
+          <app-uploaded-doc
+            [file_name]="file.name"
+            [type]="file.type"
+            [file_size]="file.size"
+            (remove)="removeFile(i)"
+          ></app-uploaded-doc>
+        </div>
+      </div>
     </div>
     <mat-dialog-actions align="end">
       <button

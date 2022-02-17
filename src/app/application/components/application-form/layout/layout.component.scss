@@ -18,7 +18,10 @@
   }
 
   &_form-wrapper {
-    margin: 5.9rem 15.3rem 5.1rem;
+    @include minSize($canvas: L) {
+      margin: 5.9rem 15.3rem 5.1rem;
+    }
+
     background: $white-100;
     box-shadow: 0 0 1.6rem rgba($blue-700, 0.1);
     border-radius: 0.8rem;

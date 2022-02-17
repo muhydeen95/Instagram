@@ -6,6 +6,7 @@ import {
   SearchDTO,
 } from 'app/models/response.model';
 import { Observable } from 'rxjs';
+import { lCApplicationDTO } from '../components/application-form/models/lc-application.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,8 @@ export class LcApplicationService {
   constructor(private http: HttpService) {}
 
   //Get LC application by ID
-  public getLcApplication(id: number): Observable<ResponseModel<any>> {
-    const endpoint = 'LCApplication/get-lc-application' + id;
+  public getLcApplicationById(id: number): Observable<ResponseModel<any>> {
+    const endpoint = 'LCApplication/get-lc-application/' + id;
     return this.http.getRequest(endpoint);
   }
 
@@ -23,7 +24,6 @@ export class LcApplicationService {
   public searchAllLcApplications(
     searchLcDTO: SearchDTO
   ): Observable<ResponseModel<PaginationResponse<any[]>>> {
-    console.log(searchLcDTO);
     const endpoint = 'LCApplication/search-all-lc-applications';
     return this.http.makeRequestWithData('post', endpoint, {}, searchLcDTO);
   }
@@ -38,13 +38,20 @@ export class LcApplicationService {
 
   //Upload new LC application
   public addLcApplication(
-    addLcApplicationDTO: any
+    addLcApplicationDTO: lCApplicationDTO
   ): Observable<ResponseModel<any>> {
     const endpoint = 'LCApplication/add-lc-application';
     const formData: FormData = new FormData();
-    Object.entries(addLcApplicationDTO).forEach(([key, value]) => {
-      formData.append(key, JSON.stringify(value));
+    Object.entries(addLcApplicationDTO).forEach(([key, value]: any): any => {
+      if (key != 'supportingDocument') {
+        formData.append(key, value);
+      } else {
+        for (let file of addLcApplicationDTO.supportingDocument) {
+          formData.append('supportingDocument', file);
+        }
+      }
     });
+
     return this.http.makeRequestWithData('post', endpoint, {}, formData);
   }
 

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DocumentDTO } from 'app/documents/models/documents.model';
+import {
+  CustomerTransactionStatus,
+  DocumentDTO,
+} from 'app/documents/models/documents.model';
 import { DocumentService } from 'app/documents/services/document.service';
 import { ResponseModel } from 'app/models/response.model';
 import { Subscription } from 'rxjs';
@@ -62,7 +65,7 @@ export class DocumentStatusComponent implements OnInit {
       time: '2:35pm',
     },
   ];
-
+  public CustomerTransactionStatus = CustomerTransactionStatus;
   private sub: Subscription = new Subscription();
   public documentDetail!: DocumentDTO;
   public loading: boolean = false;
@@ -83,13 +86,11 @@ export class DocumentStatusComponent implements OnInit {
     this.sub.add(
       this._docService.getDocumentByIdRequest(id).subscribe({
         next: (res: ResponseModel<DocumentDTO>) => {
-          console.log(res);
           this.loading = false;
           this.documentDetail = res.response;
         },
         error: (error: ResponseModel<null>) => {
           this.loading = false;
-          console.log(error);
         },
       })
     );

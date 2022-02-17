@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '@shared/services/local-storage.service';
-import { UtilityService } from '@shared/services/utility.service';
 import {
   lCApplicationDTO,
   INITIAL_FORM_DATA,
@@ -24,8 +23,7 @@ export class StepTwoComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private _step: CurrentStepService,
-    private _localStorageAS: LocalStorageService,
-    private _util: UtilityService
+    private _localStorageAS: LocalStorageService
   ) {
     this._localStorageAS.watch('lc_application_form').subscribe((res) => {
       if (res) {
@@ -78,20 +76,19 @@ export class StepTwoComponent implements OnInit {
     if (this.stepTwoForm.valid) {
       this.isLoading = true;
       const stepTwoPayload = this.stepTwoForm.value;
-      stepTwoPayload.latestShipment = this._util.covertDateToIsoString(
-        stepTwoPayload.latestShipment
-      );
-      stepTwoPayload.validUntil = this._util.covertDateToIsoString(
-        stepTwoPayload.validUntil
-      );
-      stepTwoPayload.expiryDate = this._util.covertDateToIsoString(
-        stepTwoPayload.expiryDate
-      );
-      stepTwoPayload.proformaInvoiceDate = this._util.covertDateToIsoString(
-        stepTwoPayload.proformaInvoiceDate
-      );
+      // stepTwoPayload.latestShipment = this._util.covertDateToIsoString(
+      //   stepTwoPayload.latestShipment
+      // );
+      // stepTwoPayload.validUntil = this._util.covertDateToIsoString(
+      //   stepTwoPayload.validUntil
+      // );
+      // stepTwoPayload.expiryDate = this._util.covertDateToIsoString(
+      //   stepTwoPayload.expiryDate
+      // );
+      // stepTwoPayload.proformaInvoiceDate = this._util.covertDateToIsoString(
+      //   stepTwoPayload.proformaInvoiceDate
+      // );
       const payload = { ...this.applicationForm, ...stepTwoPayload };
-      console.log(payload);
       this._step.storeCurrentStepData(payload);
       this.router.navigate([ApplicationStepRoute.step_three]);
     }

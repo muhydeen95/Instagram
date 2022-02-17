@@ -1,6 +1,6 @@
 // import { HttpErrorResponse } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
-import { 
+import {
   Component,
   Input,
   Inject,
@@ -39,23 +39,28 @@ export class ChangePasswordDialogComponent implements OnInit {
     private fb: FormBuilder,
     private _base: BaseComponent,
     private _profile: ProfileService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initChangePasswordForm();
-   }
+  }
 
   public initChangePasswordForm() {
-    this.changePasswordForm = this.fb.group({
-      currentPassword: ['', Validators.required],
-      newPassword: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    }, {validators: [ this.passwordMatchValidator]})
+    this.changePasswordForm = this.fb.group(
+      {
+        currentPassword: ['', Validators.required],
+        newPassword: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: [this.passwordMatchValidator] }
+    );
   }
 
   passwordMatchValidator(f: FormGroup) {
-    return f.get('newPassword')?.value === f.get('confirmPassword')?.value ? null : {'passwordMismatch' : true};
-}
+    return f.get('newPassword')?.value === f.get('confirmPassword')?.value
+      ? null
+      : { passwordMismatch: true };
+  }
 
   public checkForKeyEnter(event: KeyboardEvent): void {
     var key = event.key || event.keyCode;
@@ -80,7 +85,6 @@ export class ChangePasswordDialogComponent implements OnInit {
           );
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
           this.isLoading = false;
           this.passwordFormSubmitted = false;
           this.isError = false;

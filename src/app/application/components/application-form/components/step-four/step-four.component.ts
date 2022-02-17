@@ -84,7 +84,6 @@ export class StepFourComponent implements OnInit {
       this.isLoading = true;
       const stepFourPayload = this.stepFourForm.value;
       const payload = { ...this.applicationForm, ...stepFourPayload };
-      console.log(payload);
       this._step.storeCurrentStepData(payload);
       this.openTermsDialog();
     }

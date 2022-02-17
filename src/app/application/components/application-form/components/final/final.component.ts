@@ -6,11 +6,13 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { BaseComponent } from '@core/base/base/base.component';
 import { ConfirmationModalComponent } from '@shared/components/confirmation-modal/confirmation-modal.component';
 import { LocalStorageService } from '@shared/services/local-storage.service';
 import { LcApplicationService } from 'app/application/services/lc-application.service';
@@ -65,6 +67,7 @@ export class FinalComponent implements OnInit {
   public tab: string = 'sign';
   public arrToSplice = [1, 2, 3, 5, 5];
   public isSignatureUploaded: boolean = false;
+  public error_message: string = '';
   public signatureFile: any;
   public supportingDocuments: File[] = [];
   public signaturePreview: any;
@@ -78,10 +81,10 @@ export class FinalComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-
     private _step: CurrentStepService,
     private _localStorageAS: LocalStorageService,
     public dialog: MatDialog,
+    private _base: BaseComponent,
     private _lc: LcApplicationService
   ) {
     this._localStorageAS.watch('lc_application_form').subscribe((res) => {
@@ -90,7 +93,6 @@ export class FinalComponent implements OnInit {
       }
     });
   }
-
 
   ngOnInit(): void {
     window.scroll(0, 0);
@@ -159,7 +161,6 @@ export class FinalComponent implements OnInit {
     this.tab = tab;
   }
 
-
   public changeStamp(event: any): void {
     if (event.target.files.length > 0) {
       this.stampFile = event.target.files[0];
@@ -204,7 +205,7 @@ export class FinalComponent implements OnInit {
   public removeFile(index: number): void {
     this.supportingDocuments.splice(index, 1);
     this.finalForm.patchValue({
-      supportingDocument: this.arrToSplice,
+      supportingDocument: this.supportingDocuments,
     });
   }
 
@@ -240,12 +241,20 @@ export class FinalComponent implements OnInit {
     const payload = { ...this.applicationForm, ...finalFormPayload };
     this._lc.addLcApplication(payload).subscribe({
       next: (res: ResponseModel<any>) => {
+        this.error_message = '';
         this.isLoading = false;
         this._step.clearFormFromStorage();
-        this.openSucessDialog();
+        this._base.openSnackBar(res?.message);
+        this.router.navigate(['application']);
       },
-      error: (e) => {
+      error: (error: HttpErrorResponse) => {
         this.isLoading = false;
+        this.finalFormSubmitted = true;
+        // Object.values(error?.error).forEach((e: any) =>
+        //   this.error_messages.push(e[0])
+        // );
+        this.error_message = error?.error?.message;
+        window.scroll(0, 0);
       },
     });
   }

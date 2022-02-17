@@ -60,9 +60,8 @@ export class ApplicationsComponent implements OnInit {
     initial ? (this.isInitialRequest = true) : (this.isInitialRequest = false);
     this.isFetchingLcApplications = true;
     this.sub.add(
-      this._lc.searchAllLcApplications(this.searchQuery).subscribe({
+      this._lc.searchUserLcApplications(this.searchQuery).subscribe({
         next: (res: ResponseModel<PaginationResponse<any[]>>) => {
-          console.log(res);
           this.isFetchingLcApplications = false;
           this.paginatedResponse = res?.response;
           this.lcAplications = this.paginatedResponse.result;
@@ -71,7 +70,6 @@ export class ApplicationsComponent implements OnInit {
         },
         error: (error: ResponseModel<null>) => {
           this.isFetchingLcApplications = false;
-          console.log(error);
         },
       })
     );
@@ -85,9 +83,9 @@ export class ApplicationsComponent implements OnInit {
       data: object,
     });
 
-    dialogRef.componentInstance.event.subscribe((event: DialogModel<any>) => {
-      console.log(event);
-    });
+    dialogRef.componentInstance.event.subscribe(
+      (event: DialogModel<any>) => {}
+    );
   }
 
   public filterAction(): void {

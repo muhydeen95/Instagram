@@ -29,15 +29,14 @@ export class ApplicationDetailsComponent implements OnInit {
   public getLcApplicationss(id: number): void {
     this.loading = true;
     this.sub.add(
-      this._lc.getLcApplication(id).subscribe({
+      this._lc.getLcApplicationById(id).subscribe({
         next: (res: ResponseModel<LCApplicationDTO>) => {
-          console.log(res);
           this.loading = false;
           this.lcAplicationDetail = res.response;
+          console.log(this.lcAplicationDetail)
         },
         error: (error: ResponseModel<null>) => {
           this.loading = false;
-          console.log(error);
         },
       })
     );

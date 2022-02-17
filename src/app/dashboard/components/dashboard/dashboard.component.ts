@@ -81,9 +81,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.componentInstance.event.subscribe(
-      (event: DialogModel<Dashboard>) => {
-        console.log(event);
-      }
+      (event: DialogModel<Dashboard>) => {}
     );
   }
 
@@ -91,9 +89,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(UploadDocumentComponent);
 
     dialogRef.componentInstance.event.subscribe(
-      (event: DialogModel<UploadDocDTO>) => {
-        console.log(event);
-      }
+      (event: DialogModel<UploadDocDTO>) => {}
     );
   }
 
@@ -101,9 +97,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(TrackDocumentComponent);
 
     dialogRef.componentInstance.searchAction.subscribe(
-      (event: DialogModel<UploadDocDTO>) => {
-        console.log(event);
-      }
+      (event: DialogModel<UploadDocDTO>) => {}
     );
   }
 

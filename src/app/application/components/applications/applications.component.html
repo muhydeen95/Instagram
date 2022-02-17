@@ -43,18 +43,22 @@
                       width="10rem"
                       height="2rem"
                     ></app-docstream-skeleton-loader>
-                  </td></tr
-              ></ng-container>
+                  </td>
+                </tr>
+                ></ng-container
+              >
               <ng-container>
                 <tr *ngFor="let lc of lcAplications">
                   <td>{{ lc.applicantName }}</td>
                   <td>{{ lc.beneficiaryName }}</td>
                   <td>{{ lc.valueInFigure }}</td>
-                  <td>{{ lc.expiryDate }}</td>
-                  <td>{{ lc.dateSubmitted }}</td>
+                  <td>{{ lc.expiryDate | date }}</td>
+                  <td>{{ lc.dateSubmitted | date }}</td>
                   <td>
-                    <span class="text-light-blue click">
-                      <!-- routerLink="/application/detail/{{ lc.id }}" -->
+                    <span
+                      class="text-light-blue click"
+                      routerLink="/application/detail/{{ lc.lcApplicationId }}"
+                    >
                       <img src="assets/icons/eye.svg" class="me-2" />
                       View details
                     </span>

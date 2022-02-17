@@ -13,7 +13,7 @@ import { ResponseModel } from 'app/models/response.model';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
   public registrationForm!: FormGroup;
@@ -30,33 +30,37 @@ export class RegistrationComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     // private router: Router,
-    private _auth: AuthService,
-    // private _current: CurrentUserService
-  ) { }
+    private _auth: AuthService
+  ) // private _current: CurrentUserService
+  {}
 
   ngOnInit() {
     this.initRegisterForm();
   }
 
   initRegisterForm() {
-    this.registrationForm = this.fb.group({
+    this.registrationForm = this.fb.group(
+      {
         FirstName: ['', Validators.required],
         MiddleName: [''],
         LastName: ['', Validators.required],
         PhoneNumber: ['', Validators.required],
         AlternatePhoneNumber: [''],
-        Email: ['', [Validators.required,  Validators.email]],
-        AlternateEmail: ['',  Validators.email],
+        Email: ['', [Validators.required, Validators.email]],
+        AlternateEmail: ['', Validators.email],
         OrganizationName: [''],
         Password: ['', [Validators.required]],
         ConfirmPassword: ['', [Validators.required]],
-    }, {validators: [ this.passwordMatchValidator]})
+      },
+      { validators: [this.passwordMatchValidator] }
+    );
   }
 
-passwordMatchValidator(f: FormGroup) {
-    return f.get('Password')?.value === f.get('ConfirmPassword')?.value ? null : {'passwordMismatch' : true};
-}
-
+  passwordMatchValidator(f: FormGroup) {
+    return f.get('Password')?.value === f.get('ConfirmPassword')?.value
+      ? null
+      : { passwordMismatch: true };
+  }
 
   public register(): void {
     this.registerFormSubmitted = true;
@@ -64,14 +68,12 @@ passwordMatchValidator(f: FormGroup) {
       this.isSiginingUp = true;
       this._auth.register(this.registrationForm.value).subscribe({
         next: (res: ResponseModel<RegisterRequestDTO>) => {
-          console.log(res);
           this.isSiginingUp = false;
           this.registerFormSubmitted = true;
           // this.router.navigate(['authentication/login']);
           this.openModal();
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error)
           this.isSiginingUp = false;
           this.registerFormSubmitted = true;
           this.error_message = error?.error?.message;
@@ -86,22 +88,22 @@ passwordMatchValidator(f: FormGroup) {
     }
   }
 
-  public openModal():void {
+  public openModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = "365px";
-    dialogConfig.width = "600px";
+    dialogConfig.height = '365px';
+    dialogConfig.width = '600px';
     dialogConfig.data = {
       email: `${this.registrationForm.get('email')?.value}`,
-      counter: "00:05",
-    }
-    const dialogRef = this.dialog.open(RegistrationDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+      counter: '00:05',
+    };
+    const dialogRef = this.dialog.open(
+      RegistrationDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }

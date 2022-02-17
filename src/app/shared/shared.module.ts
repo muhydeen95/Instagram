@@ -19,6 +19,7 @@ import { HelpCenterComponent } from './components/help-center/help-center.compon
 import { InfoComponent } from './components/info/info.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SuccessModalComponent } from './components/success-modal/success-modal.component';
+import { UploadedDocComponent } from './components/uploaded-doc/uploaded-doc.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SuccessModalComponent } from './components/success-modal/success-modal.
     SearchbarComponent,
     HelpCenterComponent,
     InfoComponent,
-    SuccessModalComponent
+    SuccessModalComponent,
+    UploadedDocComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +63,8 @@ import { SuccessModalComponent } from './components/success-modal/success-modal.
     HelpCenterComponent,
     InfoComponent,
     NgSelectModule,
-    SuccessModalComponent
+    SuccessModalComponent,
+    UploadedDocComponent,
   ],
 })
 export class SharedModule {}

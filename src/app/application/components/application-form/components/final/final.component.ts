@@ -205,7 +205,7 @@ export class FinalComponent implements OnInit {
   public removeFile(index: number): void {
     this.supportingDocuments.splice(index, 1);
     this.finalForm.patchValue({
-      supportingDocument: this.arrToSplice,
+      supportingDocument: this.supportingDocuments,
     });
   }
 

@@ -11,7 +11,7 @@ export class DocumentService {
 
   //Get document by ID
   public getDocumentByIdRequest(id: number): Observable<ResponseModel<any>> {
-    const endpoint = 'Document/document-search' + id;
+    const endpoint = 'IncomingMail/get-customer-submission/' + id;
     return this.http.getRequest(endpoint);
   }
 }

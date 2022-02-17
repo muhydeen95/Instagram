@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FileType } from '../../models/filetype.model';
+import { FileType } from 'app/application/components/application-form/components/final/models/filetype.model';
 
 @Component({
   selector: 'app-uploaded-doc',

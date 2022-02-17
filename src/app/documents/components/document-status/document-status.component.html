@@ -34,15 +34,21 @@
               <ul class="px-3 m-0">
                 <li>
                   <h4>Document Type</h4>
-                  <p>Form A</p>
+                  <p>{{ documentDetail.documentType || "--" }}</p>
                 </li>
                 <li>
                   <h4>Subject</h4>
-                  <p>Account Opening</p>
+                  <p>{{ documentDetail.subject || "--" }}</p>
                 </li>
                 <li>
                   <h4>Status</h4>
-                  <p>Pending</p>
+                  <p>
+                    {{
+                      CustomerTransactionStatus[
+                        documentDetail.treatmentStatusId
+                      ] || "--"
+                    }}
+                  </p>
                 </li>
               </ul>
             </div>
@@ -50,7 +56,11 @@
         </div>
       </div>
 
-      <div class="accordion" id="formAccordion">
+      <div
+        class="accordion"
+        id="formAccordion"
+        *ngIf="documentDetail.files.length > 0"
+      >
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
             <div class="d-flex align-items-center">
@@ -76,21 +86,12 @@
           >
             <div class="accordion-body">
               <ul class="px-3 m-0">
-                <li class="d-flex align-items-center">
+                <li
+                  class="d-flex align-items-center"
+                  *ngFor="let file of documentDetail.files"
+                >
                   <img src="assets/images/pdf.svg" alt="" />
-                  <p class="d-inline-block ps-3">attachment.pdf</p>
-                </li>
-                <li class="d-flex align-items-center">
-                  <img src="assets/images/word.svg" alt="" />
-                  <p class="d-inline-block ps-3">attachment.docx</p>
-                </li>
-                <li class="d-flex align-items-center">
-                  <img src="assets/images/ppt.svg" alt="" />
-                  <p class="d-inline-block ps-3">attachment.pptx</p>
-                </li>
-                <li class="d-flex align-items-center">
-                  <img src="assets/images/img.svg" alt="" />
-                  <p class="d-inline-block ps-3">attachment.jpg</p>
+                  <p class="d-inline-block ps-3">{{ file.name }}</p>
                 </li>
               </ul>
             </div>

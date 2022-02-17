@@ -42,7 +42,7 @@ export class UploadDocumentComponent implements OnInit {
   public searchQuery: SearchDTO = InitialSearchDTO;
   public gettingDocTypesFailed: boolean = false;
   public docTypes: Array<DocTypeDTO> = [];
-
+  public files: File[] = [];
   constructor(
     private fb: FormBuilder,
     private _base: BaseComponent,
@@ -106,11 +106,28 @@ export class UploadDocumentComponent implements OnInit {
     }
   }
 
-  public onFileDropped(e: any, mode?: string) {
-    const files = [...e.target.files];
-    if (files.length > 0) {
-      this.uploadForm.get('Files')?.setValue(files);
-      this.fileNames = files.map((element) => element.name);
+  public onFileDropped(event: any) {
+    if (event.target.files.length > 0) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.files.includes(event.target.files[i])
+          ? null
+          : this.files.push(event.target.files[i]);
+      }
+      this.uploadForm.patchValue({
+        Files: this.files,
+      });
     }
+
+    // const files = [...e.target.files];
+    // if (files.length > 0) {
+    //   this.uploadForm.get('Files')?.setValue(files);
+    //   this.fileNames = files.map((element) => element.name);
+    // }
+  }
+  public removeFile(index: number): void {
+    this.files.splice(index, 1);
+    this.uploadForm.patchValue({
+      Files: this.files,
+    });
   }
 }

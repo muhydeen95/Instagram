@@ -118,3 +118,10 @@ form {
     justify-content: flex-end;
   }
 }
+
+.doc.col-lg-6 {
+  @media (max-width: 1169px) {
+    flex: 0 0 auto;
+    width: 100% !important;
+  }
+}

@@ -50,8 +50,12 @@ export class ChangePasswordDialogComponent implements OnInit {
       currentPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-    })
+    }, {validators: [ this.passwordMatchValidator]})
   }
+
+  passwordMatchValidator(f: FormGroup) {
+    return f.get('newPassword')?.value === f.get('confirmPassword')?.value ? null : {'passwordMismatch' : true};
+}
 
   public checkForKeyEnter(event: KeyboardEvent): void {
     var key = event.key || event.keyCode;
@@ -68,7 +72,6 @@ export class ChangePasswordDialogComponent implements OnInit {
       this._profile.changePassword(payload).subscribe({
         next: (res: ResponseModel<Password>) => {
           this.isLoading = false;
-          
           this.passwordFormSubmitted = false;
           this.close.nativeElement.click();
           this._base.openSnackBar(

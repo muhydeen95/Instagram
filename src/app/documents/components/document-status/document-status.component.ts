@@ -88,7 +88,6 @@ export class DocumentStatusComponent implements OnInit {
         next: (res: ResponseModel<DocumentDTO>) => {
           this.loading = false;
           this.documentDetail = res.response;
-          console.log(res.response);
         },
         error: (error: ResponseModel<null>) => {
           this.loading = false;

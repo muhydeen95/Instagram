@@ -77,63 +77,42 @@
               </div>
             </div>
           </div>
-          <div
-            class="accordion"
-            id="formAccordion"
-            *ngFor="let file of lcAplicationDetail.files; let i = index"
-          >
+          <div class="accordion" id="formAccordion">
             <div class="accordion-item">
-              <h2 class="accordion-header" [attr.id]="'heading' + i">
+              <h2 class="accordion-header" id="headingOne">
                 <div class="d-flex align-items-center">
                   <div
                     class="accordion-button"
                     data-bs-toggle="collapse"
-                    [attr.data-bs-target]="'#collapseTwo' + i"
+                    data-bs-target="#collapseTwo"
                     aria-expanded="true"
-                    [attr.aria-controls]="'collapseTwo' + i"
+                    aria-controls="collapseTwo"
                   >
                     <div class="circle">
                       <img src="assets/images/attachment.svg" alt="" />
                     </div>
-                    <span class="px-3">{{
-                      file.stamp
-                        ? "Stamp"
-                        : file.signature
-                        ? "Signature"
-                        : "Supporting Documents"
-                    }}</span>
+                    <span class="px-3">Supporting Documents</span>
                   </div>
                   <div class="w-fill-available"></div>
                 </div>
               </h2>
               <div
-                [attr.id]="'collapseTwo' + i"
+                id="collapseTwo"
                 class="accordion-collapse collapse show"
-                [attr.aria-labelledby]="'heading' + i"
+                aria-labelledby="headingOne"
               >
                 <div class="accordion-body">
                   <ul class="px-3 m-0">
-                    <li class="d-flex align-items-center" *ngIf="file.stamp">
-                      <img src="assets/images/pdf.svg" alt="" />
-                      <p class="d-inline-block ps-3">{{ file.stamp.name }}</p>
-                    </li>
-                    <li
-                      class="d-flex align-items-center"
-                      *ngIf="file.supportingDocuments"
-                    >
-                      <img src="assets/images/word.svg" alt="" />
-                      <p class="d-inline-block ps-3">
-                        {{ file.supportingDocuments.name }}
-                      </p>
-                    </li>
-                    <li
-                      class="d-flex align-items-center"
-                      *ngIf="file.signature"
-                    >
-                      <img src="assets/images/ppt.svg" alt="" />
-                      <p class="d-inline-block ps-3">
-                        {{ file.signature.name }}
-                      </p>
+                    <li *ngFor="let file of lcAplicationDetail.files">
+                      <div
+                        class="d-flex align-items-center"
+                        *ngIf="file.supportingDocuments"
+                      >
+                        <img src="assets/images/pdf.svg" alt="" />
+                        <p class="d-inline-block ps-3">
+                          {{ file.supportingDocuments.name }}
+                        </p>
+                      </div>
                     </li>
                   </ul>
                 </div>

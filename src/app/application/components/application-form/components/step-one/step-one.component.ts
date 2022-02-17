@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '@shared/services/local-storage.service';
-import { UtilityService } from '@shared/services/utility.service';
 import {
   INITIAL_FORM_DATA,
   lCApplicationDTO,
@@ -32,8 +31,7 @@ export class StepOneComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private _step: CurrentStepService,
-    private _localStorageAS: LocalStorageService,
-    private _util: UtilityService
+    private _localStorageAS: LocalStorageService
   ) {
     this._localStorageAS.watch('lc_application_form').subscribe((res) => {
       if (res) {
@@ -93,11 +91,8 @@ export class StepOneComponent implements OnInit {
     if (this.stepOneForm.valid) {
       this.isLoading = true;
       const stepOnePayload = this.stepOneForm.value;
-      stepOnePayload.lCApplicationDate = this._util.covertDateToIsoString(
-        stepOnePayload.lCApplicationDate
-      );
+
       const payload = { ...this.applicationForm, ...stepOnePayload };
-      console.log(payload);
       this._step.storeCurrentStepData(payload);
       this.router.navigate([ApplicationStepRoute.step_two]);
     }

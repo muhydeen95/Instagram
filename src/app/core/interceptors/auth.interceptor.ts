@@ -83,7 +83,6 @@ export class AuthInterceptor implements HttpInterceptor {
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
-            console.log(err);
             this.handleError(err);
           }
         }

@@ -91,7 +91,6 @@ export class StepThreeComponent implements OnInit {
       this.isLoading = true;
       const stepThreePayload = this.stepThreeForm.value;
       const payload = { ...this.applicationForm, ...stepThreePayload };
-      console.log(payload);
       this._step.storeCurrentStepData(payload);
       this.router.navigate([ApplicationStepRoute.step_four]);
     }

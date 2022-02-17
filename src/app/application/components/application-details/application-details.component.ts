@@ -31,13 +31,11 @@ export class ApplicationDetailsComponent implements OnInit {
     this.sub.add(
       this._lc.getLcApplication(id).subscribe({
         next: (res: ResponseModel<LCApplicationDTO>) => {
-          console.log(res);
           this.loading = false;
           this.lcAplicationDetail = res.response;
         },
         error: (error: ResponseModel<null>) => {
           this.loading = false;
-          console.log(error);
         },
       })
     );

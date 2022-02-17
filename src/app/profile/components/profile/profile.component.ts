@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
   private sub: Subscription = new Subscription();
@@ -30,12 +30,12 @@ export class ProfileComponent implements OnInit {
   public imageSrc: string = '';
 
   constructor(
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private fb: FormBuilder,
     private _profile: ProfileService,
     // private _current: CurrentUserService,
     private _base: BaseComponent
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getUserProfile();
@@ -45,20 +45,27 @@ export class ProfileComponent implements OnInit {
 
   initUpdateProfileForm() {
     this.updateProfileForm = this.fb.group({
-        firstName: [this.profile?.firstName ? this.profile?.firstName  : '' ],
-        middleName: [this.profile?.middleName ? this.profile?.middleName  : ''],
-        lastName: [this.profile?.lastName ? this.profile?.lastName  : ''],
-        phoneNumber: [this.profile?.phoneNumber ? this.profile?.phoneNumber  : ''],
-        alternatePhoneNumber: [this.profile?.alternatePhoneNumber ? this.profile?.alternatePhoneNumber  : ''],
-        email: [this.profile?.email ? this.profile?.email  : ''],
-        AlternateEmail: [this.profile?.alternateEmail ? this.profile?.alternateEmail  : ''],
-        organizationName: [this.profile?.organizationName ? this.profile?.organizationName  : '']
-    })
+      firstName: [this.profile?.firstName ? this.profile?.firstName : ''],
+      middleName: [this.profile?.middleName ? this.profile?.middleName : ''],
+      lastName: [this.profile?.lastName ? this.profile?.lastName : ''],
+      phoneNumber: [this.profile?.phoneNumber ? this.profile?.phoneNumber : ''],
+      alternatePhoneNumber: [
+        this.profile?.alternatePhoneNumber
+          ? this.profile?.alternatePhoneNumber
+          : '',
+      ],
+      email: [this.profile?.email ? this.profile?.email : ''],
+      AlternateEmail: [
+        this.profile?.alternateEmail ? this.profile?.alternateEmail : '',
+      ],
+      organizationName: [
+        this.profile?.organizationName ? this.profile?.organizationName : '',
+      ],
+    });
   }
 
   toggleEdit() {
     this.isEditing = true;
-    console.log(this.isEditing)
   }
 
   public getUserProfile(): void {
@@ -69,21 +76,20 @@ export class ProfileComponent implements OnInit {
           // console.log(res)
           this.isFetchingProfile = false;
           this.profile = res?.response;
-          this.initUpdateProfileForm()
+          this.initUpdateProfileForm();
         },
         error: (error: ResponseModel<null>) => {
           this.isFetchingProfile = false;
-          console.log(error);
         },
       })
     );
   }
 
   getInitials() {
-      return (
-        this.profile.firstName?.charAt(0).toUpperCase() +
-        this.profile.lastName?.charAt(0).toUpperCase()
-      );
+    return (
+      this.profile.firstName?.charAt(0).toUpperCase() +
+      this.profile.lastName?.charAt(0).toUpperCase()
+    );
   }
 
   public changeProfilePic(event: any) {
@@ -92,13 +98,11 @@ export class ProfileComponent implements OnInit {
       const [file] = event.target.files;
       reader.onload = () => {
         this.imageSrc = reader.result as string;
-        console.log(this.imageSrc);
       };
       reader.readAsDataURL(file);
       this.imageFile = event.target.files[0];
       this.image = event.target.files[0].name;
       this.uploadedImage = true;
-      console.log(this.imageFile, this.image)
     }
   }
 
@@ -110,7 +114,7 @@ export class ProfileComponent implements OnInit {
         this._profile.updateProfile(payload).subscribe({
           next: (res: any) => {
             // console.log(res);
-            this.profile = res["response"];
+            this.profile = res['response'];
             // console.log(this.profile.emailSignatureUrl);
             this._base.openSnackBar(
               'Great...!!!, Your action was successful',
@@ -119,7 +123,6 @@ export class ProfileComponent implements OnInit {
           },
           error: (e) => {
             // this.signatureLoad = false;
-            console.log(e);
           },
         })
       );
@@ -128,12 +131,14 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-
-  public openModal():void {
+  public openModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = "480px";
-    dialogConfig.width = "700px";
-    const dialogRef = this.dialog.open(ChangePasswordDialogComponent, dialogConfig);
+    dialogConfig.height = '480px';
+    dialogConfig.width = '700px';
+    const dialogRef = this.dialog.open(
+      ChangePasswordDialogComponent,
+      dialogConfig
+    );
     dialogRef.afterClosed().subscribe((result) => {
       // console.log(`Dialog result: ${result}`);
     });
@@ -141,7 +146,7 @@ export class ProfileComponent implements OnInit {
 
   public submit() {
     this.isLoading = true;
-    const payload = this.updateProfileForm.value
+    const payload = this.updateProfileForm.value;
     this.sub.add(
       this._profile.updateProfile(payload).subscribe({
         next: (res: any) => {
@@ -156,11 +161,9 @@ export class ProfileComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           this.isLoading = false;
           this.isError = true;
-          console.log(error);
           this.error_message = error?.error?.Id[0];
         },
       })
     );
   }
-
 }

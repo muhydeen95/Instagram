@@ -26,8 +26,8 @@ constructor(private http: HttpService) { }
   public changePassword(
       changePassword: Password
     ): Observable<ResponseModel<Password>> {
-      const endpoint = 'customer/profile/customer-update-profile';
-      return this.http.makeRequestWithData('post', endpoint, {}, changePassword);
+      const endpoint = 'CustomerAuth/change-password';
+      return this.http.makeRequestWithData('patch', endpoint, {}, changePassword);
   }
 
 }

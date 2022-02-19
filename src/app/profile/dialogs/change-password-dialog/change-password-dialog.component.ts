@@ -49,9 +49,8 @@ export class ChangePasswordDialogComponent implements OnInit {
     this.changePasswordForm = this.fb.group({
       CurrentPassword: ['', Validators.required],
       NewPassword: [
-        Validators.required, 
-        Validators.minLength(8),
-        Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/),
+        Validators.required,
+        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/),
       ],
       confirmPassword: ['', Validators.required],
     }, {validators: [ this.passwordMatchValidator]})

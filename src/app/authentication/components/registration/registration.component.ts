@@ -51,9 +51,8 @@ export class RegistrationComponent implements OnInit {
         OrganizationName: [''],
         Password: ['', 
           [
-            Validators.required, 
-            Validators.minLength(8),
-            Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/),
+            Validators.required,
+            Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/),
           ]
         ],
         ConfirmPassword: ['', [Validators.required]],
@@ -70,6 +69,15 @@ export class RegistrationComponent implements OnInit {
 
   public register(): void {
     this.registerFormSubmitted = true;
+    if(
+        this.registrationForm.get('Password')?.value != 
+        this.registrationForm.get('confirmPassword')?.value
+      ) {
+      this.error_message = 'Password must match'
+    }
+    if(!this.registrationForm.get('Password')?.valid) {
+      this.error_message = 'Password must container at least 8 character with one uppercase, one lowercase and one number'
+    }
     if (this.registrationForm.valid) {
       this.isSiginingUp = true;
       this._auth.register(this.registrationForm.value).subscribe({

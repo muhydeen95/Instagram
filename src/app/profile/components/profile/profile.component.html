@@ -74,7 +74,7 @@
   </div>
 
   <div class="profile__form mt-5">
-    <app-error *ngIf="isError">{{ error_message }}</app-error>
+    <app-error [error_message]="error_message"></app-error>
     <form novalidate [formGroup]="updateProfileForm" *ngIf="!isFetchingProfile" >
       <div class="row">
         <div class="col-lg-4">

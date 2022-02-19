@@ -35,12 +35,17 @@ export class ResetPasswordComponent implements OnInit {
   public initResetPasswordForm() {
     this.resetPasswordForm = this.fb.group({
       password: [
-        Validators.required, 
-        Validators.minLength(8),
-        Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/),
+        Validators.required,
+        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/),
       ],
       confirmPassword: ['', Validators.required],
-    })
+    }, { validators: [this.passwordMatchValidator] })
+  }
+
+  passwordMatchValidator(f: FormGroup) {
+    return f.get('Password')?.value === f.get('confirmPassword')?.value
+      ? null
+      : { passwordMismatch: true };
   }
 
   public checkForKeyEnter(event: KeyboardEvent): void {
@@ -57,9 +62,11 @@ export class ResetPasswordComponent implements OnInit {
       this.isError = true;
       this.error_message = "New password and confirm password must match"
     }
+    if(!this.resetPasswordForm.get('Password')?.valid) {
+      this.error_message = 'Password must container at least 8 character with one uppercase, one lowercase and one number'
+    }
     if (this.resetPasswordForm.valid) {
       this.isLoading = true;
-      // const payload = this.changePasswordForm.value;
       this._auth.resetPassword(payload).subscribe({
         next: (res: ResponseModel<ResetPasswordDTO>) => {
           console.log(res)

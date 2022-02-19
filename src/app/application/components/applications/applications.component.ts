@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogModel } from '@shared/components/models/dialog.model';
-import { DashboardDialogComponent } from 'app/dashboard/dialogs/dashboard-dialog/dashboard-dialog.component';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
+import { DialogModel } from '@shared/components/models/dialog.model';
+import { LcApplicationService } from 'app/application/services/lc-application.service';
+import { DashboardDialogComponent } from 'app/dashboard/dialogs/dashboard-dialog/dashboard-dialog.component';
 import { FilterComponent } from 'app/documents/dialogs/filter/filter.component';
-import { Subscription } from 'rxjs';
 import {
+  ApplicationResponseDTO,
   InitialSearchDTO,
   pageSizeOptionsDTO,
   PaginationResponse,
   ResponseModel,
   SearchDTO,
 } from 'app/models/response.model';
-import { LcApplicationService } from 'app/application/services/lc-application.service';
-import { Router } from '@angular/router';
-import { LCApplicationDTO } from '../application-form/models/types.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-applications',
@@ -27,8 +27,8 @@ export class ApplicationsComponent implements OnInit {
   public loading: boolean = false;
   public btnName: string = 'New Application';
   public isInitialRequest: boolean = true;
-  public date: string = '';
-  public lcAplications: LCApplicationDTO[] = [];
+  public date: string = new Date().toISOString();
+  public lcAplications: ApplicationResponseDTO[] = [];
   public searchQuery: SearchDTO = { ...InitialSearchDTO, search: '' };
   public paginatedResponse: PaginationResponse<any[]> = new PaginationResponse<
     any[]

@@ -16,7 +16,29 @@ export interface DocumentDTO {
   treatmentStatusId: string;
 }
 
-export const CustomerTransactionStatus:any = {
+export interface DocumentSearchDTO {
+  CustomerFileSubmissionDate: string;
+  Search: string;
+  PageNumber: number;
+  PageSize: number;
+}
+export const DefaultDocumentSearchDTO = {
+  CustomerFileSubmissionDate: '',
+  Search: '',
+  PageNumber: 1,
+  PageSize: 5,
+};
+
+export interface DocumentResponse {
+  correspondenceNo: string;
+  createdAt: string;
+  dateCreated: string;
+  documentType: string;
+  fileSubmissionId: number;
+  subject: string;
+  treatmentStatusId: string;
+}
+export const CustomerTransactionStatus: any = {
   7: 'Untreated',
   10: 'Rejected',
   9: 'Treated',

@@ -19,6 +19,7 @@ import {
   ResponseModel,
 } from '../../../models/response.model';
 import { LcApplicationService } from '../../../application/services/lc-application.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,7 +38,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private _docService: DocumentService,
-    private _applicationService: LcApplicationService
+    private _applicationService: LcApplicationService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -99,6 +101,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     dialogRef.componentInstance.searchAction.subscribe(
       (event: DialogModel<UploadDocDTO>) => {}
     );
+  }
+
+  public viewDocument(documentId: number): void {
+    this.router.navigate(['documents/status', documentId]);
+  }
+  public viewLcApplication(lcApplicationId: number): void {
+    this.router.navigate(['application/detail', lcApplicationId]);
   }
 
   ngOnDestroy() {

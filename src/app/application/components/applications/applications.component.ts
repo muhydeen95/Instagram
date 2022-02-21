@@ -41,10 +41,10 @@ export class ApplicationsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getLcApplicationss(true);
+    this.getLcApplications(true);
   }
 
-  public getLcApplicationss(
+  public getLcApplications(
     initial: boolean,
     isPagination?: boolean,
     pageEvent?: PageEvent
@@ -91,8 +91,14 @@ export class ApplicationsComponent implements OnInit {
   public filterAction(): void {
     const dialogRef = this.dialog.open(FilterComponent);
     dialogRef.componentInstance.event.subscribe((event: string) => {
-      this.date = event;
+      this.searchQuery.lCApplicationDate = event;
+      this.getLcApplications(false);
+      console.log(this.searchQuery);
     });
+  }
+
+  public getSearchQuery(searchQuery: string): void {
+    this.searchQuery.search = searchQuery;
   }
 
   public goToNewApplication(): void {

@@ -37,7 +37,7 @@ export class AuthService {
   public forgotPassword(
     forgotPasswordRequestDTO: ForgotPassswordDTO
   ): Observable<ResponseModel<ForgotPassswordDTO>> {
-    const endpoint = 'CustomerAuth/login';
+    const endpoint = 'CustomerAuth/forgot-password';
     return this.http.makeRequestWithData(
       'post',
       endpoint,
@@ -48,7 +48,7 @@ export class AuthService {
   public resetPassword(
     resetPasswordRequestDTO: ResetPasswordDTO
   ): Observable<ResponseModel<ResetPasswordDTO>> {
-    const endpoint = 'CustomerAuth/login';
+    const endpoint = 'CustomerAuth/reset-password';
     return this.http.makeRequestWithData(
       'post',
       endpoint,

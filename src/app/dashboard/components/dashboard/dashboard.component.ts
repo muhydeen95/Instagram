@@ -3,7 +3,11 @@ import { DashboardDialogComponent } from 'app/dashboard/dialogs/dashboard-dialog
 import { MatDialog } from '@angular/material/dialog';
 import { DialogModel } from '@shared/components/models/dialog.model';
 import { Subscription } from 'rxjs';
-import { Dashboard, UploadDocDTO } from 'app/dashboard/models/dashboard.model';
+import {
+  Dashboard,
+  DashboardResponseDTO,
+  UploadDocDTO,
+} from 'app/dashboard/models/dashboard.model';
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
 import { TrackDocumentComponent } from 'app/dashboard/dialogs/track-document/track-document.component';
 import { DocumentService } from '../../../documents/services/document.service';
@@ -20,6 +24,7 @@ import {
 } from '../../../models/response.model';
 import { LcApplicationService } from '../../../application/services/lc-application.service';
 import { Router } from '@angular/router';
+import { DashboardService } from 'app/dashboard/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,24 +35,40 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private sub: Subscription = new Subscription();
   public isDocumentFetching: boolean = true;
   public applicationLoading: boolean = true;
-  data: DocumentResponse[] = [];
-  filterableData: DocumentResponse[] = [];
-  applicationData: ApplicationResponseDTO[] = [];
-  applicationFilterableData: ApplicationResponseDTO[] = [];
+  public isFetchingDashboard: boolean = true;
+  public dashboardMetrics!: DashboardResponseDTO;
+  public data: DocumentResponse[] = [];
+  public filterableData: DocumentResponse[] = [];
+  public applicationData: ApplicationResponseDTO[] = [];
+  public applicationFilterableData: ApplicationResponseDTO[] = [];
 
   constructor(
     public dialog: MatDialog,
     private _docService: DocumentService,
     private _applicationService: LcApplicationService,
+    private _dashboard: DashboardService,
     private router: Router
   ) {}
 
   ngOnInit() {
+    this.getDashboard();
     this.getDocument(DefaultDocumentSearchDTO);
     this.getApplications(InitialSearchDTO);
   }
 
-  getDocument(query: DocumentSearchDTO): void {
+  public getDashboard(): void {
+    this._dashboard.getCustomerDashboard().subscribe({
+      next: (res: ResponseModel<DashboardResponseDTO>) => {
+        this.isFetchingDashboard = false;
+        console.log(res);
+        this.dashboardMetrics = res.response;
+      },
+      error: (error: ResponseModel<any>) => {
+        this.isFetchingDashboard = false;
+      },
+    });
+  }
+  public getDocument(query: DocumentSearchDTO): void {
     this._docService.getDocument(query).subscribe({
       next: (res: any) => {
         this.isDocumentFetching = false;
@@ -61,7 +82,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  getApplications(query: SearchDTO): void {
+  public getApplications(query: SearchDTO): void {
     this._applicationService.searchAllLcApplications(query).subscribe({
       next: (res: any) => {
         this.applicationLoading = false;

@@ -12,6 +12,8 @@
           <app-searchbar
             [canFilter]="true"
             (filterAction)="filterAction()"
+            (searchQuery)="getSearchQuery($event)"
+            (searchAction)="getLcApplications(false)"
             [btnName]="btnName"
             [btnIcon]="'edit'"
             (btnAction)="goToNewApplication()"
@@ -45,8 +47,7 @@
                     ></app-docstream-skeleton-loader>
                   </td>
                 </tr>
-                ></ng-container
-              >
+              </ng-container>
               <ng-container>
                 <tr *ngFor="let lc of lcAplications">
                   <td>{{ lc.applicantName }}</td>
@@ -70,7 +71,7 @@
         </section>
       </ng-container>
       <app-no-data
-        name="application"
+        name="LC Application"
         [is_initial]="isInitialRequest"
         [is_loading]="isFetchingLcApplications"
         (open_dialog)="goToNewApplication()"

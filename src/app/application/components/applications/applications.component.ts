@@ -91,7 +91,9 @@ export class ApplicationsComponent implements OnInit {
   public filterAction(): void {
     const dialogRef = this.dialog.open(FilterComponent);
     dialogRef.componentInstance.event.subscribe((event: string) => {
-      this.date = event;
+      this.searchQuery.lCApplicationDate = event;
+      this.getLcApplications(false);
+      console.log(this.searchQuery);
     });
   }
 

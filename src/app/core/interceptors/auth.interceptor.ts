@@ -8,7 +8,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { CurrentUserService } from '../services/current-user.service';
 import { BaseComponent } from '../base/base/base.component';
 import { Router } from '@angular/router';
@@ -54,11 +54,16 @@ export class AuthInterceptor implements HttpInterceptor {
             }
           },
           (err) => {
+            console.log(err);
             if (err instanceof HttpErrorResponse) {
               this.handleError(err, newRequest, next);
             }
           }
-        )
+        ),
+        catchError((e: any) => {
+          console.log(e.status);
+          return throwError(e);
+        })
       );
     } else {
       this._base.openSnackBar('Internet not connected', 'error');

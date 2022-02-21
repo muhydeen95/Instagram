@@ -7,6 +7,7 @@ export interface Profile {
     phoneNumber: string,
     alternatePhoneNumber: string,
     organizationName: string,
+    profilePictureUrl?: string
 }
 
 export interface Password {

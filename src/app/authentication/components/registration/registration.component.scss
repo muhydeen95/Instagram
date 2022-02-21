@@ -25,14 +25,15 @@ $mobile_side_padding: 3rem;
       margin-bottom: 5.6rem;
     }
   }
-  .position-relative {
+ .position-relative {
+   .invalid-feedback,
     .fa {
       position: absolute;
       font-size: 1.5rem;
       top: 1.8rem;
       right: 1.5rem;
     }
-  }
+  } 
   &__sign_in {
     padding-top: 1.4rem;
     a,p {

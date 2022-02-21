@@ -13,6 +13,7 @@ import {
   DefaultDocumentSearchDTO,
 } from '../../models/documents.model';
 import { ResponseModel } from '../../../models/response.model';
+
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -21,6 +22,8 @@ import { ResponseModel } from '../../../models/response.model';
 export class DocumentComponent implements OnInit {
   private sub: Subscription = new Subscription();
   public documentLoading: boolean = true;
+  public is_initial: boolean = true;
+  public searchTerm: string = '';
   filterableData: DocumentResponse[] = [];
   data: DocumentResponse[] = [];
   constructor(public dialog: MatDialog, private _docService: DocumentService) {}
@@ -29,10 +32,15 @@ export class DocumentComponent implements OnInit {
     this.getDocument(DefaultDocumentSearchDTO);
   }
 
-  getDocument(query: DocumentSearchDTO): void {
+  getDocument(
+    query: Partial<DocumentSearchDTO>,
+    isSearching: boolean = false
+  ): void {
+    this.documentLoading = true;
     this._docService.getDocument(query).subscribe({
       next: (res: any) => {
         this.documentLoading = false;
+        this.is_initial = !isSearching;
         this.data = res.response.result;
         this.filterableData = this.data;
       },
@@ -44,13 +52,10 @@ export class DocumentComponent implements OnInit {
   }
 
   public searchQueryAction(searchQuery: string): void {
-    let query = searchQuery.toLocaleLowerCase().trim();
-    this.filterableData = this.data.filter(
-      ({ correspondenceNo, documentType, subject }) =>
-        documentType.toLocaleLowerCase().includes(query) ||
-        subject.toLocaleLowerCase().includes(query) ||
-        correspondenceNo.toLocaleLowerCase().includes(query)
-    );
+    this.searchTerm = searchQuery.toLocaleLowerCase().trim();
+  }
+  searchDocuments(): void {
+    this.getDocument({ Search: this.searchTerm }, true);
   }
 
   public openDialog(
@@ -68,15 +73,13 @@ export class DocumentComponent implements OnInit {
 
   public filterAction(): void {
     const dialogRef = this.dialog.open(FilterComponent);
-    dialogRef.componentInstance.event.subscribe((event: DialogModel<any>) => {
-      this.filterableData = this.data.filter(({ createdAt }) => {
-        return new Date(createdAt).toDateString() === new Date().toDateString();
-      });
-    });
-
     dialogRef.componentInstance.event.subscribe(
       (event: DialogModel<any>) => {}
     );
+
+    dialogRef.componentInstance.event.subscribe((event: DialogModel<any>) => {
+      this.getDocument({ CustomerFileSubmissionDate: event.toString() }, true);
+    });
   }
 
   public openUploadDialog(): void {

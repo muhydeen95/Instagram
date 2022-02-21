@@ -24,7 +24,6 @@ export interface ForgotPassswordDTO {
 }
 
 export interface ResetPasswordDTO {
-  currentPassword: string;
   newPassword: string;
   confirmNewPassword: string;
 }

@@ -7,8 +7,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ChangePasswordDialogComponent } from './dialogs/change-password-dialog/change-password-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 @NgModule({
   declarations: [ProfileComponent, ChangePasswordDialogComponent],
-  imports: [CommonModule, ProfileRoutingModule, MatDialogModule, ReactiveFormsModule, SharedModule, FormsModule],
+  imports: [
+    CommonModule,
+    ProfileRoutingModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    SharedModule,
+    FormsModule,
+    MatProgressBarModule,
+  ],
 })
 export class ProfileModule {}

@@ -21,10 +21,9 @@ export interface DocTypeDTO {
 }
 
 export interface DashboardResponseDTO {
-  branchesCount: number;
-  departmentCount: number;
-  positionCount: number;
-  regionCount: number;
-  unitCount: number;
-  usersCount: number;
+  customerFileUploads: any;
+  customerLCApplications: any;
+  pendingFiles: number;
+  treatedFiles: number;
+  untreatedFiles: number;
 }

@@ -1,4 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEventType,
+  HttpResponse,
+} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -19,9 +23,11 @@ export class ProfileComponent implements OnInit {
   private sub: Subscription = new Subscription();
   public isLoading: boolean = false;
   public isFetchingProfile: boolean = false;
+  public isUploading: boolean = false;
   public isEditing: boolean = false;
   public updateProfileForm!: FormGroup;
   public profile!: Profile;
+  public fileUploadProgress: number = 0;
   public error_message: string = '';
   public isError: boolean = false;
   public uploadedImage: boolean = false;
@@ -33,7 +39,6 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private _profile: ProfileService,
-    // private _current: CurrentUserService,
     private _base: BaseComponent
   ) {}
 
@@ -104,25 +109,37 @@ export class ProfileComponent implements OnInit {
       this.image = event.target.files[0].name;
       this.uploadedImage = true;
     }
+    this.uploadImage();
   }
 
-  public addSignature() {
+  public uploadImage() {
     if (this.imageFile != null) {
+      this.isUploading = true;
       const payload = this.imageFile;
-      // console.log(payload);
       this.sub.add(
-        this._profile.updateProfile(payload).subscribe({
-          next: (res: any) => {
-            // console.log(res);
-            this.profile = res['response'];
-            // console.log(this.profile.emailSignatureUrl);
-            this._base.openSnackBar(
-              'Great...!!!, Your action was successful',
-              'success'
-            );
+        this._profile.addProfilePicture(payload).subscribe({
+          next: (event: any) => {
+            console.log(event);
+            if (event.type === HttpEventType.UploadProgress) {
+              this.fileUploadProgress = Math.round(
+                (100 * event.loaded) / event.total
+              );
+            } else if (event instanceof HttpResponse) {
+              const res = event.body;
+              // console.log(res)
+              this.isUploading = false;
+              this.profile.profilePictureUrl =
+                res['response'].emailSignatureUrl;
+              this._base.openSnackBar(
+                'Great...!!!, Your action was successful',
+                'success'
+              );
+            }
           },
-          error: (e) => {
-            // this.signatureLoad = false;
+          error: (e: any) => {
+            this.isUploading = false;
+            console.log(e);
+            this.error_message = e.error.message;
           },
         })
       );

@@ -6,177 +6,209 @@
 
   <div class="row mt-5">
     <div class="col-md-4 col-lg-3 document_progress me-3">
-      <div class="accordion" id="formAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <div class="d-flex align-items-center">
-              <div
-                class="accordion-button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
-                <div class="circle">
-                  <img src="assets/images/document.svg" alt="" />
-                </div>
-                <span class="px-3">Document Info</span>
-              </div>
-              <div class="w-fill-available"></div>
-            </div>
-          </h2>
-          <div
-            id="collapseOne"
-            class="accordion-collapse collapse show"
-            aria-labelledby="headingOne"
-          >
-            <div class="accordion-body">
-              <ul class="px-3 m-0">
-                <li>
-                  <h4>Document Type</h4>
-                  <p>{{ documentDetail.documentType || "--" }}</p>
-                </li>
-                <li>
-                  <h4>Subject</h4>
-                  <p>{{ documentDetail.subject || "--" }}</p>
-                </li>
-                <li>
-                  <h4>Status</h4>
-                  <p>
-                    {{
-                      CustomerTransactionStatus[
-                        documentDetail.treatmentStatusId
-                      ] || "--"
-                    }}
-                  </p>
-                </li>
-              </ul>
-            </div>
+      <ng-container *ngIf="loading">
+        <div class="mb-5">
+          <div *ngFor="let dummy of [1, 2, 3, 4, 5]">
+            <app-docstream-skeleton-loader
+              width="100%"
+              height="2rem"
+            ></app-docstream-skeleton-loader>
           </div>
         </div>
-      </div>
-
-      <div
-        class="accordion"
-        id="formAccordion"
-        *ngIf="documentDetail.files.length > 0"
-      >
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <div class="d-flex align-items-center">
-              <div
-                class="accordion-button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo"
-                aria-expanded="true"
-                aria-controls="collapseTwo"
-              >
-                <div class="circle">
-                  <img src="assets/images/attachment.svg" alt="" />
-                </div>
-                <span class="px-3">Attachment</span>
-              </div>
-              <div class="w-fill-available"></div>
-            </div>
-          </h2>
-          <div
-            id="collapseTwo"
-            class="accordion-collapse collapse show"
-            aria-labelledby="headingOne"
-          >
-            <div class="accordion-body">
-              <ul class="px-3 m-0">
-                <li
-                  class="d-flex align-items-center"
-                  *ngFor="let file of documentDetail.files"
+        <div *ngFor="let dummy of [1, 2, 3, 4, 5]">
+          <app-docstream-skeleton-loader
+            width="100%"
+            height="2rem"
+          ></app-docstream-skeleton-loader>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!loading">
+        <div class="accordion" id="formAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <div class="d-flex align-items-center">
+                <div
+                  class="accordion-button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
                 >
-                  <img src="assets/images/pdf.svg" alt="" />
-                  <p class="d-inline-block ps-3">{{ file.name }}</p>
-                </li>
-              </ul>
+                  <div class="circle">
+                    <img src="assets/images/document.svg" alt="" />
+                  </div>
+                  <span class="px-3">Document Info</span>
+                </div>
+                <div class="w-fill-available"></div>
+              </div>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+            >
+              <div class="accordion-body">
+                <ul class="px-3 m-0">
+                  <li>
+                    <h4>Document Type</h4>
+                    <p>{{ documentDetail.documentType || "--" }}</p>
+                  </li>
+                  <li>
+                    <h4>Subject</h4>
+                    <p>{{ documentDetail.subject || "--" }}</p>
+                  </li>
+                  <li>
+                    <h4>Status</h4>
+                    <p>
+                      {{
+                        CustomerTransactionStatus[
+                          documentDetail.treatmentStatusId
+                        ] || "--"
+                      }}
+                    </p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+
+        <div
+          class="accordion"
+          id="formAccordion"
+          *ngIf="documentDetail.files.length > 0"
+        >
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <div class="d-flex align-items-center">
+                <div
+                  class="accordion-button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="true"
+                  aria-controls="collapseTwo"
+                >
+                  <div class="circle">
+                    <img src="assets/images/attachment.svg" alt="" />
+                  </div>
+                  <span class="px-3">Attachment</span>
+                </div>
+                <div class="w-fill-available"></div>
+              </div>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+            >
+              <div class="accordion-body">
+                <ul class="px-3 m-0">
+                  <li
+                    class="d-flex align-items-center"
+                    *ngFor="let file of documentDetail.files"
+                  >
+                    <img src="assets/images/pdf.svg" alt="" />
+                    <p class="d-inline-block ps-3">{{ file.name }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
 
     <div class="col-md-7 col-lg-8 chat_wrapper">
-      <div id="chatTemplate">
-        <div class="chat-message" *ngFor="let chat of userChats">
-          <div
-            class="recipient d-flex justify-content-start"
-            *ngIf="chat.user == 'recipient'"
-          >
-            <div class="pe-3 d-none d-md-block">
-              <img
-                class="rounded-circle"
-                src="assets/images/fidelity-chat.svg"
-                alt=""
-              />
+      <ng-container *ngIf="loading">
+        <div *ngFor="let dummy of [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]">
+          <app-docstream-skeleton-loader
+            width="100%"
+            height="5rem"
+          ></app-docstream-skeleton-loader>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!loading">
+        <div id="chatTemplate">
+          <div class="chat-message" *ngFor="let chat of userChats">
+            <div
+              class="recipient d-flex justify-content-start"
+              *ngIf="chat.user == 'recipient'"
+            >
+              <div class="pe-3 d-none d-md-block">
+                <img
+                  class="rounded-circle"
+                  src="assets/images/fidelity-chat.svg"
+                  alt=""
+                />
+              </div>
+              <div class="recipient-message">
+                <p>
+                  {{ chat.message }}
+                </p>
+                <div class="time">
+                  <p>{{ chat.time }}</p>
+                </div>
+              </div>
             </div>
-            <div class="recipient-message">
-              <p>
-                {{ chat.message }}
-              </p>
-              <div class="time">
-                <p>{{ chat.time }}</p>
+            <div
+              class="sender d-flex justify-content-end"
+              *ngIf="chat.user == 'sender'"
+            >
+              <div class="sender-message">
+                <p>
+                  {{ chat.message }}
+                </p>
+                <div class="time">
+                  <p>{{ chat.time }}</p>
+                </div>
+              </div>
+              <div class="ps-3 d-none d-md-block">
+                <img
+                  class="rounded-circle"
+                  src="assets/images/AH-chat.svg"
+                  alt=""
+                />
               </div>
             </div>
           </div>
-          <div
-            class="sender d-flex justify-content-end"
-            *ngIf="chat.user == 'sender'"
-          >
-            <div class="sender-message">
-              <p>
-                {{ chat.message }}
-              </p>
-              <div class="time">
-                <p>{{ chat.time }}</p>
-              </div>
-            </div>
-            <div class="ps-3 d-none d-md-block">
-              <img
-                class="rounded-circle"
-                src="assets/images/AH-chat.svg"
-                alt=""
+        </div>
+
+        <div class="message_push">
+          <div class="search-wrapper">
+            <div class="search-wrapper-input me-4 mb-3 form_group">
+              <input
+                type="text"
+                class="form-control mt-0"
+                placeholder="Enter message here"
+                [(ngModel)]="message"
               />
+              <span class="_icon click">
+                <i
+                  (click)="toggled = !toggled"
+                  [(emojiPickerIf)]="toggled"
+                  [emojiPickerDirection]="
+                    'bottom' || 'top' || 'left' || 'right'
+                  "
+                  (emojiPickerSelect)="handleSelection($event)"
+                >
+                  <img src="assets/images/emoji.svg" />
+                </i>
+              </span>
+            </div>
+
+            <div class="btn-attachment px-4 pt-4">
+              <img src="assets/images/send-attachment.svg" />
+              <input type="file" />
+            </div>
+
+            <div class="btn-wrapper me-3">
+              <button class="btn btn-blue btn-lg" (click)="submit()">
+                Send
+              </button>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="message_push">
-        <div class="search-wrapper">
-          <div class="search-wrapper-input me-4 mb-3 form_group">
-            <input
-              type="text"
-              class="form-control mt-0"
-              placeholder="Enter message here"
-              [(ngModel)]="message"
-            />
-            <span class="_icon click">
-              <i
-                (click)="toggled = !toggled"
-                [(emojiPickerIf)]="toggled"
-                [emojiPickerDirection]="'bottom' || 'top' || 'left' || 'right'"
-                (emojiPickerSelect)="handleSelection($event)"
-              >
-                <img src="assets/images/emoji.svg" />
-              </i>
-            </span>
-          </div>
-
-          <div class="btn-attachment px-4 pt-4">
-            <img src="assets/images/send-attachment.svg" />
-            <input type="file" />
-          </div>
-
-          <div class="btn-wrapper me-3">
-            <button class="btn btn-blue btn-lg" (click)="submit()">Send</button>
-          </div>
-        </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 </section>

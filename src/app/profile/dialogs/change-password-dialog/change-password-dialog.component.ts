@@ -48,7 +48,10 @@ export class ChangePasswordDialogComponent implements OnInit {
   public initChangePasswordForm() {
     this.changePasswordForm = this.fb.group({
       CurrentPassword: ['', Validators.required],
-      NewPassword: ['', Validators.required],
+      NewPassword: [
+        Validators.required,
+        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/),
+      ],
       confirmPassword: ['', Validators.required],
     }, {validators: [ this.passwordMatchValidator]})
   }
@@ -73,7 +76,6 @@ export class ChangePasswordDialogComponent implements OnInit {
     }
     if (this.changePasswordForm.valid) {
       this.isLoading = true;
-      // const payload = this.changePasswordForm.value;
       this._profile.changePassword(payload).subscribe({
         next: (res: ResponseModel<Password>) => {
           console.log(res)

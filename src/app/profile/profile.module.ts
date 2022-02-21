@@ -6,9 +6,18 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ChangePasswordDialogComponent } from './dialogs/change-password-dialog/change-password-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [ProfileComponent, ChangePasswordDialogComponent],
-  imports: [CommonModule, ProfileRoutingModule, MatDialogModule, ReactiveFormsModule, SharedModule, FormsModule],
+  imports: [
+    CommonModule, 
+    ProfileRoutingModule, 
+    MatDialogModule, 
+    ReactiveFormsModule, 
+    SharedModule, 
+    FormsModule,
+    NgxSpinnerModule
+  ],
 })
 export class ProfileModule {}

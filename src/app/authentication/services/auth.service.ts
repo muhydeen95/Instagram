@@ -1,7 +1,9 @@
 import {
+  ForgotPassswordDTO,
   LoginRequestDTO,
   LoginResponseDTO,
   RegisterRequestDTO,
+  ResetPasswordDTO,
 } from './../models/auth.model';
 import { Injectable } from '@angular/core';
 import { HttpService } from '@shared/services/http.service';
@@ -32,26 +34,26 @@ export class AuthService {
       registerRequestDTO
     );
   }
-  // public forgotPassword(
-  //   forgotPasswordRequestDTO: ForgotPassswordDTO
-  // ): Observable<ResponseModel<ForgotPassswordDTO>> {
-  //   const endpoint = 'CustomerAuth/login';
-  //   return this.http.makeRequestWithData(
-  //     'post',
-  //     endpoint,
-  //     {},
-  //     forgotPasswordRequestDTO
-  //   );
-  // }
-  // public resetPassword(
-  //   resetPasswordRequestDTO: ResetPasswordDTO
-  // ): Observable<ResponseModel<ResetPasswordDTO>> {
-  //   const endpoint = 'CustomerAuth/login';
-  //   return this.http.makeRequestWithData(
-  //     'post',
-  //     endpoint,
-  //     {},
-  //     resetPasswordRequestDTO
-  //   );
-  // }
-} //00909
+  public forgotPassword(
+    forgotPasswordRequestDTO: ForgotPassswordDTO
+  ): Observable<ResponseModel<ForgotPassswordDTO>> {
+    const endpoint = 'CustomerAuth/forgot-password';
+    return this.http.makeRequestWithData(
+      'post',
+      endpoint,
+      {},
+      forgotPasswordRequestDTO
+    );
+  }
+  public resetPassword(
+    resetPasswordRequestDTO: ResetPasswordDTO
+  ): Observable<ResponseModel<ResetPasswordDTO>> {
+    const endpoint = 'CustomerAuth/reset-password';
+    return this.http.makeRequestWithData(
+      'post',
+      endpoint,
+      {},
+      resetPasswordRequestDTO
+    );
+  }
+}

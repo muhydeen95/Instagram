@@ -30,4 +30,20 @@ constructor(private http: HttpService) { }
       return this.http.makeRequestWithData('patch', endpoint, {}, changePassword);
   }
 
+  public uploadProfileImage(
+      File: File
+    ): Observable<ResponseModel<null>> {
+      const endpoint = 'CustomerAuth/upload-profile-picture';
+      return this.http.makeRequestWithData('put', endpoint, {}, File);
+  }
+
+  addSignature(payload: any): any {
+    const formData: FormData = new FormData();
+    formData.append("file", payload);
+    console.log(payload, formData)
+    const endpoint = 'CustomerAuth/upload-profile-picture';
+    return this.http.makeRequestWithData('put', endpoint, {}, formData);
+  }
+
+
 }

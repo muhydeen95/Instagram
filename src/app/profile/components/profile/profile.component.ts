@@ -7,6 +7,7 @@ import { BaseComponent } from '@core/base/base/base.component';
 import { ResponseModel } from 'app/models/response.model';
 import { ChangePasswordDialogComponent } from 'app/profile/dialogs/change-password-dialog/change-password-dialog.component';
 import { Profile } from 'app/profile/models/user-profile.model';
+import { HelperService } from 'app/profile/services/helper.service';
 import { ProfileService } from 'app/profile/services/profile.service';
 import { Subscription } from 'rxjs';
 
@@ -33,7 +34,7 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private _profile: ProfileService,
-    // private _current: CurrentUserService,
+    private _helper: HelperService,
     private _base: BaseComponent
   ) {}
 
@@ -104,25 +105,28 @@ export class ProfileComponent implements OnInit {
       this.image = event.target.files[0].name;
       this.uploadedImage = true;
     }
+    this.uploadImage();
   }
 
-  public addSignature() {
+  public uploadImage() {
     if (this.imageFile != null) {
+      this._helper.startSpinner();
       const payload = this.imageFile;
-      // console.log(payload);
+      console.log(payload);
       this.sub.add(
-        this._profile.updateProfile(payload).subscribe({
+        this._profile.addSignature(payload).subscribe({
           next: (res: any) => {
-            // console.log(res);
-            this.profile = res['response'];
-            // console.log(this.profile.emailSignatureUrl);
+            this._helper.stopSpinner();
+            this.profile.profilePictureUrl = res['response'].emailSignatureUrl;
             this._base.openSnackBar(
               'Great...!!!, Your action was successful',
               'success'
             );
           },
-          error: (e) => {
-            // this.signatureLoad = false;
+          error: (e: any) => {
+            this._helper.stopSpinner();
+            console.log(e);
+            this.error_message = e.error.message;
           },
         })
       );

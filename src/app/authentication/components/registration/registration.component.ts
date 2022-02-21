@@ -49,7 +49,12 @@ export class RegistrationComponent implements OnInit {
         Email: ['', [Validators.required, Validators.email]],
         AlternateEmail: ['', Validators.email],
         OrganizationName: [''],
-        Password: ['', [Validators.required]],
+        Password: ['', 
+          [
+            Validators.required,
+            Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/),
+          ]
+        ],
         ConfirmPassword: ['', [Validators.required]],
       },
       { validators: [this.passwordMatchValidator] }
@@ -64,6 +69,15 @@ export class RegistrationComponent implements OnInit {
 
   public register(): void {
     this.registerFormSubmitted = true;
+    if(
+        this.registrationForm.get('Password')?.value != 
+        this.registrationForm.get('confirmPassword')?.value
+      ) {
+      this.error_message = 'Password must match'
+    }
+    if(!this.registrationForm.get('Password')?.valid) {
+      this.error_message = 'Password must container at least 8 character with one uppercase, one lowercase and one number'
+    }
     if (this.registrationForm.valid) {
       this.isSiginingUp = true;
       this._auth.register(this.registrationForm.value).subscribe({

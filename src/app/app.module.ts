@@ -27,7 +27,7 @@ import { ApplicationDetailsModule } from './application/components/application-d
     JwtModule.forRoot({
       config: {},
     }),
-     ApplicationDetailsModule,
+    ApplicationDetailsModule,
   ],
   providers: [
     LocalStorageService,

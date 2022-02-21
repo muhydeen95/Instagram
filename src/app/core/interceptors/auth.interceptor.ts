@@ -40,8 +40,12 @@ export class AuthInterceptor implements HttpInterceptor {
     if (withoutAuth) {
       return this.continueWithoutAuth(request, next, headers);
     }
-    headers['Authorization'] = `Bearer ${this._currentUser.getAuthToken()}`;
+    const token = this._currentUser.getAuthToken();
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
     const newRequest = request.clone({ setHeaders: headers });
+
     const ifConnected = window.navigator.onLine;
 
     if (ifConnected) {
@@ -104,7 +108,7 @@ export class AuthInterceptor implements HttpInterceptor {
       this._base.openSnackBar(error.error?.message, 'error');
     } else {
       if (error.status === 401) {
-        this.router.navigate(['login']);
+        this.router.navigate(['authentication/login']);
         // this.handleRefresh(newRequest!, next!);
       }
 
@@ -115,35 +119,4 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return throwError(error);
   }
-  // private handleRefresh(request: HttpRequest<any>, next: HttpHandler) {
-  //   const refreshToken = localStorage.getItem('refreshToken') as string;
-  //   if (!this.isRefreshing) {
-  //     this.isRefreshing = true;
-  //     const token = this._currentUser.getAuthToken();
-  //     if (token)
-  //       return this._auth.refreshToken(JSON.parse(refreshToken)).pipe(
-  //         map((res: ResponseModel) => {
-  //           this.isRefreshing = false;
-  //           this._currentUser.storeUserCredentials(res?.response);
-  //           return next.handle(
-  //             this.addTokenHeader(request, res?.response?.refreshToken)
-  //           );
-  //         }),
-  //         catchError((err) => {
-  //           this.isRefreshing = false;
-  //           this._currentUser.logOut();
-  //           return throwError(err);
-  //         })
-  //       );
-  //   }
-  //   return;
-  // }
-  // private addTokenHeader(request: HttpRequest<any>, token: string) {
-  //   return (request = request.clone({
-  //     setHeaders: {
-  //       Accept: 'application/json',
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   }));
-  // }
 }

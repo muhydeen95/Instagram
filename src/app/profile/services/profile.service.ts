@@ -31,17 +31,11 @@ export class ProfileService {
     return this.http.makeRequestWithData('patch', endpoint, {}, changePassword);
   }
 
-  public uploadProfileImage(File: File): Observable<ResponseModel<null>> {
-    const endpoint = 'CustomerAuth/upload-profile-picture';
-    return this.http.makeRequestWithData('put', endpoint, {}, File);
-  }
-
-  addSignature(payload: any): any {
+  addProfilePicture(payload: any): any {
     const formData: FormData = new FormData();
     formData.append('file', payload);
-    console.log(payload, formData);
     const endpoint = 'CustomerAuth/upload-profile-picture';
-    return this._http.post(`${environment.api_url}${endpoint}`, formData, {
+    return this._http.put(`${environment.api_url}${endpoint}`, formData, {
       reportProgress: true,
       observe: 'events',
     });

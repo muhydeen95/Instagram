@@ -1,4 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEventType,
+  HttpResponse,
+} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -7,7 +11,6 @@ import { BaseComponent } from '@core/base/base/base.component';
 import { ResponseModel } from 'app/models/response.model';
 import { ChangePasswordDialogComponent } from 'app/profile/dialogs/change-password-dialog/change-password-dialog.component';
 import { Profile } from 'app/profile/models/user-profile.model';
-import { HelperService } from 'app/profile/services/helper.service';
 import { ProfileService } from 'app/profile/services/profile.service';
 import { Subscription } from 'rxjs';
 
@@ -20,9 +23,11 @@ export class ProfileComponent implements OnInit {
   private sub: Subscription = new Subscription();
   public isLoading: boolean = false;
   public isFetchingProfile: boolean = false;
+  public isUploading: boolean = false;
   public isEditing: boolean = false;
   public updateProfileForm!: FormGroup;
   public profile!: Profile;
+  public fileUploadProgress: number = 0;
   public error_message: string = '';
   public isError: boolean = false;
   public uploadedImage: boolean = false;
@@ -34,7 +39,6 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private _profile: ProfileService,
-    private _helper: HelperService,
     private _base: BaseComponent
   ) {}
 
@@ -110,21 +114,29 @@ export class ProfileComponent implements OnInit {
 
   public uploadImage() {
     if (this.imageFile != null) {
-      this._helper.startSpinner();
+      this.isUploading = true;
       const payload = this.imageFile;
       console.log(payload);
       this.sub.add(
         this._profile.addSignature(payload).subscribe({
-          next: (res: any) => {
-            this._helper.stopSpinner();
-            this.profile.profilePictureUrl = res['response'].emailSignatureUrl;
-            this._base.openSnackBar(
-              'Great...!!!, Your action was successful',
-              'success'
-            );
+          next: (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.fileUploadProgress = Math.round(
+                (100 * event.loaded) / event.total
+              );
+            } else if (event instanceof HttpResponse) {
+              const res = event.body;
+              this.isUploading = false;
+              this.profile.profilePictureUrl =
+                res['response'].emailSignatureUrl;
+              this._base.openSnackBar(
+                'Great...!!!, Your action was successful',
+                'success'
+              );
+            }
           },
           error: (e: any) => {
-            this._helper.stopSpinner();
+            this.isUploading = false;
             console.log(e);
             this.error_message = e.error.message;
           },

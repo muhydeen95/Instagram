@@ -83,18 +83,18 @@ export class LayoutComponent implements OnInit {
 
   public step(step: number): void {
     switch (true) {
-      case step == 1:
-        this.router.navigate([ApplicationStepRoute.step_one]);
-        break;
-      case step == 2:
-        this.router.navigate([ApplicationStepRoute.step_two]);
-        break;
-      case step == 3:
-        this.router.navigate([ApplicationStepRoute.step_three]);
-        break;
-      case step == 4:
-        this.router.navigate([ApplicationStepRoute.step_four]);
-        break;
+      // case step == 1:
+      //   this.router.navigate([ApplicationStepRoute.step_one]);
+      //   break;
+      // case step == 2:
+      //   this.router.navigate([ApplicationStepRoute.step_two]);
+      //   break;
+      // case step == 3:
+      //   this.router.navigate([ApplicationStepRoute.step_three]);
+      //   break;
+      // case step == 4:
+      //   this.router.navigate([ApplicationStepRoute.step_four]);
+      //   break;
 
       default:
         break;

@@ -1,28 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DashboardDialogComponent } from 'app/dashboard/dialogs/dashboard-dialog/dashboard-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogModel } from '@shared/components/models/dialog.model';
 import { Subscription } from 'rxjs';
 import {
-  Dashboard,
   DashboardResponseDTO,
   UploadDocDTO,
 } from 'app/dashboard/models/dashboard.model';
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
 import { TrackDocumentComponent } from 'app/dashboard/dialogs/track-document/track-document.component';
-import { DocumentService } from '../../../documents/services/document.service';
-import {
-  DocumentResponse,
-  DocumentSearchDTO,
-  DefaultDocumentSearchDTO,
-} from '../../../documents/models/documents.model';
-import {
-  InitialSearchDTO,
-  SearchDTO,
-  ApplicationResponseDTO,
-  ResponseModel,
-} from '../../../models/response.model';
-import { LcApplicationService } from '../../../application/services/lc-application.service';
+import { ResponseModel } from '../../../models/response.model';
 import { Router } from '@angular/router';
 import { DashboardService } from 'app/dashboard/services/dashboard.service';
 
@@ -37,23 +23,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public applicationLoading: boolean = true;
   public isFetchingDashboard: boolean = true;
   public dashboardMetrics!: DashboardResponseDTO;
-  public data: DocumentResponse[] = [];
-  public filterableData: DocumentResponse[] = [];
-  public applicationData: ApplicationResponseDTO[] = [];
-  public applicationFilterableData: ApplicationResponseDTO[] = [];
 
   constructor(
     public dialog: MatDialog,
-    private _docService: DocumentService,
-    private _applicationService: LcApplicationService,
     private _dashboard: DashboardService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.getDashboard();
-    this.getDocument(DefaultDocumentSearchDTO);
-    this.getApplications(InitialSearchDTO);
   }
 
   public getDashboard(): void {
@@ -67,45 +45,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.isFetchingDashboard = false;
       },
     });
-  }
-  public getDocument(query: DocumentSearchDTO): void {
-    this._docService.getDocument(query).subscribe({
-      next: (res: any) => {
-        this.isDocumentFetching = false;
-        this.data = res.response.result;
-        this.filterableData = this.data;
-      },
-      error: (error: ResponseModel<null>) => {
-        this.isDocumentFetching = false;
-        console.log(error);
-      },
-    });
-  }
-
-  public getApplications(query: SearchDTO): void {
-    this._applicationService.searchAllLcApplications(query).subscribe({
-      next: (res: any) => {
-        this.applicationLoading = false;
-        this.applicationData = res.response.result;
-        this.applicationFilterableData = this.applicationData;
-      },
-      error: (error: ResponseModel<null>) => {
-        this.applicationLoading = false;
-        console.log(error);
-      },
-    });
-  }
-  public openDialog(
-    payload: { isEditing?: boolean; editObj?: any } | any
-  ): void {
-    let object: DialogModel<Dashboard> = payload;
-    const dialogRef = this.dialog.open(DashboardDialogComponent, {
-      data: object,
-    });
-
-    dialogRef.componentInstance.event.subscribe(
-      (event: DialogModel<Dashboard>) => {}
-    );
   }
 
   public openUploadDialog(): void {

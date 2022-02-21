@@ -119,6 +119,7 @@ export class ProfileComponent implements OnInit {
       this.sub.add(
         this._profile.addProfilePicture(payload).subscribe({
           next: (event: any) => {
+            console.log(event);
             if (event.type === HttpEventType.UploadProgress) {
               this.fileUploadProgress = Math.round(
                 (100 * event.loaded) / event.total

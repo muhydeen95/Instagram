@@ -30,4 +30,9 @@ export class DashboardService {
     const endpoint = 'documentType/get-document-types';
     return this.http.makeRequestWithData('post', endpoint, {}, payload);
   }
+
+  public getCustomerDashboard(): Observable<ResponseModel<any>> {
+    const endpoint = 'IncomingMail/get-customer-dashboard';
+    return this.http.getRequest(endpoint);
+  }
 }

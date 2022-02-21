@@ -34,7 +34,7 @@
           <app-card
             [name]="'Untreated Documents'"
             [dayCount]="'0 Today'"
-            [count]="4"
+            [count]="dashboardMetrics.untreatedFiles"
             color="info"
             [loading]="false"
             [route]="'documents'"
@@ -45,7 +45,7 @@
           <app-card
             [name]="'Pending Documents'"
             [dayCount]="'0 Today'"
-            [count]="10"
+            [count]="dashboardMetrics.pendingFiles"
             color="warning"
             [loading]="false"
             [route]="'documents'"
@@ -55,7 +55,7 @@
           <app-card
             [name]="'Uploaded Documents'"
             [dayCount]="'0 Today'"
-            [count]="10"
+            [count]="dashboardMetrics.treatedFiles"
             color="success"
             [loading]="false"
             [route]="'documents'"
@@ -81,7 +81,7 @@
             </thead>
           </ng-container>
           <tbody>
-            <ng-container *ngIf="isDocumentFetching">
+            <ng-container *ngIf="isFetchingDashboard">
               <tr *ngFor="let dummy of [1, 2, 3, 4, 5]">
                 <td *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]">
                   <app-docstream-skeleton-loader
@@ -91,7 +91,11 @@
                 </td></tr
             ></ng-container>
             <ng-container>
-              <tr *ngFor="let doc of filterableData">
+              <tr
+                *ngFor="
+                  let doc of dashboardMetrics.customerFileUploads.data.result
+                "
+              >
                 <td>{{ doc.correspondenceNo }}</td>
                 <td>{{ doc.documentType }} type</td>
                 <td>{{ doc.subject }}</td>
@@ -99,7 +103,7 @@
                 <td>
                   <span
                     class="text-light-blue click"
-                    (click)="openDialog({ isEditing: false, editObj: doc })"
+                    (click)="viewDocument(doc.fileSubmissionId)"
                   >
                     <img src="assets/icons/eye.svg" class="me-2" />
                     View details
@@ -113,7 +117,7 @@
 
       <div class="d-flex justify-content-between table-head pt-5 mt-5">
         <h4>Recent LC Application</h4>
-        <h6 class="click">View All</h6>
+        <h6 class="click" routerLink="../application">View All</h6>
       </div>
       <section class="table-responsive my-5">
         <table class="table caption-top text-nowrap">
@@ -130,7 +134,7 @@
             </thead>
           </ng-container>
           <tbody>
-            <ng-container *ngIf="applicationLoading">
+            <ng-container *ngIf="isFetchingDashboard">
               <tr *ngFor="let dummy of [1, 2, 3, 4, 5]">
                 <td *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]">
                   <app-docstream-skeleton-loader
@@ -140,7 +144,12 @@
                 </td></tr
             ></ng-container>
             <ng-container>
-              <tr *ngFor="let application of applicationFilterableData">
+              <tr
+                *ngFor="
+                  let application of dashboardMetrics.customerLCApplications
+                    .list
+                "
+              >
                 <td>{{ application.applicantName }}</td>
                 <td>{{ application.beneficiaryName }}</td>
                 <td>{{ application.valueInFigure }}</td>
@@ -149,9 +158,7 @@
                 <td>
                   <span
                     class="text-light-blue click"
-                    (click)="
-                      openDialog({ isEditing: false, editObj: application })
-                    "
+                    (click)="viewLcApplication(application.lcApplicationId)"
                   >
                     <img src="assets/icons/eye.svg" class="me-2" />
                     View details

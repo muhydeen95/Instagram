@@ -116,9 +116,8 @@ export class ProfileComponent implements OnInit {
     if (this.imageFile != null) {
       this.isUploading = true;
       const payload = this.imageFile;
-      console.log(payload);
       this.sub.add(
-        this._profile.addSignature(payload).subscribe({
+        this._profile.addProfilePicture(payload).subscribe({
           next: (event: any) => {
             console.log(event);
             if (event.type === HttpEventType.UploadProgress) {
@@ -127,6 +126,7 @@ export class ProfileComponent implements OnInit {
               );
             } else if (event instanceof HttpResponse) {
               const res = event.body;
+              // console.log(res)
               this.isUploading = false;
               this.profile.profilePictureUrl =
                 res['response'].emailSignatureUrl;

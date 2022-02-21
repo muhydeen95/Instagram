@@ -25,7 +25,7 @@ export class ChangePasswordDialogComponent implements OnInit {
   @ViewChild('close') close!: ElementRef;
   @Input() btnAction: boolean = false;
   public changePasswordForm!: FormGroup;
-  public showCurrentPassword: boolean = false;
+  public CurrentPassword: boolean = false;
   public showPassword: boolean = false;
   public showConfirmPassword: boolean = false;
   public isLoading: boolean = false;
@@ -46,21 +46,16 @@ export class ChangePasswordDialogComponent implements OnInit {
   }
 
   public initChangePasswordForm() {
-    this.changePasswordForm = this.fb.group(
-      {
-        currentPassword: ['', Validators.required],
-        newPassword: ['', Validators.required],
-        confirmPassword: ['', Validators.required],
-      },
-      { validators: [this.passwordMatchValidator] }
-    );
+    this.changePasswordForm = this.fb.group({
+      CurrentPassword: ['', Validators.required],
+      NewPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    }, {validators: [ this.passwordMatchValidator]})
   }
 
   passwordMatchValidator(f: FormGroup) {
-    return f.get('newPassword')?.value === f.get('confirmPassword')?.value
-      ? null
-      : { passwordMismatch: true };
-  }
+    return f.get('NewPassword')?.value === f.get('confirmPassword')?.value ? null : {'passwordMismatch' : true};
+}
 
   public checkForKeyEnter(event: KeyboardEvent): void {
     var key = event.key || event.keyCode;
@@ -70,12 +65,18 @@ export class ChangePasswordDialogComponent implements OnInit {
   }
 
   public submit(): void {
-    this.isLoading = true;
+    const payload = this.changePasswordForm.value;
+    this.passwordFormSubmitted = true;
+    if(payload.NewPassword != payload.confirmPassword) {
+      this.isError = true;
+      this.error_message = "New password and confirm password must match"
+    }
     if (this.changePasswordForm.valid) {
       this.isLoading = true;
-      const payload = this.changePasswordForm.value;
+      // const payload = this.changePasswordForm.value;
       this._profile.changePassword(payload).subscribe({
         next: (res: ResponseModel<Password>) => {
+          console.log(res)
           this.isLoading = false;
           this.passwordFormSubmitted = false;
           this.close.nativeElement.click();
@@ -85,10 +86,11 @@ export class ChangePasswordDialogComponent implements OnInit {
           );
         },
         error: (error: HttpErrorResponse) => {
+          console.log(error, error.error);
           this.isLoading = false;
           this.passwordFormSubmitted = false;
-          this.isError = false;
-          this.error_message = error?.error?.Id[0];
+          this.isError = true;
+          this.error_message = error?.error.message;
         },
       });
     }

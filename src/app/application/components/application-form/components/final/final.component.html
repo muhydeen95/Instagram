@@ -181,7 +181,11 @@
       Back
     </button>
 
-    <button class="btn btn-green btn-md" (click)="submitForm()">
+    <button
+      class="btn btn-green btn-md"
+      (click)="submitForm()"
+      [disabled]="isLoading"
+    >
       <app-loading-button
         [text]="'Submit Form'"
         [condition]="isLoading"

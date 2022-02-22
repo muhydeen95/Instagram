@@ -40,13 +40,21 @@
           [canFilter]="true"
           (filterAction)="filterAction()"
           (searchQuery)="searchQueryAction($event)"
+          (searchAction)="searchDocuments()"
           btnName="Upload"
           btnIcon="upload"
           (btnAction)="openUploadDialog()"
         ></app-searchbar>
       </section>
 
-      <section class="table-responsive my-5 pt-5">
+      <section
+        *ngIf="
+          (is_initial && documentLoading) ||
+          !is_initial ||
+          (is_initial && filterableData.length > 0)
+        "
+        class="table-responsive my-5 pt-5"
+      >
         <table class="table caption-top text-nowrap">
           <ng-container>
             <caption>
@@ -77,11 +85,11 @@
                 <td>{{ doc.correspondenceNo }}</td>
                 <td>{{ doc.documentType }} type</td>
                 <td>{{ doc.subject }}</td>
-                <td>{{ doc.createdAt }}</td>
+                <td>{{ doc.createdAt | date }}</td>
                 <td>
                   <span
                     class="text-light-blue click"
-                    routerLink="/documents/document-status"
+                    routerLink="/documents/status/{{ doc.fileSubmissionId }}"
                   >
                     <img src="assets/icons/eye.svg" class="me-2" />
                     View details
@@ -92,6 +100,13 @@
           </tbody>
         </table>
       </section>
+      <app-no-data
+        name="Document"
+        [is_initial]="is_initial"
+        [is_loading]="documentLoading"
+        (open_dialog)="openUploadDialog()"
+        *ngIf="filterableData.length == 0"
+      ></app-no-data>
     </section>
   </div>
 </div>

@@ -93,7 +93,6 @@ export class ApplicationsComponent implements OnInit {
     dialogRef.componentInstance.event.subscribe((event: string) => {
       this.searchQuery.lCApplicationDate = event;
       this.getLcApplications(false);
-      console.log(this.searchQuery);
     });
   }
 

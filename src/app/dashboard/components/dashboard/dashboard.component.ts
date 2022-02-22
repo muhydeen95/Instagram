@@ -63,9 +63,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  public viewDocument(documentId: number): void {
-    this.router.navigate(['documents/status', documentId]);
-  }
+  // public viewDocument(documentId: number): void {
+  //   this.router.navigate(['documents/status', documentId]);
+  // }
   public viewLcApplication(lcApplicationId: number): void {
     this.router.navigate(['application/detail', lcApplicationId]);
   }

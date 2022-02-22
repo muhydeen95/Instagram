@@ -16,7 +16,9 @@ export class DocumentService {
     return this.http.getRequest(endpoint);
   }
 
-  public getDocument(query: DocumentSearchDTO): Observable<ResponseModel<any>> {
+  public getDocument(
+    query: Partial<DocumentSearchDTO>
+  ): Observable<ResponseModel<any>> {
     const endpoint = 'IncomingMail/get-all-customer-submissions';
     return this.http.makeRequestWithData('post', endpoint, {}, query);
   }

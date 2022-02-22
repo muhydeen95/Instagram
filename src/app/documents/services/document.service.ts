@@ -11,7 +11,7 @@ export class DocumentService {
   constructor(private http: HttpService, client: HttpClient) {}
 
   //Get document by ID
-  public getDocumentByIdRequest(id: number): Observable<ResponseModel<any>> {
+  public getDocumentByIdRequest(id: string): Observable<ResponseModel<any>> {
     const endpoint = 'IncomingMail/get-customer-submission/' + id;
     return this.http.getRequest(endpoint);
   }

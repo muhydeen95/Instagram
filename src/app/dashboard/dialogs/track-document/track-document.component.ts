@@ -19,14 +19,14 @@ export class TrackDocumentComponent implements OnInit {
   @ViewChild('searchQuery') searchQueryElement!: ElementRef;
   @Output() searchQuery: EventEmitter<string> = new EventEmitter<string>();
   @Output() searchAction = new EventEmitter();
-
+  searchTerm: string = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogModel<any>) {}
 
   ngOnInit(): void {}
 
   public trackPressed(): void {
-    this.searchAction.emit(true);
+    this.searchAction.emit(this.searchTerm);
   }
 
   public getSearchQuery(
@@ -35,10 +35,11 @@ export class TrackDocumentComponent implements OnInit {
     clear?: boolean
   ): void {
     clear ? (this.searchQueryElement.nativeElement.value = '') : null;
+    this.searchTerm = searchQuery.toLocaleLowerCase().trim();
     this.searchQuery.emit(searchQuery);
     var key = event.key || event.keyCode;
     if (key == 'Enter' || key == 8 || searchQuery == '') {
-      this.searchAction.emit(true);
+      this.searchAction.emit(this.searchTerm);
     }
   }
 }

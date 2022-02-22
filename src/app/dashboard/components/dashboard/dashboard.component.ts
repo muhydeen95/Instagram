@@ -9,7 +9,7 @@ import {
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
 import { TrackDocumentComponent } from 'app/dashboard/dialogs/track-document/track-document.component';
 import { ResponseModel } from '../../../models/response.model';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { DashboardService } from 'app/dashboard/services/dashboard.service';
 
 @Component({
@@ -23,6 +23,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public applicationLoading: boolean = true;
   public isFetchingDashboard: boolean = true;
   public dashboardMetrics!: DashboardResponseDTO;
+  navigationExtras: NavigationExtras = {
+    queryParams: { isSearching: true },
+  };
 
   constructor(
     public dialog: MatDialog,
@@ -38,7 +41,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this._dashboard.getCustomerDashboard().subscribe({
       next: (res: ResponseModel<DashboardResponseDTO>) => {
         this.isFetchingDashboard = false;
-        console.log(res);
         this.dashboardMetrics = res.response;
       },
       error: (error: ResponseModel<any>) => {
@@ -49,23 +51,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDocumentComponent);
-
     dialogRef.componentInstance.event.subscribe(
       (event: DialogModel<UploadDocDTO>) => {}
     );
   }
 
+  routeToPage(query: string, isSearching: boolean): void {
+    this.router.navigate([`documents/status/${query}`], this.navigationExtras);
+  }
+
   public openTrackDialog(): void {
     const dialogRef = this.dialog.open(TrackDocumentComponent);
-
     dialogRef.componentInstance.searchAction.subscribe(
-      (event: DialogModel<UploadDocDTO>) => {}
+      (correspondenceNumber: string) => {
+        correspondenceNumber &&
+          (() => {
+            dialogRef.close();
+            this.routeToPage(correspondenceNumber, true);
+          })();
+      }
     );
   }
 
-  // public viewDocument(documentId: number): void {
-  //   this.router.navigate(['documents/status', documentId]);
-  // }
+  public viewDocument(documentId: string): void {
+    this.routeToPage(documentId, false);
+  }
   public viewLcApplication(lcApplicationId: number): void {
     this.router.navigate(['application/detail', lcApplicationId]);
   }

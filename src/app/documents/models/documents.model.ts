@@ -29,6 +29,20 @@ export const DefaultDocumentSearchDTO = {
   PageSize: 5,
 };
 
+export const InitialDocumentSearchDTO = {
+  doctype: 0,
+  searchBy: 0,
+  startDate: '',
+  EndDate: new Date().toISOString(),
+  OrderBy: {
+    OrderField: 'createdAt',
+    Ascending: true,
+  },
+  Search: '',
+  PageNumber: 1,
+  PageSize: 10,
+};
+
 export interface DocumentResponse {
   correspondenceNo: string;
   createdAt: string;

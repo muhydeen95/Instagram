@@ -1,11 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { ResetPasswordDTO } from '@auth/models/auth.model';
 import { AuthService } from '@auth/services/auth.service';
 import { BaseComponent } from '@core/base/base/base.component';
 import { ResponseModel } from 'app/models/response.model';
+import { ResetDialogComponent } from './reset-dialog/reset-dialog.component';
 
 @Component({
   selector: 'app-registration',
@@ -20,21 +22,29 @@ export class ResetPasswordComponent implements OnInit {
   public passwordFormSubmitted: boolean = false;
   public isError: boolean = false;
   public error_message: string = '';
+  public token: any = '';
+  public email: any = '';
 
   constructor(
     private _base: BaseComponent,
     private fb: FormBuilder,
     private _auth: AuthService, 
-    private _router: Router
+    // private _router: Router,
+    private _route: ActivatedRoute,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
+    this._route.queryParams.subscribe(params => {
+      this.token = params['token'];
+      this.email = params['email'];
+    });
     this.initResetPasswordForm();
   }
 
   public initResetPasswordForm() {
     this.resetPasswordForm = this.fb.group({
-      password: [
+      Password: [
         Validators.required,
         Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/),
       ],
@@ -55,11 +65,26 @@ export class ResetPasswordComponent implements OnInit {
     }
   }
 
+  public openModal(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.height = '365px';
+    dialogConfig.width = '600px';
+    const dialogRef = this.dialog.open(
+      ResetDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
   public submit(): void {
     const payload = this.resetPasswordForm.value;
+    payload.token = this.token;
+    payload.email = this.email;
     this.passwordFormSubmitted = true;
-    if(payload.NewPassword != payload.confirmPassword) {
-      this.isError = true;
+    if(
+        this.resetPasswordForm.get('Password')?.value != 
+        this.resetPasswordForm.get('confirmPassword')?.value
+      ) {
       this.error_message = "New password and confirm password must match"
     }
     if(!this.resetPasswordForm.get('Password')?.valid) {
@@ -67,6 +92,7 @@ export class ResetPasswordComponent implements OnInit {
     }
     if (this.resetPasswordForm.valid) {
       this.isLoading = true;
+      console.log(payload)
       this._auth.resetPassword(payload).subscribe({
         next: (res: ResponseModel<ResetPasswordDTO>) => {
           console.log(res)
@@ -76,7 +102,7 @@ export class ResetPasswordComponent implements OnInit {
             'Great...!!!, Your action was successful',
             'success'
           );
-          this._router.navigate(['authentication/login'])
+          this.openModal();
         },
         error: (error: HttpErrorResponse) => {
           console.log(error, error.error);

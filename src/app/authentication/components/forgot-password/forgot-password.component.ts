@@ -1,12 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ForgotPassswordDTO } from '@auth/models/auth.model';
 import { AuthService } from '@auth/services/auth.service';
-// import { BaseComponent } from '@core/base/base/base.component';
 import { ResponseModel } from 'app/models/response.model';
 import { Subscription } from 'rxjs';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-registration',
@@ -22,9 +22,8 @@ export class ForgotPasswordComponent implements OnInit {
   public isError: boolean = false
 
   constructor(
-    // private _base: BaseComponent,
+    public dialog: MatDialog,
     private fb: FormBuilder,
-    private _router: Router,
     private _auth: AuthService
   ) { }
 
@@ -38,15 +37,30 @@ export class ForgotPasswordComponent implements OnInit {
     })
   }
 
+  public openModal(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.height = '365px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = {
+      email: `${this.forgotPasswordForm.get('email')?.value}`,
+    };
+    const dialogRef = this.dialog.open(
+      DialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
   public submit(): void {
     this.forgotPasswordFormSubmitted = true;
     if (this.forgotPasswordForm.valid) {
       this.isLoggingIn = true;
       this._auth.forgotPassword(this.forgotPasswordForm.value).subscribe({
         next: (res: ResponseModel<ForgotPassswordDTO>) => {
+          // console.log(res)
           this.isLoggingIn = false;
           this.forgotPasswordFormSubmitted = true;
-          this._router.navigate(['authentication/reset-password']);
+          this.openModal();
         },
         error: (error: HttpErrorResponse) => {
           this.isLoggingIn = false;

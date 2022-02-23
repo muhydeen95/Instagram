@@ -104,7 +104,8 @@
               <div class="accordion-body">
                 <ul class="px-3 m-0">
                   <li
-                    class="d-flex align-items-center"
+                    class="d-flex align-items-center click"
+                    (click)="attachmentLink = file"
                     *ngFor="let file of documentDetail.files"
                   >
                     <img src="assets/images/pdf.svg" alt="" />
@@ -127,86 +128,20 @@
           ></app-docstream-skeleton-loader>
         </div>
       </ng-container>
+
       <ng-container *ngIf="!loading">
-        <div id="chatTemplate">
-          <div class="chat-message" *ngFor="let chat of userChats">
-            <div
-              class="recipient d-flex justify-content-start"
-              *ngIf="chat.user == 'recipient'"
-            >
-              <div class="pe-3 d-none d-md-block">
-                <img
-                  class="rounded-circle"
-                  src="assets/images/fidelity-chat.svg"
-                  alt=""
-                />
-              </div>
-              <div class="recipient-message">
-                <p>
-                  {{ chat.message }}
-                </p>
-                <div class="time">
-                  <p>{{ chat.time }}</p>
-                </div>
-              </div>
-            </div>
-            <div
-              class="sender d-flex justify-content-end"
-              *ngIf="chat.user == 'sender'"
-            >
-              <div class="sender-message">
-                <p>
-                  {{ chat.message }}
-                </p>
-                <div class="time">
-                  <p>{{ chat.time }}</p>
-                </div>
-              </div>
-              <div class="ps-3 d-none d-md-block">
-                <img
-                  class="rounded-circle"
-                  src="assets/images/AH-chat.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
+        <div class="no-attachment" *ngIf="!attachmentLink.path">
+          Select an attachmet to preview.
         </div>
-
-        <div class="message_push">
-          <div class="search-wrapper">
-            <div class="search-wrapper-input me-4 mb-3 form_group">
-              <input
-                type="text"
-                class="form-control mt-0"
-                placeholder="Enter message here"
-                [(ngModel)]="message"
-              />
-              <span class="_icon click">
-                <i
-                  (click)="toggled = !toggled"
-                  [(emojiPickerIf)]="toggled"
-                  [emojiPickerDirection]="
-                    'bottom' || 'top' || 'left' || 'right'
-                  "
-                  (emojiPickerSelect)="handleSelection($event)"
-                >
-                  <img src="assets/images/emoji.svg" />
-                </i>
-              </span>
-            </div>
-
-            <div class="btn-attachment px-4 pt-4">
-              <img src="assets/images/send-attachment.svg" />
-              <input type="file" />
-            </div>
-
-            <div class="btn-wrapper me-3">
-              <button class="btn btn-blue btn-lg" (click)="submit()">
-                Send
-              </button>
-            </div>
-          </div>
+        <div *ngIf="attachmentLink.path">
+          <pdf-viewer
+            [src]="attachmentLink.path"
+            [render-text]="true"
+            [show-all]="true"
+            [original-size]="false"
+            [fit-to-page]="true"
+            style="width: 100%; min-height: 70vh"
+          ></pdf-viewer>
         </div>
       </ng-container>
     </div>

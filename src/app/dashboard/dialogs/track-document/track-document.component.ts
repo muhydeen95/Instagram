@@ -38,7 +38,7 @@ export class TrackDocumentComponent implements OnInit {
     this.searchTerm = searchQuery.toLocaleLowerCase().trim();
     this.searchQuery.emit(searchQuery);
     var key = event.key || event.keyCode;
-    if (key == 'Enter' || key == 8 || searchQuery == '') {
+    if (key == 'Enter' || searchQuery == '') {
       this.searchAction.emit(this.searchTerm);
     }
   }

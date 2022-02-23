@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogModel } from '@shared/components/models/dialog.model';
+// import { DialogModel } from '@shared/components/models/dialog.model';
 import { Subscription } from 'rxjs';
 import {
   DashboardResponseDTO,
-  UploadDocDTO,
+  // UploadDocDTO,
 } from 'app/dashboard/models/dashboard.model';
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
 import { TrackDocumentComponent } from 'app/dashboard/dialogs/track-document/track-document.component';
@@ -51,8 +51,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDocumentComponent);
-    dialogRef.componentInstance.event.subscribe(
-      (event: DialogModel<UploadDocDTO>) => {}
+    // dialogRef.componentInstance.event.subscribe(
+    //   (event: DialogModel<UploadDocDTO>) => {}
+    // );
+    dialogRef.componentInstance.isUploaded.subscribe(
+      (isFileUploaded: boolean) => {
+        isFileUploaded && this.getDashboard();
+      }
     );
   }
 

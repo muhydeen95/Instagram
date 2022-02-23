@@ -8,7 +8,8 @@ import { DocumentService } from 'app/documents/services/document.service';
 import { DashboardService } from '../../../dashboard/services/dashboard.service';
 import { ResponseModel } from 'app/models/response.model';
 import { Subscription } from 'rxjs';
-
+import { HttpErrorResponse } from '@angular/common/http';
+import { BaseComponent } from '@core/base/base/base.component';
 @Component({
   selector: 'app-document-status',
   templateUrl: './document-status.component.html',
@@ -76,7 +77,8 @@ export class DocumentStatusComponent implements OnInit {
   constructor(
     private _docService: DocumentService,
     private activatedRoute: ActivatedRoute,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private _popper: BaseComponent
   ) {}
 
   ngOnInit(): void {
@@ -110,8 +112,14 @@ export class DocumentStatusComponent implements OnInit {
         this.loading = false;
         this.documentDetail = res.response;
       },
-      error: (error: ResponseModel<any>) => {
+      error: (error: HttpErrorResponse) => {
         this.loading = false;
+        console.log(error?.error?.message);
+        this._popper.goBack();
+        this._popper.openSnackBar(
+          error?.error?.message || 'Unable to process your request',
+          'error'
+        );
       },
     });
   }

@@ -17,6 +17,15 @@ import { Subscription } from 'rxjs';
 export class DocumentStatusComponent implements OnInit {
   public toggled: boolean = false;
   public message: string = '';
+  public attachmentLink: {
+    name: string;
+    path: string;
+    uniqueName: string;
+  } = {
+    name: '',
+    path: '',
+    uniqueName: '',
+  };
   public userChats = [
     {
       id: 1,
@@ -103,6 +112,7 @@ export class DocumentStatusComponent implements OnInit {
       })
     );
   }
+
   public getSearchedDocument(): void {
     this.loading = true;
     this.dashboardService.getDocumentTracking(this.docId).subscribe({

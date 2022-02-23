@@ -81,14 +81,8 @@ export class ResetPasswordComponent implements OnInit {
     payload.token = this.token;
     payload.email = this.email;
     this.passwordFormSubmitted = true;
-    if(
-        this.resetPasswordForm.get('Password')?.value != 
-        this.resetPasswordForm.get('confirmPassword')?.value
-      ) {
-      this.error_message = "New password and confirm password must match"
-    }
-    if(!this.resetPasswordForm.get('Password')?.valid) {
-      this.error_message = 'Password must container at least 8 character with one uppercase, one lowercase and one number'
+    if(!this.resetPasswordForm?.valid) {
+      this.error_message = 'Please fill all required field!'
     }
     if (this.resetPasswordForm.valid) {
       this.isLoading = true;

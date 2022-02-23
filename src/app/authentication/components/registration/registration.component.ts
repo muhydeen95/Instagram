@@ -69,14 +69,8 @@ export class RegistrationComponent implements OnInit {
 
   public register(): void {
     this.registerFormSubmitted = true;
-    if(
-        this.registrationForm.get('Password')?.value != 
-        this.registrationForm.get('confirmPassword')?.value
-      ) {
-      this.error_message = 'Password must match'
-    }
-    if(!this.registrationForm.get('Password')?.valid) {
-      this.error_message = 'Password must container at least 8 character with one uppercase, one lowercase and one number'
+    if(!this.registrationForm.valid) {
+      this.error_message = 'Please fill all required field!'
     }
     if (this.registrationForm.valid) {
       this.isSiginingUp = true;
@@ -88,9 +82,10 @@ export class RegistrationComponent implements OnInit {
           this.openModal();
         },
         error: (error: HttpErrorResponse) => {
+          console.log(error);
           this.isSiginingUp = false;
           this.registerFormSubmitted = true;
-          this.error_message = error?.error?.message;
+          this.error_message = error?.error?.response[0].description;
         },
       });
     }
@@ -107,7 +102,7 @@ export class RegistrationComponent implements OnInit {
     dialogConfig.height = '365px';
     dialogConfig.width = '600px';
     dialogConfig.data = {
-      email: `${this.registrationForm.get('email')?.value}`,
+      email: `${this.registrationForm.get('Email')?.value}`,
       counter: '00:05',
     };
     const dialogRef = this.dialog.open(

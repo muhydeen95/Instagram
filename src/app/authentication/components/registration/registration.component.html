@@ -179,8 +179,6 @@
               class="invalid-feedback"
               *ngIf="
               registrationForm.get('Email')?.hasError('Email') &&
-                registerFormSubmitted &&
-                !registrationForm.get('Email')?.hasError('required') &&
                 registerFormSubmitted
               "
             >
@@ -261,13 +259,16 @@
                 ></i>
               </ng-template>
             </div>
+            <div class="text-danger" 
+              *ngIf="registrationForm.get('Password')?.invalid &&
+              registrationForm.get('Password')?.value != '' 
+            ">
+              <span>Password must container at least 8 character with one uppercase, one lowercase and one number</span>
+            </div>
             <div
-              class="invalid-feedback"
+              class="text-danger"
               *ngIf="
-                registrationForm.get('Password')?.hasError('required') &&
-                registerFormSubmitted &&
-                !registrationForm.get('Password')?.hasError('Password') &&
-                registerFormSubmitted
+                registrationForm.get('Password')?.value == ''
               "
             >
               Required
@@ -304,7 +305,11 @@
                 ></i>
               </ng-template>
             </div>
-            <div class="invalid-feedback">Passwords must match</div>
+            <div class="text-danger"
+              *ngIf="registrationForm.get('Password')?.value !== registrationForm.get('ConfirmPassword')?.value"
+            >
+              Passwords must match
+            </div>
           </div>
         </div>
       </div>

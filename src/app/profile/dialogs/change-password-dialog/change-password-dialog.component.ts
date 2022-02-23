@@ -71,9 +71,8 @@ export class ChangePasswordDialogComponent implements OnInit {
   public submit(): void {
     const payload = this.changePasswordForm.value;
     this.passwordFormSubmitted = true;
-    if(payload.NewPassword != payload.confirmPassword) {
-      this.isError = true;
-      this.error_message = "New password and confirm password must match"
+    if(!this.changePasswordForm.valid) {
+      this.error_message = "Please fill all required field!"
     }
     if (this.changePasswordForm.valid) {
       this.isLoading = true;

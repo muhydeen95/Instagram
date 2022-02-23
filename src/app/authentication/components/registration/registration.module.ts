@@ -6,10 +6,10 @@ import { SharedModule } from '@shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { RegistrationDialogComponent } from './dialogs/registration-dialog/registration-dialog.component';
+import { FormatTimePipe, RegistrationDialogComponent } from './dialogs/registration-dialog/registration-dialog.component';
 
 @NgModule({
-  declarations: [RegistrationComponent, RegistrationDialogComponent],
+  declarations: [RegistrationComponent, RegistrationDialogComponent, FormatTimePipe],
   imports: [
     CommonModule,
     RegistrationRoutingModule,

@@ -1,29 +1,31 @@
 export interface LoginRequestDTO {
-  email: string;
-  password: string;
+  email: string,
+  password: string
 }
 
 export interface LoginResponseDTO {
-  token: string;
+  token: string
 }
 
 export interface RegisterRequestDTO {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  phoneNumber: string;
-  alternatePhoneNumber: string;
-  email: string;
-  alternateEmail: string;
-  organizationName: string;
-  password: string;
+  firstName: string,
+  middleName: string,
+  lastName: string,
+  phoneNumber: string,
+  alternatePhoneNumber: string,
+  email: string,
+  alternateEmail: string,
+  organizationName: string,
+  password: string
 }
 
 export interface ForgotPassswordDTO {
-  email: string;
+  email: string,
+  token: string,
 }
 
 export interface ResetPasswordDTO {
-  newPassword: string;
-  confirmNewPassword: string;
+  newPassword: string,
+  confirmNewPassword: string,
+  token: string
 }

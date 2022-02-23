@@ -34,7 +34,7 @@
           <app-card
             [name]="'Untreated Documents'"
             [dayCount]="'0 Today'"
-            [count]="dashboardMetrics.untreatedFiles"
+            [count]="dashboardMetrics?.untreatedFiles"
             color="info"
             [loading]="false"
             [route]="'documents'"
@@ -45,7 +45,7 @@
           <app-card
             [name]="'Pending Documents'"
             [dayCount]="'0 Today'"
-            [count]="dashboardMetrics.pendingFiles"
+            [count]="dashboardMetrics?.pendingFiles"
             color="warning"
             [loading]="false"
             [route]="'documents'"
@@ -55,7 +55,7 @@
           <app-card
             [name]="'Uploaded Documents'"
             [dayCount]="'0 Today'"
-            [count]="dashboardMetrics.treatedFiles"
+            [count]="dashboardMetrics?.treatedFiles"
             color="success"
             [loading]="false"
             [route]="'documents'"
@@ -93,7 +93,7 @@
             <ng-container>
               <tr
                 *ngFor="
-                  let doc of dashboardMetrics.customerFileUploads.data.result
+                  let doc of dashboardMetrics?.customerFileUploads.data.result
                 "
               >
                 <td>{{ doc.correspondenceNo }}</td>
@@ -146,7 +146,7 @@
             <ng-container>
               <tr
                 *ngFor="
-                  let application of dashboardMetrics.customerLCApplications
+                  let application of dashboardMetrics?.customerLCApplications
                     .list
                 "
               >

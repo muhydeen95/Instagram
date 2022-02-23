@@ -73,10 +73,6 @@ export class DocumentComponent implements OnInit {
 
   public filterAction(): void {
     const dialogRef = this.dialog.open(FilterComponent);
-    dialogRef.componentInstance.event.subscribe(
-      (event: DialogModel<any>) => {}
-    );
-
     dialogRef.componentInstance.event.subscribe((event: DialogModel<any>) => {
       this.getDocument({ CustomerFileSubmissionDate: event.toString() }, true);
     });

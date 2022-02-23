@@ -5,6 +5,7 @@ import {
   DocumentDTO,
 } from 'app/documents/models/documents.model';
 import { DocumentService } from 'app/documents/services/document.service';
+import { DashboardService } from '../../../dashboard/services/dashboard.service';
 import { ResponseModel } from 'app/models/response.model';
 import { Subscription } from 'rxjs';
 
@@ -69,19 +70,26 @@ export class DocumentStatusComponent implements OnInit {
   private sub: Subscription = new Subscription();
   public documentDetail!: DocumentDTO;
   public loading: boolean = false;
-  public docId: number = 0;
+  public docId: string = '';
+  public isSearching: boolean = false;
+
   constructor(
     private _docService: DocumentService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dashboardService: DashboardService
   ) {}
 
   ngOnInit(): void {
     const param: any = this.activatedRoute.params;
+    const searchQuery: any = this.activatedRoute.queryParams;
     this.docId = param['value'].id;
-    this.getDocumentDetail(this.docId);
+    this.isSearching = searchQuery['value'].isSearching;
+    this.isSearching
+      ? this.getSearchedDocument()
+      : this.getDocumentDetail(this.docId);
   }
 
-  public getDocumentDetail(id: number): void {
+  public getDocumentDetail(id: string): void {
     this.loading = true;
     this.sub.add(
       this._docService.getDocumentByIdRequest(id).subscribe({
@@ -94,6 +102,18 @@ export class DocumentStatusComponent implements OnInit {
         },
       })
     );
+  }
+  public getSearchedDocument(): void {
+    this.loading = true;
+    this.dashboardService.getDocumentTracking(this.docId).subscribe({
+      next: (res: ResponseModel<DocumentDTO>) => {
+        this.loading = false;
+        this.documentDetail = res.response;
+      },
+      error: (error: ResponseModel<any>) => {
+        this.loading = false;
+      },
+    });
   }
 
   handleSelection(event: any) {

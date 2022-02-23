@@ -35,4 +35,15 @@ export class DashboardService {
     const endpoint = 'IncomingMail/get-customer-dashboard';
     return this.http.getRequest(endpoint);
   }
+  public getDocumentTracking(
+    correspondenceNumber: any
+  ): Observable<ResponseModel<any>> {
+    const endpoint = 'IncomingMail/track-customer-file-submission';
+    return this.http.makeRequestWithData(
+      'post',
+      endpoint,
+      {},
+      { correspondenceNumber }
+    );
+  }
 }

@@ -7,8 +7,9 @@ import { SharedModule } from '@shared/shared.module';
 import { FilterComponent } from './dialogs/filter/filter.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DocumentStatusComponent } from './components/document-status/document-status.component';
-import { NgxEmojiPickerModule } from 'ngx-emoji-picker';
+// import { NgxEmojiPickerModule } from 'ngx-emoji-picker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [DocumentComponent, DocumentStatusComponent, FilterComponent],
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxEmojiPickerModule.forRoot()
+    PdfViewerModule,
+    // NgxEmojiPickerModule.forRoot(),
   ],
 })
 export class DocumentsModule {}

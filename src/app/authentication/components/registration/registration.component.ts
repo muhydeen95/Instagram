@@ -74,7 +74,11 @@ export class RegistrationComponent implements OnInit {
     }
     if (this.registrationForm.valid) {
       this.isSiginingUp = true;
-      this._auth.register(this.registrationForm.value).subscribe({
+      const payload = this.registrationForm.value;
+      if(payload.AlternateEmail == '') {
+        delete payload.AlternateEmail;
+      }
+      this._auth.register(payload).subscribe({
         next: (res: ResponseModel<RegisterRequestDTO>) => {
           this.isSiginingUp = false;
           this.registerFormSubmitted = true;
@@ -90,6 +94,7 @@ export class RegistrationComponent implements OnInit {
       });
     }
   }
+
   public checkForKeyEnter(event: KeyboardEvent): void {
     var key = event.key || event.keyCode;
     if (key == 'Enter' || key == 8) {

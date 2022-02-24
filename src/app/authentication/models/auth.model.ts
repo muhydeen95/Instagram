@@ -29,3 +29,12 @@ export interface ResetPasswordDTO {
   confirmNewPassword: string,
   token: string
 }
+
+export interface ResendLink {
+  email: string,
+}
+
+export interface confirmEmail {
+  email: string,
+  token: string
+}

@@ -3,33 +3,33 @@
     <section class="dashboard-content mt-5">
       <section class="row my-5">
         <div class="col-sm-6 col-md-6 col-lg-4">
+          <!-- [dayCount]="'0 Today'" -->
           <app-card
             [name]="'Untreated Documents'"
-            [dayCount]="'0 Today'"
-            [count]="documentCount.UnTreated"
+            [count]="documentCount.untreatedFiles"
             color="info"
-            [loading]="false"
+            [loading]="documentLoading"
             (click)="filterDocument('Untreated')"
           ></app-card>
         </div>
 
         <div class="col-sm-6 col-md-6 col-lg-4">
+          <!-- [dayCount]="'0 Today'" -->
           <app-card
             [name]="'Pending Documents'"
-            [dayCount]="'0 Today'"
-            [count]="documentCount.Pending"
+            [count]="documentCount.pendingFiles"
             color="warning"
-            [loading]="false"
+            [loading]="documentLoading"
             (click)="filterDocument('Pending')"
           ></app-card>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-4">
+          <!-- [dayCount]="'0 Today'" -->
           <app-card
             [name]="'Treated Documents'"
-            [dayCount]="'0 Today'"
-            [count]="documentCount.Treated"
+            [count]="documentCount.treatedFiles"
             color="success"
-            [loading]="false"
+            [loading]="documentLoading"
             (click)="filterDocument('Treated')"
           ></app-card>
         </div>
@@ -100,6 +100,17 @@
           </tbody>
         </table>
       </section>
+      <mat-paginator
+        *ngIf="filterableData.length > 0"
+        #paginator
+        [length]="paginatedResponse.totalItems"
+        [pageIndex]="paginatedResponse.pageNumber - 1"
+        [pageSize]="paginatedResponse.pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        aria-label="Select page"
+        (page)="paginate($event)"
+      >
+      </mat-paginator>
       <app-no-data
         name="Document"
         [is_initial]="is_initial"

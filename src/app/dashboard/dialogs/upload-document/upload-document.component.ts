@@ -31,6 +31,7 @@ export class UploadDocumentComponent implements OnInit {
     editObj: UploadDocDTO;
     isEditing?: boolean;
   }> = new EventEmitter<{ editObj: UploadDocDTO; isEditing?: boolean }>();
+  @Output() isUploaded: EventEmitter<boolean> = new EventEmitter<boolean>();
   public AcceptedFileTypes: string = 'application/PDF';
   public fileNames: Array<string> = [];
   public uploadForm!: FormGroup;
@@ -91,6 +92,7 @@ export class UploadDocumentComponent implements OnInit {
             this.event.emit({
               editObj: this.uploadForm.value,
             });
+            this.isUploaded.emit(true);
             this.close.nativeElement.click();
             this._base.openSnackBar(
               'Document uploaded successfully',

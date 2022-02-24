@@ -3,6 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { LcApplicationService } from 'app/application/services/lc-application.service';
 import { ResponseModel } from 'app/models/response.model';
 import { Subscription } from 'rxjs';
+import {
+  ShipmentStatusEnum,
+  BankChargesEnum,
+  LC_Type,
+} from '../application-form/models/lc-application.model';
 import { LCApplicationDTO } from '../application-form/models/types.model';
 
 @Component({
@@ -15,6 +20,9 @@ export class ApplicationDetailsComponent implements OnInit {
   public lcAplicationDetail!: LCApplicationDTO;
   public loading: boolean = false;
   public applicationId: number = 0;
+  public shipmentStatusEnum = ShipmentStatusEnum;
+  public bankChargesEnum = BankChargesEnum;
+  public types: { id: number; type: string }[] = LC_Type;
   constructor(
     private _lc: LcApplicationService,
     private activatedRoute: ActivatedRoute
@@ -26,6 +34,12 @@ export class ApplicationDetailsComponent implements OnInit {
     this.getLcApplicationss(this.applicationId);
   }
 
+  public getDate(date: string): any {
+    const utc = new Date(date);
+    const convertedDate = utc.toISOString().substr(0, 10);
+    return convertedDate;
+  }
+
   public getLcApplicationss(id: number): void {
     this.loading = true;
     this.sub.add(
@@ -33,7 +47,6 @@ export class ApplicationDetailsComponent implements OnInit {
         next: (res: ResponseModel<LCApplicationDTO>) => {
           this.loading = false;
           this.lcAplicationDetail = res.response;
-          console.log(this.lcAplicationDetail)
         },
         error: (error: ResponseModel<null>) => {
           this.loading = false;

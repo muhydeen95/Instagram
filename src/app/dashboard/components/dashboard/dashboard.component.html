@@ -64,7 +64,7 @@
       </section>
       <ng-container
         *ngIf="
-          dashboardMetrics?.customerFileUploads.data.pagedResult.length > 0
+          dashboardMetrics?.customerFileUploads.data.pagedResult.totalItems > 0
         "
       >
         <div class="d-flex justify-content-between table-head">
@@ -98,7 +98,7 @@
                 <tr
                   *ngFor="
                     let doc of dashboardMetrics?.customerFileUploads.data
-                      .pagedResult
+                      .pagedResult.result
                   "
                 >
                   <td>{{ doc.correspondenceNo }}</td>

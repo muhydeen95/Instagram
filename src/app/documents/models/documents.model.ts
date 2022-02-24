@@ -45,6 +45,12 @@ export const InitialDocumentSearchDTO = {
   PageSize: 10,
 };
 
+export interface DocumentCountDTO {
+  Treated: number;
+  UnTreated: number;
+  Pending: number;
+}
+
 export interface DocumentResponse {
   correspondenceNo: string;
   createdAt: string;

@@ -12,6 +12,7 @@ import {
   DefaultDocumentSearchDTO,
   DocumentResponse,
   DocumentSearchDTO,
+  DocumentCountDTO,
 } from '../../models/documents.model';
 import { DocumentService } from '../../services/document.service';
 
@@ -28,6 +29,11 @@ export class DocumentComponent implements OnInit {
   filterableData: DocumentResponse[] = [];
   documentStatus: string = '0';
   data: DocumentResponse[] = [];
+  documentCount: DocumentCountDTO = {
+    Treated: 0,
+    UnTreated: 0,
+    Pending: 0,
+  };
   constructor(
     public dialog: MatDialog,
     private _docService: DocumentService,
@@ -59,6 +65,16 @@ export class DocumentComponent implements OnInit {
         this.is_initial = !isSearching;
         this.data = res.response.result;
         this.filterableData = this.data;
+        this.data.forEach((data: any) => {
+          console.log(data);
+          data.treatmentStatusId === 'Untreated'
+            ? (this.documentCount.UnTreated = this.documentCount.UnTreated + 1)
+            : data.treatmentStatusId === 'Treated'
+            ? (this.documentCount.Treated = this.documentCount.Treated + 1)
+            : data.treatmentStatusId === 'Pending'
+            ? (this.documentCount.Pending = this.documentCount.Pending + 1)
+            : null;
+        });
       },
       error: (error: ResponseModel<null>) => {
         this.documentLoading = false;

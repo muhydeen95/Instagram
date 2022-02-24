@@ -46,9 +46,9 @@ export const InitialDocumentSearchDTO = {
 };
 
 export interface DocumentCountDTO {
-  Treated: number;
-  UnTreated: number;
-  Pending: number;
+  pendingFiles: number;
+  treatedFiles: number;
+  untreatedFiles: number;
 }
 
 export interface DocumentResponse {

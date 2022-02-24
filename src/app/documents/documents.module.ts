@@ -10,7 +10,7 @@ import { DocumentStatusComponent } from './components/document-status/document-s
 // import { NgxEmojiPickerModule } from 'ngx-emoji-picker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [DocumentComponent, DocumentStatusComponent, FilterComponent],
   imports: [
@@ -21,6 +21,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ReactiveFormsModule,
     FormsModule,
     PdfViewerModule,
+    MatPaginatorModule,
     // NgxEmojiPickerModule.forRoot(),
   ],
 })

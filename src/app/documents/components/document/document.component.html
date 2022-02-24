@@ -9,7 +9,7 @@
             [count]="4"
             color="info"
             [loading]="false"
-            [route]="'documents'"
+            (click)="filterDocument('Untreated')"
           ></app-card>
         </div>
 
@@ -20,17 +20,17 @@
             [count]="10"
             color="warning"
             [loading]="false"
-            [route]="'documents'"
+            (click)="filterDocument('Pending')"
           ></app-card>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-4">
           <app-card
-            [name]="'Uploaded Documents'"
+            [name]="'Treated Documents'"
             [dayCount]="'0 Today'"
             [count]="10"
             color="success"
             [loading]="false"
-            [route]="'documents'"
+            (click)="filterDocument('Treated')"
           ></app-card>
         </div>
       </section>

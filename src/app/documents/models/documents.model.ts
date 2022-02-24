@@ -18,10 +18,12 @@ export interface DocumentDTO {
 
 export interface DocumentSearchDTO {
   CustomerFileSubmissionDate: string;
+  TreatmentStatus: string;
   Search: string;
   PageNumber: number;
   PageSize: number;
 }
+
 export const DefaultDocumentSearchDTO = {
   CustomerFileSubmissionDate: '',
   Search: '',

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { DialogModel } from '@shared/components/models/dialog.model';
 import { DashboardDialogComponent } from 'app/dashboard/dialogs/dashboard-dialog/dashboard-dialog.component';
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
 import { UploadDocDTO } from 'app/dashboard/models/dashboard.model';
 import { Subscription } from 'rxjs';
+import { ResponseModel } from '../../../models/response.model';
 import { FilterComponent } from '../../dialogs/filter/filter.component';
-import { DocumentService } from '../../services/document.service';
 import {
+  DefaultDocumentSearchDTO,
   DocumentResponse,
   DocumentSearchDTO,
-  DefaultDocumentSearchDTO,
 } from '../../models/documents.model';
-import { ResponseModel } from '../../../models/response.model';
+import { DocumentService } from '../../services/document.service';
 
 @Component({
   selector: 'app-document',
@@ -25,11 +26,26 @@ export class DocumentComponent implements OnInit {
   public is_initial: boolean = true;
   public searchTerm: string = '';
   filterableData: DocumentResponse[] = [];
+  documentStatus: string = '0';
   data: DocumentResponse[] = [];
-  constructor(public dialog: MatDialog, private _docService: DocumentService) {}
+  constructor(
+    public dialog: MatDialog,
+    private _docService: DocumentService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.getDocument(DefaultDocumentSearchDTO);
+    const param: any = this.activatedRoute.queryParams;
+    this.documentStatus = param['value'].query;
+    this.documentStatus
+      ? (() => {
+          this.getDocument({ TreatmentStatus: this.documentStatus });
+        })()
+      : this.getDocument(DefaultDocumentSearchDTO);
+  }
+
+  filterDocument(query: string): void {
+    this.getDocument({ TreatmentStatus: query });
   }
 
   getDocument(

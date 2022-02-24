@@ -211,9 +211,14 @@
                 <div class="col-12">
                   <div class="form_group mb-5">
                     <label class="form-label">LC Type</label>
-                    <select name="" id="" [value]="lcAplicationDetail.type">
-                      <option value="Value here">Select Type</option>
-                      <option value="Value here">Name</option>
+                    <select
+                      disabled
+                      class="form-control"
+                      [value]="types[lcAplicationDetail.type]"
+                    >
+                      <option value="{{ type.id }}" *ngFor="let type of types">
+                        {{ type.type }}
+                      </option>
                     </select>
                   </div>
                 </div>

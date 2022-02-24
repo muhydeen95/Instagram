@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import {
   ShipmentStatusEnum,
   BankChargesEnum,
+  LC_Type,
 } from '../application-form/models/lc-application.model';
 import { LCApplicationDTO } from '../application-form/models/types.model';
 
@@ -21,6 +22,7 @@ export class ApplicationDetailsComponent implements OnInit {
   public applicationId: number = 0;
   public shipmentStatusEnum = ShipmentStatusEnum;
   public bankChargesEnum = BankChargesEnum;
+  public types: { id: number; type: string }[] = LC_Type;
   constructor(
     private _lc: LcApplicationService,
     private activatedRoute: ActivatedRoute

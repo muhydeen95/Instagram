@@ -1,4 +1,5 @@
 // import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { 
   Component,
   Input,
@@ -9,6 +10,9 @@ import {
   PipeTransform,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ResendLink } from '@auth/models/auth.model';
+import { AuthService } from '@auth/services/auth.service';
+import { ResponseModel } from 'app/models/response.model';
 import { timer, Subscription } from 'rxjs';
 // import { ResponseModel } from 'app/models/response.model';
 
@@ -22,10 +26,13 @@ export class RegistrationDialogComponent implements OnInit, OnDestroy {
   public countDown: Subscription = new Subscription();
   public counter = 10;
   public tick = 1000;
+  public sending: boolean = false;
+  public error_message: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<RegistrationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public modalData: any,
+    private _auth: AuthService,
   ) { }
 
   ngOnInit() {
@@ -40,7 +47,20 @@ export class RegistrationDialogComponent implements OnInit, OnDestroy {
   }
 
   public submit(): void {
-    this.counter = 10;
+    this.sending = true;
+      this._auth.verifyResendlink(this.modalData.email).subscribe({
+        next: (res: ResponseModel<ResendLink>) => {
+          console.log(res);
+          this.sending = false;
+          this.counter = 10;
+        },
+        error: (error: HttpErrorResponse) => {
+          this.sending = false;
+          console.log(error);
+          this.error_message = error.error.message;
+        },
+      });
+    
   }
 
   ngOnDestroy(){

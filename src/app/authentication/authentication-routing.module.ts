@@ -40,6 +40,13 @@ const routes: Routes = [
             (m) => m.ResetPasswordModule
           ),
       },
+      {
+        path: 'confirm-email',
+        loadChildren: () =>
+          import('../authentication/components/email-confirmation/email-confirmation.module').then(
+            (m) => m.EmailconfirmationModule
+          ),
+      },
     ],
   },
 ];

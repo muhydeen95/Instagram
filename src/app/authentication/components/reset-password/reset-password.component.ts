@@ -22,8 +22,8 @@ export class ResetPasswordComponent implements OnInit {
   public passwordFormSubmitted: boolean = false;
   public isError: boolean = false;
   public error_message: string = '';
-  public token: any = '';
-  public email: any = '';
+  public token: string = '';
+  public email: string = '';
 
   constructor(
     private _base: BaseComponent,

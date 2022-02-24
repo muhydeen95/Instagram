@@ -1,8 +1,10 @@
 import {
+  confirmEmail,
   ForgotPassswordDTO,
   LoginRequestDTO,
   LoginResponseDTO,
   RegisterRequestDTO,
+  ResendLink,
   ResetPasswordDTO,
 } from './../models/auth.model';
 import { Injectable } from '@angular/core';
@@ -56,4 +58,29 @@ export class AuthService {
       resetPasswordRequestDTO
     );
   }
+
+  public verifyResendlink(
+    email: ResendLink
+  ): Observable<ResponseModel<ResendLink>> {
+    const endpoint = `CustomerAuth/resend-confirmation-mail/${email}`;
+    return this.http.makeRequestWithData(
+      'post',
+      endpoint,
+      {},
+    );
+  }
+
+  public confirmEmail(
+    payload: confirmEmail
+  ): Observable<ResponseModel<confirmEmail>> {
+    const endpoint = 'CustomerAuth/confirm-email';
+    return this.http.makeRequestWithData(
+      'post',
+      endpoint,
+      {},
+      payload
+    );
+  }
+
+
 }

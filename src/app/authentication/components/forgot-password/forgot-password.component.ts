@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ForgotPassswordDTO } from '@auth/models/auth.model';
 import { AuthService } from '@auth/services/auth.service';
 import { ResponseModel } from 'app/models/response.model';
@@ -24,7 +25,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private _auth: AuthService
+    private _auth: AuthService, 
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -77,6 +79,11 @@ export class ForgotPasswordComponent implements OnInit {
       this.submit();
     }
   }
+
+  back() {
+    this.router.navigate(['/authentication/login'])
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

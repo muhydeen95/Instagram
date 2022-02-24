@@ -10,7 +10,12 @@
         Password reset action succesful, kindly click button below to continue login
     </p>
     <div class="d-flex justify-content-center">
-        <button class="btn btn-green btn-lg" routerLink="/authentication/login">
+        <button 
+          [mat-dialog-close]="true"
+          class="btn btn-green btn-lg" 
+          routerLink="/authentication/login"
+          #close
+        >
             Proceed to Login
         </button>
     </div>

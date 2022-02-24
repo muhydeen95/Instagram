@@ -45,8 +45,11 @@ export class ResetPasswordComponent implements OnInit {
   public initResetPasswordForm() {
     this.resetPasswordForm = this.fb.group({
       Password: [
-        Validators.required,
-        Validators.pattern(/^(?=.?[A-Z])(?=.?[a-z])(?=.*?[0-9]).{8,}$/)
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^(?=.?[A-Z])(?=.?[a-z])(?=.*?[0-9]).{8,}$/)
+        ]
       ],
       confirmPassword: ['', Validators.required],
     }, { validators: [this.passwordMatchValidator] })

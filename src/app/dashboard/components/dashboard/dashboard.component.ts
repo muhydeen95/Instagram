@@ -51,9 +51,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDocumentComponent);
-    // dialogRef.componentInstance.event.subscribe(
-    //   (event: DialogModel<UploadDocDTO>) => {}
-    // );
     dialogRef.componentInstance.isUploaded.subscribe(
       (isFileUploaded: boolean) => {
         isFileUploaded && this.getDashboard();
@@ -63,6 +60,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   routeToPage(query: string, isSearching: boolean): void {
     this.router.navigate([`documents/status/${query}`], this.navigationExtras);
+  }
+  triggerClick(query: string): void {
+    const param: NavigationExtras = {
+      queryParams: { query },
+    };
+    this.router.navigate([`documents`], param);
   }
 
   public openTrackDialog(): void {

@@ -37,7 +37,7 @@
             [count]="dashboardMetrics?.untreatedFiles"
             color="info"
             [loading]="false"
-            [route]="'documents'"
+            (click)="triggerClick('Untreated')"
           ></app-card>
         </div>
 
@@ -48,7 +48,7 @@
             [count]="dashboardMetrics?.pendingFiles"
             color="warning"
             [loading]="false"
-            [route]="'documents'"
+            (click)="triggerClick('Pending')"
           ></app-card>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -58,7 +58,7 @@
             [count]="dashboardMetrics?.treatedFiles"
             color="success"
             [loading]="false"
-            [route]="'documents'"
+            (click)="triggerClick('Treated')"
           ></app-card>
         </div>
       </section>

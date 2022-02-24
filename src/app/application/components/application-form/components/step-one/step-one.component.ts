@@ -48,7 +48,9 @@ export class StepOneComponent implements OnInit {
   public initStepOneForm(): void {
     this.stepOneForm = this.fb.group({
       lCApplicationDate: [
-        this.applicationForm.lCApplicationDate ?? '',
+        (this.applicationForm.lCApplicationDate = this.setDateValue(
+          new Date()
+        )),
         Validators.required,
       ],
       applicantName: [
@@ -81,6 +83,11 @@ export class StepOneComponent implements OnInit {
       sight: [this.applicationForm.sight ?? null, Validators.required],
       location: [this.applicationForm.location ?? '', Validators.required],
     });
+  }
+
+  setDateValue(date: Date): string {
+    var isoString = date.toISOString();
+    return isoString.substring(0, ((isoString.indexOf('T') | 0) + 6) | 0);
   }
   public back(): void {
     this._location.back();

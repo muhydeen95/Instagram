@@ -6,7 +6,7 @@
           <app-card
             [name]="'Untreated Documents'"
             [dayCount]="'0 Today'"
-            [count]="4"
+            [count]="documentCount.UnTreated"
             color="info"
             [loading]="false"
             (click)="filterDocument('Untreated')"
@@ -17,7 +17,7 @@
           <app-card
             [name]="'Pending Documents'"
             [dayCount]="'0 Today'"
-            [count]="10"
+            [count]="documentCount.Pending"
             color="warning"
             [loading]="false"
             (click)="filterDocument('Pending')"
@@ -27,7 +27,7 @@
           <app-card
             [name]="'Treated Documents'"
             [dayCount]="'0 Today'"
-            [count]="10"
+            [count]="documentCount.Treated"
             color="success"
             [loading]="false"
             (click)="filterDocument('Treated')"

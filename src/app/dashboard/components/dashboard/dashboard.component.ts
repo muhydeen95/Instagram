@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       next: (res: ResponseModel<DashboardResponseDTO>) => {
         this.isFetchingDashboard = false;
         this.dashboardMetrics = res.response;
+        console.log(this.dashboardMetrics);
       },
       error: (error: ResponseModel<any>) => {
         this.isFetchingDashboard = false;

@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DialogModel } from '@shared/components/models/dialog.model';
 import { DashboardDialogComponent } from 'app/dashboard/dialogs/dashboard-dialog/dashboard-dialog.component';
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
-import { UploadDocDTO } from 'app/dashboard/models/dashboard.model';
 import { Subscription } from 'rxjs';
 import {
   InitialSearchDTO,
@@ -121,9 +120,10 @@ export class DocumentComponent implements OnInit {
 
   public openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDocumentComponent);
-
-    dialogRef.componentInstance.event.subscribe(
-      (event: DialogModel<UploadDocDTO>) => {}
+    dialogRef.componentInstance.isUploaded.subscribe(
+      (isFileUploaded: boolean) => {
+        isFileUploaded && this.getDocument(DefaultDocumentSearchDTO);
+      }
     );
   }
 

@@ -80,7 +80,7 @@
                   ></app-docstream-skeleton-loader>
                 </td></tr
             ></ng-container>
-            <ng-container>
+            <ng-container *ngIf="!documentLoading">
               <tr *ngFor="let doc of filterableData">
                 <td>{{ doc.correspondenceNo }}</td>
                 <td>{{ doc.documentType }} type</td>

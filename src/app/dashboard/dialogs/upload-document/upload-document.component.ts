@@ -107,24 +107,41 @@ export class UploadDocumentComponent implements OnInit {
         });
     }
   }
+  public addFilesToList = (newFiles: any) => {
+    for (let i = 0; i < newFiles.length; i++) {
+      this.files.includes(newFiles[i]) ? null : this.files.push(newFiles[i]);
+    }
+    this.uploadForm.patchValue({
+      Files: this.files,
+    });
+  };
+  public dropHandler(ev: any): void {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    if (ev.dataTransfer.items) {
+      for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+        if (ev.dataTransfer.items[i].kind === 'file') {
+          this.addFilesToList(ev.dataTransfer.files);
+        }
+      }
+    } else {
+      for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+        this.addFilesToList(ev.dataTransfer.files);
+      }
+    }
+  }
+
+  public dragOverHandler(ev: any): void {
+    // Prevent default behavior (Prevent file from being opened)
+    ev.preventDefault();
+    ev.stopPropagation();
+  }
 
   public onFileDropped(event: any) {
     if (event.target.files.length > 0) {
-      for (let i = 0; i < event.target.files.length; i++) {
-        this.files.includes(event.target.files[i])
-          ? null
-          : this.files.push(event.target.files[i]);
-      }
-      this.uploadForm.patchValue({
-        Files: this.files,
-      });
+      this.addFilesToList(event.target.files);
     }
-
-    // const files = [...e.target.files];
-    // if (files.length > 0) {
-    //   this.uploadForm.get('Files')?.setValue(files);
-    //   this.fileNames = files.map((element) => element.name);
-    // }
   }
   public removeFile(index: number): void {
     this.files.splice(index, 1);

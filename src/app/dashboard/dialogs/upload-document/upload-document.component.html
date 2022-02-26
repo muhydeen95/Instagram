@@ -68,7 +68,7 @@
     </div>
     <div class="form-group form_group">
       <label>Upload Documents</label>
-      <div
+      <label
         class="upload-document-wrapper click py-5"
         for="file-1"
         (drop)="dropHandler($event)"
@@ -93,7 +93,7 @@
           (change)="onFileDropped($event)"
           [accept]="AcceptedFileTypes"
         />
-      </div>
+      </label>
       <div class="row mt-4">
         <div class="col-12 col-lg-6 doc" *ngFor="let file of files; index as i">
           <app-uploaded-doc

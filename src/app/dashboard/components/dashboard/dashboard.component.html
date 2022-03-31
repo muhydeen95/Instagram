@@ -31,39 +31,41 @@
       </section>
       <section class="row my-5">
         <div class="col-md-6 col-lg-4">
+          <!-- [dayCount]="'0 Today'" -->
           <app-card
             [name]="'Untreated Documents'"
-            [dayCount]="'0 Today'"
             [count]="dashboardMetrics?.untreatedFiles"
             color="info"
-            [loading]="false"
+            [loading]="isFetchingDashboard"
             (click)="triggerClick('Untreated')"
           ></app-card>
         </div>
 
         <div class="col-md-6 col-lg-4">
+          <!-- [dayCount]="'0 Today'" -->
           <app-card
             [name]="'Pending Documents'"
-            [dayCount]="'0 Today'"
             [count]="dashboardMetrics?.pendingFiles"
             color="warning"
-            [loading]="false"
+            [loading]="isFetchingDashboard"
             (click)="triggerClick('Pending')"
           ></app-card>
         </div>
         <div class="col-md-6 col-lg-4">
+          <!-- [dayCount]="'0 Today'" -->
           <app-card
             [name]="'Treated Documents'"
-            [dayCount]="'0 Today'"
             [count]="dashboardMetrics?.treatedFiles"
             color="success"
-            [loading]="false"
+            [loading]="isFetchingDashboard"
             (click)="triggerClick('Treated')"
           ></app-card>
         </div>
       </section>
       <ng-container
-        *ngIf="dashboardMetrics?.customerFileUploads.data.result.length > 0"
+        *ngIf="
+          dashboardMetrics?.customerFileUploads.data.pagedResult.totalItems > 0
+        "
       >
         <div class="d-flex justify-content-between table-head">
           <h4>Recent Documents</h4>
@@ -95,7 +97,8 @@
               <ng-container>
                 <tr
                   *ngFor="
-                    let doc of dashboardMetrics?.customerFileUploads.data.result
+                    let doc of dashboardMetrics?.customerFileUploads.data
+                      .pagedResult.result
                   "
                 >
                   <td>{{ doc.correspondenceNo }}</td>

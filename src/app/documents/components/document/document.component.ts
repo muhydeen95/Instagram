@@ -4,15 +4,19 @@ import { ActivatedRoute } from '@angular/router';
 import { DialogModel } from '@shared/components/models/dialog.model';
 import { DashboardDialogComponent } from 'app/dashboard/dialogs/dashboard-dialog/dashboard-dialog.component';
 import { UploadDocumentComponent } from 'app/dashboard/dialogs/upload-document/upload-document.component';
-import { UploadDocDTO } from 'app/dashboard/models/dashboard.model';
 import { Subscription } from 'rxjs';
-import { ResponseModel } from '../../../models/response.model';
+import {
+  InitialSearchDTO,
+  pageSizeOptionsDTO,
+  PaginationResponse,
+  ResponseModel,
+} from '../../../models/response.model';
 import { FilterComponent } from '../../dialogs/filter/filter.component';
 import {
   DefaultDocumentSearchDTO,
+  DocumentCountDTO,
   DocumentResponse,
   DocumentSearchDTO,
-  DocumentCountDTO,
 } from '../../models/documents.model';
 import { DocumentService } from '../../services/document.service';
 
@@ -27,19 +31,23 @@ export class DocumentComponent implements OnInit {
   public is_initial: boolean = true;
   public searchTerm: string = '';
   filterableData: DocumentResponse[] = [];
+  paginationQuery = InitialSearchDTO;
   documentStatus: string = '0';
   data: DocumentResponse[] = [];
+  public paginatedResponse: PaginationResponse<any[]> = new PaginationResponse<
+    any[]
+  >();
+  public pageSizeOptions: number[] = pageSizeOptionsDTO;
   documentCount: DocumentCountDTO = {
-    Treated: 0,
-    UnTreated: 0,
-    Pending: 0,
+    pendingFiles: 0,
+    treatedFiles: 0,
+    untreatedFiles: 0,
   };
   constructor(
     public dialog: MatDialog,
     private _docService: DocumentService,
     private activatedRoute: ActivatedRoute
   ) {}
-
   ngOnInit() {
     const param: any = this.activatedRoute.queryParams;
     this.documentStatus = param['value'].query;
@@ -63,24 +71,24 @@ export class DocumentComponent implements OnInit {
       next: (res: any) => {
         this.documentLoading = false;
         this.is_initial = !isSearching;
-        this.data = res.response.result;
+        this.paginatedResponse = res?.response.pagedResult;
+        this.data = res.response.pagedResult.result;
         this.filterableData = this.data;
-        this.data.forEach((data: any) => {
-          console.log(data);
-          data.treatmentStatusId === 'Untreated'
-            ? (this.documentCount.UnTreated = this.documentCount.UnTreated + 1)
-            : data.treatmentStatusId === 'Treated'
-            ? (this.documentCount.Treated = this.documentCount.Treated + 1)
-            : data.treatmentStatusId === 'Pending'
-            ? (this.documentCount.Pending = this.documentCount.Pending + 1)
-            : null;
-        });
+        this.documentCount = res.response.documentStatusCount;
       },
       error: (error: ResponseModel<null>) => {
         this.documentLoading = false;
         console.log(error);
       },
     });
+  }
+
+  paginate(pagingEvent: any) {
+    const pagination = {
+      ...pagingEvent,
+      pageNumber: pagingEvent?.pageIndex + 1,
+    };
+    this.getDocument(pagination);
   }
 
   public searchQueryAction(searchQuery: string): void {
@@ -112,9 +120,10 @@ export class DocumentComponent implements OnInit {
 
   public openUploadDialog(): void {
     const dialogRef = this.dialog.open(UploadDocumentComponent);
-
-    dialogRef.componentInstance.event.subscribe(
-      (event: DialogModel<UploadDocDTO>) => {}
+    dialogRef.componentInstance.isUploaded.subscribe(
+      (isFileUploaded: boolean) => {
+        isFileUploaded && this.getDocument(DefaultDocumentSearchDTO);
+      }
     );
   }
 

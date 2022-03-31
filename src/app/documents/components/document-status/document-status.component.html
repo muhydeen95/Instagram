@@ -60,11 +60,7 @@
                   <li>
                     <h4>Status</h4>
                     <p>
-                      {{
-                        CustomerTransactionStatus[
-                          documentDetail.treatmentStatusId
-                        ] || "--"
-                      }}
+                      {{ documentDetail.treatmentStatusId || "--" }}
                     </p>
                   </li>
                 </ul>

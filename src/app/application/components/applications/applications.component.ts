@@ -27,7 +27,7 @@ export class ApplicationsComponent implements OnInit {
   public loading: boolean = false;
   public btnName: string = 'New Application';
   public isInitialRequest: boolean = true;
-  public date: string = new Date().toISOString();
+  public date: string = '';
   public lcAplications: ApplicationResponseDTO[] = [];
   public searchQuery: SearchDTO = { ...InitialSearchDTO, search: '' };
   public paginatedResponse: PaginationResponse<any[]> = new PaginationResponse<

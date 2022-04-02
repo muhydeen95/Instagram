@@ -86,7 +86,8 @@ export class StepOneComponent implements OnInit {
   }
 
   setDateValue(date: Date): string {
-    var isoString = date.toISOString();
+    var newDate = (date).getTimezoneOffset() * 60000; 
+    var isoString = (new Date(Date.now() - newDate)).toISOString().slice(0,-1);
     return isoString.substring(0, ((isoString.indexOf('T') | 0) + 6) | 0);
   }
   public back(): void {

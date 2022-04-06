@@ -68,7 +68,8 @@ export class ForgotPasswordComponent implements OnInit {
           this.isLoggingIn = false;
           this.forgotPasswordFormSubmitted = true;
           this.isError = true;
-          this.error_message = error?.error?.message;
+          // this.error_message = error?.error?.message;
+          this.error_message = 'Email does not exist!';
         },
       });
     }

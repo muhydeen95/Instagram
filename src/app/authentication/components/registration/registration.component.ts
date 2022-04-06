@@ -70,7 +70,8 @@ export class RegistrationComponent implements OnInit {
   public register(): void {
     this.registerFormSubmitted = true;
     if(!this.registrationForm.valid) {
-      this.error_message = 'Please fill all required field!'
+      this.error_message = 'Please fill all required field!';
+      window.scroll(0,0);
     }
     if (this.registrationForm.valid) {
       this.isSiginingUp = true;

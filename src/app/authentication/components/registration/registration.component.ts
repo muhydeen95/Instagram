@@ -91,6 +91,7 @@ export class RegistrationComponent implements OnInit {
           this.isSiginingUp = false;
           this.registerFormSubmitted = true;
           this.error_message = error?.error?.response[0].description;
+          window.scroll(0,0);
         },
       });
     }

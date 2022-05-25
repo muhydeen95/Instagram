@@ -107,6 +107,7 @@ export class UploadDocumentComponent implements OnInit {
         });
     }
   }
+
   public addFilesToList = (newFiles: any) => {
     for (let i = 0; i < newFiles.length; i++) {
       this.files.includes(newFiles[i]) ? null : this.files.push(newFiles[i]);
@@ -115,6 +116,7 @@ export class UploadDocumentComponent implements OnInit {
       Files: this.files,
     });
   };
+
   public dropHandler(ev: any): void {
     ev.preventDefault();
     ev.stopPropagation();
@@ -143,6 +145,7 @@ export class UploadDocumentComponent implements OnInit {
       this.addFilesToList(event.target.files);
     }
   }
+  
   public removeFile(index: number): void {
     this.files.splice(index, 1);
     this.uploadForm.patchValue({

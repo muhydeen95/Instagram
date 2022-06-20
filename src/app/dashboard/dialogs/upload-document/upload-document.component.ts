@@ -32,7 +32,8 @@ export class UploadDocumentComponent implements OnInit {
     isEditing?: boolean;
   }> = new EventEmitter<{ editObj: UploadDocDTO; isEditing?: boolean }>();
   @Output() isUploaded: EventEmitter<boolean> = new EventEmitter<boolean>();
-  public AcceptedFileTypes: string = 'application/PDF';
+  // public AcceptedFileTypes: string = 'application/PDF';
+  public AcceptedFileTypes: string = '.dox,.docx,.docs,.pptx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,application/pdf,.pps';
   public fileNames: Array<string> = [];
   public uploadForm!: FormGroup;
   public isLoading: boolean = false;

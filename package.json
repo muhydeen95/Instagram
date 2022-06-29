@@ -26,6 +26,7 @@
     "jquery": "^3.6.0",
     "ng2-pdf-viewer": "^8.0.1",
     "ngx-emoji-picker": "^0.1.6",
+    "ngx-extended-pdf-viewer": "^14.0.4",
     "ngx-signaturepad2": "^1.0.2",
     "ngx-skeleton-loader": "^4.0.0",
     "ngx-spinner": "^13.1.1",

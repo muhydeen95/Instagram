@@ -98,6 +98,8 @@
   }
   .chat_wrapper {
     min-height: 70vh;
+    max-height: 100vh;
+
     padding: 3rem 1rem 2rem 3rem;
     border-radius: 0.85rem;
     position: relative;
@@ -274,3 +276,7 @@
   align-items: center;
 }
 
+ul {
+  max-height: 30rem;
+  overflow-y: scroll;
+}

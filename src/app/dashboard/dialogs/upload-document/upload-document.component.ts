@@ -1,4 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEventType,
+  HttpResponse,
+} from '@angular/common/http';
 import {
   Component,
   ElementRef,
@@ -33,7 +37,8 @@ export class UploadDocumentComponent implements OnInit {
   }> = new EventEmitter<{ editObj: UploadDocDTO; isEditing?: boolean }>();
   @Output() isUploaded: EventEmitter<boolean> = new EventEmitter<boolean>();
   // public AcceptedFileTypes: string = 'application/PDF';
-  public AcceptedFileTypes: string = '.dox,.docx,.docs,.pptx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,application/pdf,.pps';
+  public AcceptedFileTypes: string =
+    '.dox,.docx,.docs,.pptx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,application/pdf,.pps,image/png, image/gif, image/jpeg';
   public fileNames: Array<string> = [];
   public uploadForm!: FormGroup;
   public isLoading: boolean = false;
@@ -45,6 +50,8 @@ export class UploadDocumentComponent implements OnInit {
   public gettingDocTypesFailed: boolean = false;
   public docTypes: Array<DocTypeDTO> = [];
   public files: File[] = [];
+  public fileUploadProgress: number = 0;
+
   constructor(
     private fb: FormBuilder,
     private _base: BaseComponent,
@@ -87,18 +94,26 @@ export class UploadDocumentComponent implements OnInit {
       this.dashboardService
         .uploadDocumentRequest(this.uploadForm.value)
         .subscribe({
-          next: (res: ResponseModel<UploadDocDTO>) => {
-            this.isLoading = false;
-            this.uploadFormSubmitted = false;
-            this.event.emit({
-              editObj: this.uploadForm.value,
-            });
-            this.isUploaded.emit(true);
-            this.close.nativeElement.click();
-            this._base.openSnackBar(
-              'Document uploaded successfully',
-              'success'
-            );
+          next: (event) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.fileUploadProgress = Math.round(
+                (100 * event.loaded) / event.total
+              );
+            } else if (event instanceof HttpResponse) {
+              // const res: ResponseModel<UploadDocDTO> = event.body;
+              this.fileUploadProgress = 0;
+              this.isLoading = false;
+              this.uploadFormSubmitted = false;
+              this.event.emit({
+                editObj: this.uploadForm.value,
+              });
+              this.isUploaded.emit(true);
+              this.close.nativeElement.click();
+              this._base.openSnackBar(
+                'Document uploaded successfully',
+                'success'
+              );
+            }
           },
           error: (error: HttpErrorResponse) => {
             this.isLoading = false;
@@ -146,7 +161,7 @@ export class UploadDocumentComponent implements OnInit {
       this.addFilesToList(event.target.files);
     }
   }
-  
+
   public removeFile(index: number): void {
     this.files.splice(index, 1);
     this.uploadForm.patchValue({

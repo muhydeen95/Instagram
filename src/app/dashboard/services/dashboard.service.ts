@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
 import { HttpService } from '@shared/services/http.service';
 import { ResponseModel } from 'app/models/response.model';
 import { Observable } from 'rxjs';
@@ -8,11 +10,10 @@ import { UploadDocDTO } from '../models/dashboard.model';
   providedIn: 'root',
 })
 export class DashboardService {
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService, private _http: HttpClient) {}
 
-  public uploadDocumentRequest(
-    payload: UploadDocDTO
-  ): Observable<ResponseModel<UploadDocDTO>> {
+  // ResponseModel<UploadDocDTO>
+  public uploadDocumentRequest(payload: UploadDocDTO): Observable<any> {
     const formData = new FormData();
     Object.entries(payload).forEach(([key, value]) => {
       if (key != 'Files') {
@@ -23,7 +24,10 @@ export class DashboardService {
       formData.append('Files', file, file.name);
     });
     const endpoint = 'incomingmail/customer-create';
-    return this.http.makeRequestWithData('post', endpoint, {}, formData);
+    return this._http.post(`${environment.api_url}${endpoint}`, formData, {
+      reportProgress: true,
+      observe: 'events',
+    });
   }
 
   public getDocumentTypesRequest(payload: any): Observable<ResponseModel<any>> {

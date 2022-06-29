@@ -8,6 +8,8 @@ export interface DocumentDTO {
   documentType: string;
   fileSubmissionId: number;
   files: Array<{
+    fileType: string;
+    base64String: string;
     name: string;
     path: string;
     uniqueName: string;

@@ -20,6 +20,8 @@ import { InfoComponent } from './components/info/info.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SuccessModalComponent } from './components/success-modal/success-modal.component';
 import { UploadedDocComponent } from './components/uploaded-doc/uploaded-doc.component';
+import { FileViewerComponent } from './components/file-viewer/file-viewer.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { UploadedDocComponent } from './components/uploaded-doc/uploaded-doc.com
     InfoComponent,
     SuccessModalComponent,
     UploadedDocComponent,
+    FileViewerComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +49,7 @@ import { UploadedDocComponent } from './components/uploaded-doc/uploaded-doc.com
     NgxSkeletonLoaderModule,
     MatDialogModule,
     NgSelectModule,
+    NgxExtendedPdfViewerModule,
   ],
   exports: [
     LoadingButtonComponent,
@@ -65,6 +69,7 @@ import { UploadedDocComponent } from './components/uploaded-doc/uploaded-doc.com
     NgSelectModule,
     SuccessModalComponent,
     UploadedDocComponent,
+    FileViewerComponent,
   ],
 })
 export class SharedModule {}

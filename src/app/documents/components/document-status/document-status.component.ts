@@ -149,7 +149,7 @@ export class DocumentStatusComponent implements OnInit {
       case type.toLocaleLowerCase().includes(fileTypeEnum.PPTX):
         return 'assets/images/ppt.svg';
       case type.toLocaleLowerCase().includes(fileTypeEnum.EXCEL):
-        return 'assets/images/ppt.svg';
+        return 'assets/images/excel.png';
       case type.toLocaleLowerCase().includes(fileTypeEnum.IMG):
         return 'assets/images/img.svg';
       default:

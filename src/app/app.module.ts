@@ -11,6 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LocalStorageService } from '@shared/services/local-storage.service';
 import { ApplicationDetailsModule } from './application/components/application-details/application-details.module';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,7 @@ import { ApplicationDetailsModule } from './application/components/application-d
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-
+    SharedModule,
     JwtModule.forRoot({
       config: {},
     }),

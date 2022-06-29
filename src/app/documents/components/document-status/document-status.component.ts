@@ -10,6 +10,7 @@ import { ResponseModel } from 'app/models/response.model';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BaseComponent } from '@core/base/base/base.component';
+import { fileTypeEnum } from '@shared/components/file-viewer/file-viewer.component';
 @Component({
   selector: 'app-document-status',
   templateUrl: './document-status.component.html',
@@ -82,6 +83,7 @@ export class DocumentStatusComponent implements OnInit {
   public loading: boolean = false;
   public docId: string = '';
   public isSearching: boolean = false;
+  public type: string = '';
 
   constructor(
     private _docService: DocumentService,
@@ -132,6 +134,27 @@ export class DocumentStatusComponent implements OnInit {
         );
       },
     });
+  }
+
+    public getFileType(type: string): string {
+    switch (true) {
+      case type.toLocaleLowerCase().includes(fileTypeEnum.PDF):
+        return 'assets/images/pdf.svg';
+      case type.toLocaleLowerCase().includes(fileTypeEnum.DOC):
+        return 'assets/images/word.svg';
+      case type.toLocaleLowerCase().includes(fileTypeEnum.DOCX):
+        return 'assets/images/word.svg';
+      case type.toLocaleLowerCase().includes(fileTypeEnum.PPT):
+        return 'assets/images/ppt.svg';
+      case type.toLocaleLowerCase().includes(fileTypeEnum.PPTX):
+        return 'assets/images/ppt.svg';
+      case type.toLocaleLowerCase().includes(fileTypeEnum.EXCEL):
+        return 'assets/images/ppt.svg';
+      case type.toLocaleLowerCase().includes(fileTypeEnum.IMG):
+        return 'assets/images/img.svg';
+      default:
+        return 'assets/images/img.svg';
+    }
   }
 
   handleSelection(event: any) {

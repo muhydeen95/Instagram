@@ -27,12 +27,12 @@
       align-items: center;
       img {
         width: 100%;
-        height: calc(100% - 16rem);
+        height: calc(100% - 10rem);
       }
     }
     &-pdf {
       width: 100%;
-      height: calc(100% - 16rem);
+      height: calc(100% - 10rem);
     }
 
     iframe {
@@ -40,7 +40,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: calc(100% - 16rem);
+      height: calc(100% - 10rem);
 
       display: flex;
       justify-content: center;

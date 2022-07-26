@@ -63,7 +63,9 @@ export class FileViewerComponent implements OnInit, OnChanges, OnDestroy {
       this.files[this.currentViewingFileIndex].fileType.toLowerCase() ===
         fileTypeEnum.DOCX ||
       this.files[this.currentViewingFileIndex].fileType.toLowerCase() ===
-        fileTypeEnum.EXCEL
+        fileTypeEnum.EXCEL ||
+      this.files[this.currentViewingFileIndex].fileType.toLowerCase() ===
+        fileTypeEnum.XLS
     ) {
       dataPrefix = 'https://docs.google.com/gview?url=';
       suffix = '&embedded=true';
@@ -139,6 +141,7 @@ export enum fileTypeEnum {
   PPT = 'ppt',
   PPTX = 'pptx',
   EXCEL = 'xlsx',
+  XLS = 'xls',
 }
 
 export class Util {

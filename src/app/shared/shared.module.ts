@@ -22,6 +22,7 @@ import { SuccessModalComponent } from './components/success-modal/success-modal.
 import { UploadedDocComponent } from './components/uploaded-doc/uploaded-doc.component';
 import { FileViewerComponent } from './components/file-viewer/file-viewer.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     MatDialogModule,
     NgSelectModule,
     NgxExtendedPdfViewerModule,
+    NgxDocViewerModule,
   ],
   exports: [
     LoadingButtonComponent,

@@ -55,7 +55,12 @@
           files[currentViewingFileIndex]?.fileType != fileTypeEnum.PDF
         "
       >
-        <iframe [src]="sanitizedUrl" frameborder="0" allowfullscreen></iframe>
+        <!-- <iframe [src]="sanitizedUrl" frameborder="0" allowfullscreen></iframe> -->
+        <ngx-doc-viewer
+          [url]="files[currentViewingFileIndex].path"
+          viewer="office"
+          class="doc"
+        ></ngx-doc-viewer>
       </div>
       <div class="wrapper_main-pdf">
         <ngx-extended-pdf-viewer

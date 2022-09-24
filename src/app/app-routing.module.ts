@@ -7,10 +7,24 @@ import { OfflineComponent } from './offline/offline.component';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('./homepage/homepage.module').then(
+        (m) => m.HomepageModule
+      ),
+  },
+  {
     path: 'authentication',
     loadChildren: () =>
       import('./authentication/authentication.module').then(
         (m) => m.AuthenticationModule
+      ),
+  },
+  {
+    path: 'onboarding',
+    loadChildren: () =>
+      import('./onboarding/onboarding.module').then(
+        (m) => m.OnboardingModule
       ),
   },
   {
@@ -20,29 +34,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'properties',
         pathMatch: 'full',
       },
       {
-        path: 'dashboard',
+        path: 'properties',
         loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-      },
-      {
-        path: 'documents',
-        loadChildren: () =>
-          import('./documents/documents.module').then((m) => m.DocumentsModule),
-      },
-      {
-        path: 'user-profile',
-        loadChildren: () =>
-          import('./profile/profile.module').then((m) => m.ProfileModule),
-      },
-      {
-        path: 'application',
-        loadChildren: () =>
-          import('./application/application.module').then(
-            (m) => m.ApplicationModule
+          import('./properties/properties.module').then(
+            (m) => m.PropertiesModule
           ),
       },
     ],
@@ -50,11 +49,6 @@ const routes: Routes = [
   {
     path: 'offline',
     component: OfflineComponent,
-  },
-  {
-    path: 'documents',
-    loadChildren: () =>
-      import('./documents/documents.module').then((m) => m.DocumentsModule),
   },
 
   {

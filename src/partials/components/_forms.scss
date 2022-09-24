@@ -21,8 +21,12 @@
     font-size: 1.4rem;
     color: $blue-700;
     padding: 1.35rem 1.6rem;
-    background: rgba($blue-700, 0.07);
+    background: transparent;
+    border: .2rem solid $grey-300;
 
+    &:hover {
+      border: 0.1rem solid $black-100 !important;
+    }
     &.is-invalid {
       border: 0.1rem solid $error !important;
       background: $white-100;
@@ -30,7 +34,7 @@
     &:focus {
       background: $white-100;
       color: $blue-700;
-      border: 0.1rem solid rgba($blue-700, 0.4);
+      border: 0.1rem solid rgba($grey-300, 1);
       box-shadow: none;
     }
   }

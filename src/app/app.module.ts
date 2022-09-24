@@ -10,7 +10,6 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LocalStorageService } from '@shared/services/local-storage.service';
-import { ApplicationDetailsModule } from './application/components/application-details/application-details.module';
 import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
@@ -28,7 +27,6 @@ import { SharedModule } from '@shared/shared.module';
     JwtModule.forRoot({
       config: {},
     }),
-    ApplicationDetailsModule,
   ],
   providers: [
     LocalStorageService,

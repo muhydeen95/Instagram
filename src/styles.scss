@@ -47,6 +47,9 @@ $docstream-theme: mat.define-light-theme(
 @import "partials/abstract/mixins";
 @import "components/forms";
 
+// font styles
+
+
 // scrollbar styles
 
 /* width */
@@ -63,13 +66,13 @@ $docstream-theme: mat.define-light-theme(
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $green-600;
+  background: $green-400;
   border-radius: 1rem;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: $green-700;
+  background: $green-400;
 }
 
 .docstream_snackbar_success {
@@ -244,6 +247,34 @@ table.table {
       font-size: 1.5rem;
       color: $text-body;
       padding: 1.4rem;
+    }
+  }
+}
+
+
+.nav-pills {
+  border-bottom: 0.1rem solid rgba($green-400, 0.15);
+  .nav-link {
+    color: $text-body;
+    opacity: 0.7;
+    transition: all ease 0.3s;
+    font-size: 1.4rem;
+    &.active {
+      color: $green-400;
+      font-weight: bold;
+      opacity: 1;
+      background-color: transparent;
+      position: relative;
+      &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 0.2rem;
+        bottom: 0;
+        left: 0;
+        background-color: rgba($green-400, 0.5);
+        border-radius: 0.2rem 0.2rem 0rem 0rem;
+      }
     }
   }
 }

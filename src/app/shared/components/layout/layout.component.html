@@ -1,24 +1,9 @@
 <div class="wrapper">
-  <app-sidebar (showMinimized)="showMinimizedMenu($event)"></app-sidebar>
-  <div class="wrapper__layout" [ngClass]="{ showMinimized: showMinimized }">
+  <div class="wrapper__layout">
     <app-navbar></app-navbar>
     <div class="container my-5" style="position: relative">
-      <router-outlet>
-        <div
-          class="preloader d-flex justify-content-center align-items-center flex-column"
-          *ngIf="routeLoading"
-        >
-          <div class="logo flash infinite animated">
-            <img src="assets/images/new_logo.png" alt="logo" />
-          </div>
-          <div class="progress-cont mt-3">
-            <div class="progress">
-              <div class="indeterminate"></div>
-            </div>
-          </div>
-        </div>
-      </router-outlet>
+      <router-outlet></router-outlet>
     </div>
+    <app-footer></app-footer>
   </div>
 </div>
-<app-help-center></app-help-center>

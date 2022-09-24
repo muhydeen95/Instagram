@@ -1,0 +1,92 @@
+<div class="wrapper">
+    <div class="wrapper__layout">
+      <div class="banner">
+        <app-header></app-header>
+        <div class="container m-auto">
+          <div class="banner-content">
+            <div class="banner-content-header">
+              <h2>Best property deals</h2>
+              <p>Best deal anywhere in the Uk</p>
+            </div>
+          </div>
+          <div class="search_wrapper">
+            <div class="">
+              <ul class="nav nav-pills vertical-nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item p-0" role="presentation">
+                  <a
+                    class="nav-link"
+                    [ngClass]="{ active: currentTabIndex === 1}"
+                    id="departmental-tab"
+                    data-bs-toggle="tab"
+                    routerLink="login"
+                    role="tab"
+                    aria-controls="departmental"
+                    aria-selected="true"
+                    >Buy</a
+                  >
+                </li>
+                <li class="nav-item p-0 ms-5" role="presentation">
+                  <a
+                    class="nav-link"
+                    [ngClass]="{ active: currentTabIndex === 2}"
+                    id="shared-tab"
+                    data-bs-toggle="tab"
+                    routerLink="register"
+                    role="tab"
+                    aria-controls="shared"
+                    aria-selected="false"
+                    >Sell</a
+                  >
+                </li>
+                <li class="nav-item p-0 ms-5" role="presentation">
+                  <a
+                    class="nav-link"
+                    [ngClass]="{ active: currentTabIndex === 3}"
+                    id="shared-tab"
+                    data-bs-toggle="tab"
+                    routerLink="register"
+                    role="tab"
+                    aria-controls="shared"
+                    aria-selected="false"
+                    >Rent</a
+                  >
+                </li>
+              </ul>
+            </div>
+      
+            <div class="tab-content bg-white p-4" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="regions"
+                role="tabpanel"
+                aria-labelledby="regions-tab"
+              >
+                <router-outlet></router-outlet>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container category my-5">
+        <div class="row">
+          <div class="col-md-4" *ngFor="let item of pptyCategories">
+            <app-category-card [data]="item"></app-category-card>
+          </div>
+        </div>
+      </div>
+
+      <div class="advert">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6" *ngFor="let item of [1,2]">
+              <app-advert-card></app-advert-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <app-footer></app-footer>
+    </div>
+</div>
+  

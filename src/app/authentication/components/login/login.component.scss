@@ -30,22 +30,29 @@
     }
   }
   &__forgot, &__sign_up {
-    margin-bottom: 3.4rem;
+    margin: 3.4rem auto;
     a, p {
       color: $blue-700;
       font-weight: 600;
       font-size: 1.4rem;
       line-height: 1.8rem;
-      text-decoration: none;
+      text-decoration: underline;
     }
     span {
-      color: $green-600;
+      color: $green-400;
       text-decoration: underline;
+    }
+  }
+  &__alt {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    &-text {
+      font-size: 1.25rem;
     }
   }
   &__login_btn {
     width: 100%;
-    background: $green-600;
+    background: $green-400;
     box-shadow: 0rem 0.4rem 0.8rem -0.1rem rgba(0, 74, 77, 0.15);
     border-radius: 0.8rem;
     font-weight: 600;
@@ -58,8 +65,33 @@
     color: $white-100;
     padding: 1.35rem 0;
     transition: 0.6s all ease;
+    margin-top: 2rem;
     &:hover {
-      background: $green-700;
+      background: $green-400;
+      transform: translateY(-.5rem);
+    }
+  }
+  .auth-alt {
+    margin-bottom: 2rem;
+    .btn-light {
+      border: .1rem solid $black-100;
+      color: $black-100;
+      min-width: 15rem;
+      .fa-facebook {
+        font-size: 1.9rem;
+      }
+      &:hover {
+        color: $white-100;
+        background: $black-100;
+      }
     }
   }
 }
+
+// @include maxSize($canvas: M) {
+//   .auth-alt {
+//     .btn-light {
+//       min-width: 15rem;
+//     }
+//   }
+// }

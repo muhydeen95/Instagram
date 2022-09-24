@@ -1,0 +1,75 @@
+@import "partials/abstract/variables";
+@import "partials/abstract/mixins.scss";
+
+nav {
+  min-height: 6.4rem;
+  align-items: center;
+  display: flex;
+  padding: 2rem 1rem 1rem 1rem;
+  .navbar-brand {
+    margin-right: 1.8rem;
+  }
+  .navbar-nav {
+    border-bottom: .1rem solid $white-100;
+  }
+  .nav-item {
+    .nav-link {
+      font-size: 1.5rem;
+      padding: 1rem 1.5rem;
+      margin-right: 1.2rem;
+      color: $white-100;
+      cursor: pointer;
+      &.active {
+        color: $green-400;
+        font-weight: bold;
+        opacity: 1;
+        background-color: transparent;
+        position: relative;
+        &::after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 0.2rem;
+          bottom: 0;
+          left: 0;
+          background-color: rgba($green-400, 0.5);
+          border-radius: 0.2rem 0.2rem 0rem 0rem;
+        }
+      }
+    }
+  }
+  .search-wrapper-input {
+    position: relative;
+    flex-grow: 3;
+    ._icon {
+      position: absolute;
+      left: 1.5rem;
+      top: 1.5rem;
+    }
+    ._clear {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      cursor: pointer;
+      transition: all ease-out 0.2s;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+    .form-control {
+      padding-left: 4.5rem;
+      border: none !important;
+    }
+    input {
+      border: none !important;
+      &:hover {
+        border: none !important;
+      }
+    }
+  }
+  .avatar {
+    img {
+      width: 70%;
+    }
+  }
+}

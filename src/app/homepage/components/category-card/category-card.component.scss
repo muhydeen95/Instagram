@@ -1,0 +1,37 @@
+@import "partials/abstract/variables";
+@import "partials/abstract/mixins.scss";
+
+.card {
+    text-align: center;
+    padding: 3.5rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    transition: all 500ms ease-in-out;
+    min-height: 40rem;
+    margin: 1rem;
+    img {
+        // left: 50%;
+    }
+    &-body {
+        .card-title {
+            font-size: 2.5rem;
+        }
+        .card-text {
+            font-size: 1.4rem;
+        }
+        .btn-outline-green {
+            border: .1rem solid $green-400;
+            padding-top: .7rem;
+        }
+    }
+    &:hover {
+        border: .2rem solid $green-400;
+        min-height: 42rem;
+        margin: 1.5rem;
+        transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+        .btn-outline-green {
+            color: $white-100;
+            background: $green-400;
+        }
+    }
+}

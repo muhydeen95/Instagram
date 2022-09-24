@@ -2,12 +2,8 @@
 @import "partials/abstract/mixins";
 @import "partials/components/forms";
 
-$side_padding: 12.4rem 6rem 12.4rem 9.2rem;
-$mobile_side_padding: 3rem;
-
 .wrapper {
   height: 100%;
-  // padding: $side_padding;
   &__logo {
     margin-bottom: 5.6rem;
   }
@@ -25,32 +21,44 @@ $mobile_side_padding: 3rem;
       margin-bottom: 5.6rem;
     }
   }
- .position-relative {
-   .invalid-feedback,
+  .position-relative {
     .fa {
       position: absolute;
       font-size: 1.5rem;
       top: 1.8rem;
       right: 1.5rem;
     }
-  } 
-  &__sign_in {
-    padding-top: 1.4rem;
-    a,p {
+  }
+  &__forgot {
+    margin: .4rem auto 3.4rem auto;
+    span {
+      color: $grey-400;
+    }
+  }
+  &__sign_up {
+    margin: 3.4rem auto;
+    a, p {
       color: $blue-700;
       font-weight: 600;
       font-size: 1.4rem;
       line-height: 1.8rem;
-      text-decoration: none;
+      text-decoration: underline;
     }
     span {
-      color: $green-600;
+      color: $green-400;
+      text-decoration: underline;
+    }
+  }
+  &__alt {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    &-text {
+      font-size: 1.25rem;
     }
   }
   &__login_btn {
-    width: 30%;
-    height: 4.5rem !important;
-    background: $green-600;
+    width: 100%;
+    background: $green-400;
     box-shadow: 0rem 0.4rem 0.8rem -0.1rem rgba(0, 74, 77, 0.15);
     border-radius: 0.8rem;
     font-weight: 600;
@@ -61,23 +69,27 @@ $mobile_side_padding: 3rem;
     justify-content: center;
     text-align: center;
     color: $white-100;
-    padding: .35rem 0;
+    padding: 1.35rem 0;
     transition: 0.6s all ease;
+    margin-top: 2rem;
     &:hover {
-      background: $green-700;
+      background: $green-400;
+      transform: translateY(-.5rem);
     }
   }
-}
-
-@include maxSize($canvas: M) {
-  .wrapper {
-    padding: $mobile_side_padding;
-    &__login_btn {
-      width: 100%;
-      margin-top: 1rem;
-    }
-    &__sign_in {
-      padding-top: 1.5rem;
+  .auth-alt {
+    margin-bottom: 2rem;
+    .btn-light {
+      border: .1rem solid $black-100;
+      color: $black-100;
+      min-width: 15rem;
+      .fa-facebook {
+        font-size: 1.9rem;
+      }
+      &:hover {
+        color: $white-100;
+        background: $black-100;
+      }
     }
   }
 }

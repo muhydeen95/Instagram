@@ -45,4 +45,13 @@
     &:hover {
         border: .2rem solid $green-400;
     }
+    .btn-outline-success {
+        color: $success;
+        border: .1rem solid $success;
+        &:hover {
+            color: $success;
+            border: .1rem solid $success;
+            background: transparent;
+        }
+    }
 }

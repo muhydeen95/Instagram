@@ -1,0 +1,41 @@
+@import "partials/abstract/variables";
+@import "partials/abstract/mixins.scss";
+
+.ppty__wrapper {
+    &-filter {
+        .search-filter-input {
+            position: relative;
+            flex-grow: 3;
+            ._icon {
+              position: absolute;
+              right: 1.5rem;
+              top: 1.5rem;
+              border: 1px solid green;
+            }
+            .form-control {
+              padding-right: 4.5rem;
+              border: none !important;
+              padding-left: none !important;
+            }
+            input {
+              border: none !important;
+              &:hover {
+                border: none !important;
+              }
+            }
+            ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                font-size: 1.2rem;
+            }
+              
+            :-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color: $green-400;
+                font-weight: bold;
+            }
+              
+            ::-ms-input-placeholder { /* Microsoft Edge */
+                color: $green-400;
+                font-weight: bold;
+            }
+        }
+    }
+}

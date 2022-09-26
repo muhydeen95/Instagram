@@ -17,6 +17,10 @@ footer {
     }
     .fab, .fa {
         font-size: 2.35rem;
+        color: $black-100;
+    }
+    .fa-phone {
+        transform: rotate(90deg);
     }
     .company-address {
         span {

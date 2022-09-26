@@ -6,6 +6,7 @@ import { HomepageRoutingModule } from './homepage-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { CategoryCardComponent } from './components/category-card/category-card.component';
 import { AdvertCardComponent } from './components/advert-card/advert-card.component';
+import { NgxView360Module } from 'ngx-view360';
 
 
 
@@ -19,7 +20,8 @@ import { AdvertCardComponent } from './components/advert-card/advert-card.compon
   imports: [
     CommonModule,
     SharedModule,
-    HomepageRoutingModule
+    HomepageRoutingModule,
+    NgxView360Module
   ]
 })
 export class HomepageModule { }

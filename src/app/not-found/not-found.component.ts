@@ -10,6 +10,6 @@ export class NotFoundComponent implements OnInit {
 
   ngOnInit(): void {}
   public goHome(): void {
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['']);
   }
 }

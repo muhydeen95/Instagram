@@ -31,10 +31,16 @@
                 </div>
 
                 <div class="action-btn d-flex justify-content-end">
-                    <button class="btn btn-outline-green btn-md me-3">
+                    <button 
+                        class="btn btn-outline-green btn-md me-3"
+                        (click)="skip()"
+                    >
                         Skip
                     </button>
-                    <button class="btn btn-green btn-md">
+                    <button 
+                        class="btn btn-green btn-md"
+                        (click)="continue()"
+                    >
                         Continue
                     </button>
                 </div>

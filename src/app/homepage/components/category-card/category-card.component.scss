@@ -6,7 +6,7 @@
     padding: 3.5rem;
     cursor: pointer;
     border-radius: 1rem;
-    transition: all 500ms ease-in-out;
+    transition: all 0.7s ease-in-out;
     min-height: 40rem;
     margin: 1rem;
     img {
@@ -26,9 +26,7 @@
     }
     &:hover {
         border: .2rem solid $green-400;
-        min-height: 42rem;
-        margin: 1.5rem;
-        transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+        transform: scale(1.05);
         .btn-outline-green {
             color: $white-100;
             background: $green-400;

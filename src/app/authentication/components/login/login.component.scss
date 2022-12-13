@@ -73,11 +73,12 @@
     }
   }
   .btn {
-    min-width: 17rem;
+    min-width: 16rem;
     &-light {
       border: .1rem solid rgba($grey-color, 0.2);
       color: $grey-200;
       position: relative;
+      display: flex;
       embed {
         margin-right: .7rem;
       }

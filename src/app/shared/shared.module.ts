@@ -15,10 +15,6 @@ import { CardComponent } from './components/card/card.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { HelpCenterComponent } from './components/help-center/help-center.component';
 import { InfoComponent } from './components/info/info.component';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { FileViewerComponent } from './components/file-viewer/file-viewer.component';
-import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
@@ -34,7 +30,6 @@ import { FooterComponent } from './components/footer/footer.component';
     SearchbarComponent,
     HelpCenterComponent,
     InfoComponent,
-    FileViewerComponent,
     FooterComponent,
   ],
   imports: [
@@ -43,9 +38,6 @@ import { FooterComponent } from './components/footer/footer.component';
     RouterModule,
     NgxSkeletonLoaderModule,
     MatDialogModule,
-    NgSelectModule,
-    NgxExtendedPdfViewerModule,
-    NgxDocViewerModule,
   ],
   exports: [
     LoadingButtonComponent,
@@ -60,8 +52,6 @@ import { FooterComponent } from './components/footer/footer.component';
     SearchbarComponent,
     HelpCenterComponent,
     InfoComponent,
-    NgSelectModule,
-    FileViewerComponent,
     FooterComponent
   ],
 })

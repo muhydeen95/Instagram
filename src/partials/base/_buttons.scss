@@ -9,26 +9,28 @@
   justify-content: center;
 }
 .btn-green {
-  background-color: $green-400;
+  background-color: $blue-100;
   color: #fff;
   display: flex;
   align-items: center;
   line-height: 0;
   transition: all ease 0.3s;
   &:hover {
-    color: #fff;
-    background-color: $green-400;
+    color: $white-100;
     transform: translateY(-0.3rem);
+    border-radius: 10rem;
   }
 }
+
 .btn-outline-green {
   border: 0.15rem solid $green-600;
   background-color: transparent;
-  color: $green-400;
+  color: $blue-100;
   transition: all ease 0.3s;
   &:hover {
-    color: $green-400;
+    color: $blue-100;
     background-color: transparent;
+    border-radius: 10rem;
   }
 }
 
@@ -43,6 +45,7 @@
     color: $green-700;
     border: 0.15rem solid $grey-400;
     background-color: transparent;
+    border-radius: 10rem;
   }
 }
 

@@ -1,20 +1,29 @@
 <div class="wrapper">
+  <div class="wrapper__logo">
+    <embed
+      src="assets/images/logo.svg"
+      alt="Kazar logo"
+    />
+  </div>
+  <div class="wrapper__header">
+    <h1>Welcome Philip</h1>
+    <p>Let’s pick up where we left off</p>
+  </div>
   <div class="wrapper__form">
-    <form [formGroup]="loginForm">
+    <div [formGroup]="loginForm">
       <app-error [error_message]="error_message"></app-error>
       <div class="form_group mb-5">
         <label for="email" class="form-label"
-          >Email Address
-          <span>● </span>
+          >Email
+          <!-- <span>● </span> -->
         </label>
         <input
           type="email"
           id="email"
           class="form-control"
-          placeholder=""
+          placeholder="Enter email address"
           (keyup)="checkForKeyEnter($event)"
           formControlName="email"
-          autocomplete="email"
           [ngClass]="{
             'is-invalid':
               (loginForm.get('email')?.errors &&
@@ -50,7 +59,7 @@
       <div class="form_group mb-3">
         <label for="password" class="form-label"
           >Password
-          <span>● </span>
+          <!-- <span>● </span> -->
         </label>
         <div class="position-relative">
           <input
@@ -59,7 +68,6 @@
             placeholder=""
             formControlName="password"
             (keyup)="checkForKeyEnter($event)"
-            autocomplete="current-password"
             [ngClass]="{
               'is-invalid':
                 (loginForm.get('password')?.errors &&
@@ -91,33 +99,46 @@
         </div>
       </div>
       <div class="wrapper__forgot">
-        <a routerLink="/authentication/forgot-password"> Forgot Password?</a>
-      </div>
-      <div class="wrapper__alt">
-        <span class="wrapper__alt-text">Or sign in with your email</span>
-      </div>
-      <div class="auth-alt d-flex">
-        <button class="btn btn-light btn-lg me-3">
-          <i class="fab fa-google me-2"></i>
-          Google
-        </button>
-        <button class="btn btn-light btn-lg">
-          <i class="fab fa-facebook me-2"></i>
-          Facebook
-        </button>
+        <a routerLink="../forgot-password"> Forgot Password?</a>
       </div>
       <button class="btn wrapper__login_btn" (click)="login()">
         <app-loading-button
-          [text]="'Login to my account'"
+          [text]="'Login'"
           [condition]="isLoggingIn"
         ></app-loading-button>
       </button>
+      <div class="sign-in-alt">
+        <span>or sign in with</span>
+      </div>
+      <div class="d-flex justify-content-between my-5">
+        <button class="btn btn-light btn-lg">
+          <embed
+            src="assets/icons/google.svg"
+            alt="google logo"
+          />
+          <span>Google</span>
+        </button>
+        <button class="btn btn-light btn-lg">
+          <embed
+            src="assets/icons/apple.svg"
+            alt="apple btn-light logo"
+          />
+          Apple
+        </button>
+        <button class="btn btn-light btn-lg">
+          <embed
+            src="assets/icons/facebook.svg"
+            alt="facebook logo"
+          />
+          Facebook
+        </button>
+      </div>
       <div class="wrapper__sign_up text-center mt-4">
         <p>
-          Don't have an account?
-          <a routerLink="/authentication/register"><span>Register</span></a>
+          Dont have an account?
+          <a routerLink="/authentication/register"><span>Sign Up</span></a>
         </p>
       </div>
-    </form>
+    </div>
   </div>
 </div>

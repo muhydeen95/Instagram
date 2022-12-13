@@ -1,18 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RouteGuard } from '@core/guards/route.guard';
-import { LayoutComponent } from '@shared/components/layout/layout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { OfflineComponent } from './offline/offline.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () =>
-      import('./homepage/homepage.module').then(
-        (m) => m.HomepageModule
-      ),
-  },
   {
     path: 'authentication',
     loadChildren: () =>
@@ -21,30 +12,11 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'onboarding',
+    path: 'email',
     loadChildren: () =>
-      import('./onboarding/onboarding.module').then(
-        (m) => m.OnboardingModule
+      import('./email-template/email-template.module').then(
+        (m) => m.EmailTemplateModule
       ),
-  },
-  {
-    path: '',
-    component: LayoutComponent,
-    canActivate: [RouteGuard],
-    children: [
-      {
-        path: '',
-        redirectTo: 'properties',
-        pathMatch: 'full',
-      },
-      {
-        path: 'properties',
-        loadChildren: () =>
-          import('./properties/properties.module').then(
-            (m) => m.PropertiesModule
-          ),
-      },
-    ],
   },
   {
     path: 'offline',
@@ -54,6 +26,11 @@ const routes: Routes = [
   {
     path: '**',
     component: NotFoundComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'authentication',
+    pathMatch: 'full',
   },
 ];
 

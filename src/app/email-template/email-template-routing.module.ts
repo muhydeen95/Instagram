@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OnboardingComponent } from './components/onboarding/onboarding.component';
+import { EmailTemplateComponent } from './components/email-template/email-template.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: OnboardingComponent,
-  },
+    {
+        path: '',
+        component: EmailTemplateComponent
+    }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class OnboardingRoutingModule {}
+export class EmailTemplateRoutingModule {}

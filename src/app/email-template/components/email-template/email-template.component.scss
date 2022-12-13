@@ -1,0 +1,68 @@
+@import "partials/abstract/variables";
+@import "partials/abstract/mixins";
+@import "partials/components/forms";
+
+$side_bar_width: 50%;
+$medium_side_bar_width: 50%;
+$small_side_bar_width: 50%;
+
+$side_padding: 5rem 42rem;
+$large_side_padding: 5rem 24rem;
+$mobile_side_padding: 3rem;
+
+.wrapper {
+    padding: $side_padding;
+    margin: 0 auto;
+    &__logo {
+        text-align: center;
+        background: $primary-light;
+        padding: 2rem;
+    }
+    &__content {
+        margin-top: 5rem;
+        h2 {
+            font-weight: 900;
+            font-size: 1.6rem;
+            line-height: 150%;
+            margin-bottom: 1.5rem;
+        }
+        p {
+            font-weight: 400;
+            font-size: 1.4rem;
+            line-height: 150%;
+            margin-bottom: 4.5rem;
+        }
+    }
+    &__footer {
+        margin-top: 12rem;
+        text-align: center;
+        .media {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            embed {
+                margin-right: 2rem;
+                cursor: pointer;
+                &:last-child{
+                    margin-right: none;
+                }
+            }
+        }
+    }
+}
+
+@include screenSize($canvas: M) {
+    .wrapper {
+        padding: $mobile_side_padding;
+    }
+}
+@include screenSize($canvas: L) {
+    .wrapper {
+        padding: $large_side_padding;
+    }
+}
+@include screenSize($canvas: S) {
+    .wrapper {
+        padding: $mobile_side_padding;
+    }
+}

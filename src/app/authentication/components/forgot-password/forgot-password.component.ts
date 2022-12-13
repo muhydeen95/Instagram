@@ -1,12 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ForgotPassswordDTO } from '@auth/models/auth.model';
 import { AuthService } from '@auth/services/auth.service';
 import { ResponseModel } from 'app/models/response.model';
-import { Subscription } from 'rxjs';
+import { timer, Subscription } from 'rxjs';
 import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
@@ -15,12 +15,16 @@ import { DialogComponent } from './dialog/dialog.component';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  public sub: Subscription = new Subscription()
+  public sub: Subscription = new Subscription();
+  public countDown: Subscription = new Subscription();
   public forgotPasswordForm!: FormGroup;
   public forgotPasswordFormSubmitted: boolean = false;
   public isLoggingIn: boolean = false;
   public error_message: string = '';
-  public isError: boolean = false
+  public isError: boolean = false;
+  public counter = 10;
+  public tick = 1000;
+  public sending: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -31,6 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.initForgotPasswordForm();
+    this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
   }
 
   initForgotPasswordForm() {
@@ -54,7 +59,8 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   public submit(): void {
-    this.forgotPasswordFormSubmitted = true;
+    this.router.navigate(['/authentication/reset-password']);
+    // this.forgotPasswordFormSubmitted = true;
     if (this.forgotPasswordForm.valid) {
       this.isLoggingIn = true;
       this._auth.forgotPassword(this.forgotPasswordForm.value).subscribe({
@@ -89,4 +95,18 @@ export class ForgotPasswordComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
+}
+
+@Pipe({
+  name: "formatTime"
+})
+export class FormatTimePipe implements PipeTransform {
+  transform(value: number): string {
+    const minutes: number = Math.floor(value / 60);
+    return (
+      ("00" + minutes).slice(-2) +
+      ":" +
+      ("00" + Math.floor(value - minutes * 60)).slice(-2)
+    );
+  }
 }

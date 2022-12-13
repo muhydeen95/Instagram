@@ -1,57 +1,10 @@
-<div class="auth_wrapper">
-  <div class="row">
-    <div class="col-md-7 col-lg-6">
-      <div class="logo">
-        <img src="assets/images/fidelity.svg" alt="">
-      </div>
-      <div [ngClass]="isLogin ? 'login-bg ' : 'register-bg ' + 'd-none d-md-block'"></div>
-    </div>
-    <div class="col-md-4 col-lg-4">
-      <div class="mb-5">
-        <ul class="nav nav-pills vertical-nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item p-0" role="presentation">
-            <a
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              class="nav-link px-0 py-3"
-              id="departmental-tab"
-              data-bs-toggle="tab"
-              routerLink="login"
-              role="tab"
-              (click)="changeTab(true)"
-              aria-controls="departmental"
-              aria-selected="true"
-              >Login</a
-            >
-          </li>
-          <li class="nav-item p-0 ms-5" role="presentation">
-            <a
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              class="nav-link px-0 py-3"
-              id="shared-tab"
-              data-bs-toggle="tab"
-              routerLink="register"
-              role="tab"
-              (click)="changeTab(false)"
-              aria-controls="shared"
-              aria-selected="false"
-              >Sign Up</a
-            >
-          </li>
-        </ul>
-      </div>
-
-      <div class="tab-content" id="myTabContent">
-        <div
-          class="tab-pane fade show active"
-          id="regions"
-          role="tabpanel"
-          aria-labelledby="regions-tab"
-        >
-          <router-outlet></router-outlet>
-        </div>
-      </div>
+<div class="wrapper">
+  <div class="wrapper__side">
+    <app-authentication-sidebar></app-authentication-sidebar>
+  </div>
+  <div class="wrapper__layout">
+    <div class="wrapper__layout--content">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

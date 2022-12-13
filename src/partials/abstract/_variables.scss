@@ -1,22 +1,27 @@
 // colors and fonts go here.
 
 // Brand Colours
-$blue-100: #f0f2f9;
+$blue-100: #2D54E5;
 $blue-300: #1890ff;
 $blue-700: #182252;
 $blue-900: #161b37;
 $green-400: #964b00;
 $green-600: #d9a724;
 $green-700: #a6801b;
+$primary-color: #0F1C4D;
+$primary-gradient: rgba($primary-color, 0.93);
+$primary-light : #EDF1FF;
 
 // Neutrals & Shades
 $white-100: #ffffff;
 $white-200: #f7f7f7;
 $white-300: #fafafa;
 $white-700: #f2f2f2;
-$text-body: #464e75;
+$text-body: #596180;
 $black-100: #000000;
 $black-850: #1f1f1f;
+$grey-color: #0F1733;
+$grey-200: #596180;
 $grey-300: rgba($blue-700, 0.07);
 $grey-400: rgba($blue-700, 0.1);
 $grey-500: rgba($blue-900, 0.2);

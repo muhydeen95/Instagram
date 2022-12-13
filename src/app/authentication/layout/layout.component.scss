@@ -30,6 +30,7 @@ $mobile_side_padding: 3rem;
       height: 100%;
       padding: $side_padding;
       overflow-y: auto;
+      overflow-y: hidden;
     }
   }
 }

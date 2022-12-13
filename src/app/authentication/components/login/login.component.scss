@@ -73,8 +73,8 @@
     }
   }
   .btn {
-    min-width: 16rem;
     &-light {
+      min-width: 16rem;
       border: .1rem solid rgba($grey-color, 0.2);
       color: $grey-200;
       position: relative;
@@ -87,6 +87,17 @@
   &__forgot, &__sign_up {
     a, span {
       color: $blue-100;
+    }
+  }
+}
+
+@include screenSize($canvas: M) {
+  .wrapper {
+    .btn-light {
+      width: 7rem;
+      embed {
+        width: 5%;
+      }
     }
   }
 }

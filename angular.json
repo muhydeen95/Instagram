@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Docstream-Admin": {
+    "Kazar": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Docstream-Customer",
+            "outputPath": "dist/Kazar",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -132,10 +132,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Docstream-Admin:build:production"
+              "browserTarget": "Kazar:build:production"
             },
             "development": {
-              "browserTarget": "Docstream-Admin:build:development"
+              "browserTarget": "Kazar:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -143,7 +143,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Docstream-Admin:build"
+            "browserTarget": "Kazar:build"
           }
         },
         "test": {
@@ -162,5 +162,5 @@
       }
     }
   },
-  "defaultProject": "Docstream-Customer"
+  "defaultProject": "Kazar"
 }

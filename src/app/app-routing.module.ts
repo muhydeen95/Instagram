@@ -22,15 +22,15 @@ const routes: Routes = [
     path: 'offline',
     component: OfflineComponent,
   },
-
-  {
-    path: '**',
-    component: NotFoundComponent,
-  },
   {
     path: '',
     redirectTo: 'authentication',
     pathMatch: 'full',
+  },
+
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 

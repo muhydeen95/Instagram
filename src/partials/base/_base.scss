@@ -51,3 +51,10 @@ hr {
 .border {
   border: 0.1rem solid rgba($blue-700, 0.15) !important;
 }
+
+.svg_eye {
+  cursor: pointer;
+  position: absolute;
+  right: 5%;
+  top: 45px;
+}

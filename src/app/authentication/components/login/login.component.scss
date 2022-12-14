@@ -26,12 +26,7 @@
     }
   }
   .position-relative {
-    .fa {
-      position: absolute;
-      font-size: 1.5rem;
-      top: 1.8rem;
-      right: 1.5rem;
-    }
+    position: relative;
   }
   &__forgot, &__sign_up {
     margin-bottom: 3.4rem;

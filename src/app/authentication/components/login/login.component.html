@@ -56,13 +56,12 @@
           Enter a valid email
         </div>
       </div>
-      <div class="form_group mb-3">
+      <div class="form_group position-relative mb-3">
         <label for="password" class="form-label"
           >Password
           <!-- <span>● </span> -->
         </label>
-        <div class="position-relative">
-          <input
+        <input
             class="form-control pr-2"
             [type]="showPassword ? 'text' : 'password'"
             placeholder=""
@@ -75,19 +74,13 @@
                 (loginForm.get('password')?.hasError('required') &&
                   loginFormSubmitted)
             }"
-          />
-          <i
-            class="fa fa-eye-slash click"
-            *ngIf="showPassword; else hidePassword"
+        />
+        <img
             (click)="showPassword = !showPassword"
-          ></i>
-          <ng-template #hidePassword>
-            <i
-              class="fa fa-eye click"
-              (click)="showPassword = !showPassword"
-            ></i>
-          </ng-template>
-        </div>
+            src="assets/icons/eye-icon-{{ showPassword ? 'open' : 'close' }}.svg"
+            alt="eye close icon"
+            class="svg_eye"
+        />
         <div
           class="invalid-feedback"
           *ngIf="

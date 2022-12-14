@@ -67,18 +67,24 @@
       width: 100%;
     }
   }
-  .btn {
-    &-light {
-      width: 32%;
-      border: .1rem solid rgba($grey-color, 0.2);
-      color: $grey-200;
-      position: relative;
-      display: flex;
-      embed {
-        margin-right: .7rem;
+  .alt-login {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(32%, 1fr));
+    .btn {
+      &-light {
+        width: 100%;
+        border: .1rem solid rgba($grey-color, 0.2);
+        color: $grey-200;
+        position: relative;
+        display: flex;
+        embed {
+          margin-right: .7rem;
+        }
       }
     }
   }
+ 
   &__forgot, &__sign_up {
     a, span {
       color: $blue-100;

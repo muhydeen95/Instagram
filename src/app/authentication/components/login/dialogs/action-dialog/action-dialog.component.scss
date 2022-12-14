@@ -15,10 +15,13 @@
     }
     .btn_wrapper {
         margin-top: 5rem;
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
         .btn {
-            min-width: 45%;
+            width: 100%;
             &-light {
-                border: .1rem solid $grey-color;
+                border: .1rem solid rgba($grey-color, 0.2);
                 color: $grey-200;
             }
         }

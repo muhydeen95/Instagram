@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       localStorage.setItem('attempt', JSON.stringify(this.count++));
       let attempt = localStorage.getItem('attempt');
-      console.log(attempt);
       this.isLoggingIn = true;
       const payload = this.loginForm.value;
       if(

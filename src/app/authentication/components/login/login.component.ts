@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
 
   public openModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = '300px';
-    dialogConfig.width = '450px';
+    dialogConfig.height = '350px';
+    dialogConfig.width = '500px';
     dialogConfig.data = {
       email: `${this.loginForm.get('email')?.value}`,
     };

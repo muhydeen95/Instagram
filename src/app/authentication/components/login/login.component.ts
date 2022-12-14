@@ -1,12 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { LoginResponseDTO } from '@auth/models/auth.model';
-import { AuthService } from '@auth/services/auth.service';
-import { CurrentUserService } from '@core/services/current-user.service';
-import { ResponseModel } from 'app/models/response.model';
+import { BaseComponent } from '@core/base/base/base.component';
+import { User } from '@core/models/users.model';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ActionDialogComponent } from './dialogs/action-dialog/action-dialog.component';
 
@@ -22,12 +18,13 @@ export class LoginComponent implements OnInit {
   public loginFormSubmitted: boolean = false;
   public error_message: string = '';
   public showPassword: boolean = false;
+  public user = User;
+  public count: number = 0;
+
   constructor(
-    private router: Router,
     private fb: FormBuilder,
-    private _auth: AuthService,
-    private _current: CurrentUserService,
     public dialog: MatDialog,
+    private _base: BaseComponent
   ) {}
 
   ngOnInit(): void {
@@ -42,12 +39,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public openModal(): void {
+  public openModal(count: number): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = '350px';
     dialogConfig.width = '500px';
     dialogConfig.data = {
-      email: `${this.loginForm.get('email')?.value}`,
+      count: count,
     };
     const dialogRef = this.dialog.open(
       ActionDialogComponent,
@@ -59,21 +56,27 @@ export class LoginComponent implements OnInit {
   public login(): void {
     this.loginFormSubmitted = true;
     if (this.loginForm.valid) {
+      localStorage.setItem('attempt', JSON.stringify(this.count++));
+      let attempt = localStorage.getItem('attempt');
+      console.log(attempt);
       this.isLoggingIn = true;
-      this._auth.login(this.loginForm.value).subscribe({
-        next: (res: ResponseModel<LoginResponseDTO>) => {
-          this.isLoggingIn = false;
-          this.loginFormSubmitted = true;
-          this._current.storeUserCredentials(res?.response);
-          this.router.navigate(['dashboard']);
-        },
-        error: (error: HttpErrorResponse) => {
-          this.openModal();
-          this.isLoggingIn = false;
-          this.loginFormSubmitted = true;
-          this.error_message = error?.error?.message;
-        },
-      });
+      const payload = this.loginForm.value;
+      if(
+        payload.email == this.user.email &&
+        payload.password == this.user.password
+      ) {
+        this.isLoggingIn = false;
+        this._base.openSnackBar('Login Successsful!!!');
+        this.loginForm.reset();
+      } else if(Number(attempt) == 3) {
+        this.isLoggingIn = false;
+        this.openModal(Number(attempt));
+      } else if(Number(attempt) > 3) {
+        this._base.openSnackBar('Your account has been blocked due to so many attempt', 'error');
+      } else {
+        this.isLoggingIn = false;
+        this.openModal(this.count);
+      }
     }
   }
   public checkForKeyEnter(event: KeyboardEvent): void {

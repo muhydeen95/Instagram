@@ -8,12 +8,12 @@
                 <h2>Hello Philip,</h2>
                 <p>
                     A suspicious activity has been detected on you account and it was 
-                    accessed on 23-12-2023, 12:05 AM. If you are unaware of this activity, 
+                    accessed on 23-12-2023, 12:05 AM {{ date | date:'short' }}. If you are unaware of this activity, 
                     kindly contact support immediately or use the button below to reset your 
                     password. 
                 </p>
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-green btn-lg" routerLink="/authentication/forgot-password">
+                    <button class="btn btn-green btn-lg" routerLink="/authentication/reset-password">
                         Reset Password
                     </button>
                 </div>

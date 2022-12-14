@@ -30,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private _auth: AuthService, 
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -59,7 +59,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   public submit(): void {
-    this.router.navigate(['/authentication/reset-password']);
+    this.router.navigate(['/email']);
     // this.forgotPasswordFormSubmitted = true;
     if (this.forgotPasswordForm.valid) {
       this.isLoggingIn = true;
@@ -80,6 +80,7 @@ export class ForgotPasswordComponent implements OnInit {
       });
     }
   }
+
   public checkForKeyEnter(event: KeyboardEvent): void {
     var key = event.key || event.keyCode;
     if (key == 'Enter' || key == 8) {

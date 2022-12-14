@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./email-template.component.scss']
 })
 export class EmailTemplateComponent implements OnInit {
-
+  public date = new Date();
+  
   constructor() { }
 
   ngOnInit(): void {

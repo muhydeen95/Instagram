@@ -1,12 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { ResetPasswordDTO } from '@auth/models/auth.model';
-import { AuthService } from '@auth/services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base/base.component';
-import { ResponseModel } from 'app/models/response.model';
 import { ResetDialogComponent } from './reset-dialog/reset-dialog.component';
 
 @Component({
@@ -28,8 +24,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private _base: BaseComponent,
     private fb: FormBuilder,
-    private _auth: AuthService, 
-    // private _router: Router,
+    private _router: Router,
     private _route: ActivatedRoute,
     public dialog: MatDialog,
   ) { }
@@ -89,26 +84,8 @@ export class ResetPasswordComponent implements OnInit {
     }
     if (this.resetPasswordForm.valid) {
       this.isLoading = true;
-      console.log(payload)
-      this._auth.resetPassword(payload).subscribe({
-        next: (res: ResponseModel<ResetPasswordDTO>) => {
-          console.log(res)
-          this.isLoading = false;
-          this.passwordFormSubmitted = false;
-          this._base.openSnackBar(
-            'Great...!!!, Your action was successful',
-            'success'
-          );
-          this.openModal();
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error, error.error);
-          this.isLoading = false;
-          this.passwordFormSubmitted = false;
-          this.isError = true;
-          this.error_message = error?.error.message;
-        },
-      });
+      this._base.openSnackBar('Password reset successfully!!!');
+      this._router.navigate(['/authentication/login']);
     }
   }
 

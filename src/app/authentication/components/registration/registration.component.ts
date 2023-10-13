@@ -8,30 +8,48 @@ import { Subscription } from 'rxjs/internal/Subscription';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
-  public loginForm!: FormGroup;
+  public registerForm!: FormGroup;
   private sub: Subscription = new Subscription();
   public isLoggingIn: boolean = false;
-  public loginFormSubmitted: boolean = false;
+  public registerFormSubmitted: boolean = false;
   public error_message: string = '';
   public showPassword: boolean = false;
+  public showConfirmPassword: boolean = false;
+
   constructor(
     private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {
     window.scroll(0,0);
-    this.initLoginForm();
+    this.initRegisterForm();
   }
 
-  initLoginForm() {
-    this.loginForm = this.fb.group({
+  initRegisterForm() {
+    this.registerForm = this.fb.group({
+      fullName: ['', [Validators.required, Validators.pattern(/^(?=.?[A-Z])(?=.?[a-z]).{8,50}$/)]],
+      userName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-    });
+      phoneNumber: ['', [Validators.required]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^(?=.?[A-Z])(?=.?[a-z])(?=.*?[0-9]).{8,30}$/)
+        ]
+      ],
+      confirmPassword: ['', Validators.required],
+    }, { validators: [this.passwordMatchValidator] });
+  }
+
+  passwordMatchValidator(f: FormGroup) {
+    return f.get('password')?.value === f.get('confirmPassword')?.value
+      ? null
+      : { passwordMismatch: true };
   }
 
   public register(): void {
-    this.loginFormSubmitted = true;
+    this.registerFormSubmitted = true;
   }
 
   public checkForKeyEnter(event: KeyboardEvent): void {
@@ -40,6 +58,7 @@ export class RegistrationComponent implements OnInit {
       this.register();
     }
   }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

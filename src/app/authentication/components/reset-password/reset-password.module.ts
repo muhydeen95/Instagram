@@ -5,11 +5,10 @@ import { ResetPasswordRoutingModule } from './reset-password-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './reset-password.component';
-import { ResetDialogComponent } from './reset-dialog/reset-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [ResetPasswordComponent, ResetDialogComponent],
+  declarations: [ResetPasswordComponent],
   imports: [
     CommonModule,
     ResetPasswordRoutingModule,

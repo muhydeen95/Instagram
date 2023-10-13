@@ -1,9 +1,12 @@
-<div class="wrapper">
-  <div class="wrapper__layout">
-    <app-navbar></app-navbar>
-    <div class="container my-5" style="position: relative">
-      <router-outlet></router-outlet>
-    </div>
-    <app-footer></app-footer>
-  </div>
-</div>
+<section id="webapp">
+  <app-sidebar (showMinimized)="showMinimizedMenu($event)"></app-sidebar>
+  <main  [ngClass]="{ showMinimized: showMinimized }">
+     <div class="main-content" #mainContent>
+       <router-outlet></router-outlet>
+       <div class="footer d-sm-block d-md-none">
+        <app-navbar></app-navbar>
+       </div>
+     </div>
+   </main>
+ </section>
+

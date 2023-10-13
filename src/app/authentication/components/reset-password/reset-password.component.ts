@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base/base.component';
-import { ResetDialogComponent } from './reset-dialog/reset-dialog.component';
 
 @Component({
   selector: 'app-registration',
@@ -63,16 +62,6 @@ export class ResetPasswordComponent implements OnInit {
     }
   }
 
-  public openModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = '365px';
-    dialogConfig.width = '600px';
-    const dialogRef = this.dialog.open(
-      ResetDialogComponent,
-      dialogConfig
-    );
-    dialogRef.afterClosed().subscribe((result) => {});
-  }
 
   public submit(): void {
     const payload = this.resetPasswordForm.value;

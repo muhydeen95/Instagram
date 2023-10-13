@@ -14,20 +14,20 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$docstream-primary: mat.define-palette(mat.$indigo-palette);
-$docstream-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$kazar-primary: mat.define-palette(mat.$indigo-palette);
+$kazar-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$docstream-warn: mat.define-palette(mat.$red-palette);
+$kazar-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$docstream-theme: mat.define-light-theme(
+$kazar-theme: mat.define-light-theme(
   (
     color: (
-      primary: $docstream-primary,
-      accent: $docstream-accent,
-      warn: $docstream-warn,
+      primary: $kazar-primary,
+      accent: $kazar-accent,
+      warn: $kazar-warn,
     ),
   )
 );
@@ -36,7 +36,7 @@ $docstream-theme: mat.define-light-theme(
 
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($docstream-theme);
+@include mat.all-component-themes($kazar-theme);
 
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
@@ -61,13 +61,13 @@ $docstream-theme: mat.define-light-theme(
 /* Track */
 ::-webkit-scrollbar-track {
   background: $white-100;
-  border-radius: 1rem;
+  border-radius: .5rem;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $blue-100;
-  border-radius: 1rem;
+  background: $white-100;
+  border-radius: .5rem;
 }
 
 /* Handle on hover */
@@ -271,4 +271,8 @@ table.table {
     border-radius: 10rem;
     color: $white-100;
   }
+}
+
+.modal-width .mat-dialog-container {
+  max-width: 52rem !important;
 }

@@ -1,0 +1,227 @@
+<div class="menu-icon d-none" (click)="toggleSidebar()">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    aria-hidden="true"
+    role="img"
+    width="1em"
+    height="1em"
+    preserveAspectRatio="xMidYMid meet"
+    viewBox="0 0 24 24"
+  >
+    <g
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M3 12h18" />
+      <path d="M3 6h18" />
+      <path d="M3 18h18" />
+    </g>
+  </svg>
+</div>
+<div
+  class="sidebar-overlay"
+  [ngClass]="{ 'overlay-isOpen': isOpen }"
+  (click)="toggleSidebar()"
+>
+  <div class="closeMenu">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      aria-hidden="true"
+      role="img"
+      width="1em"
+      height="1em"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 512 512"
+    >
+      <path
+        fill="#fff"
+        d="M325.297 256l134.148-134.148c19.136-19.136 19.136-50.161 0-69.297c-19.137-19.136-50.16-19.136-69.297 0L256 186.703L121.852 52.555c-19.136-19.136-50.161-19.136-69.297 0s-19.136 50.161 0 69.297L186.703 256L52.555 390.148c-19.136 19.136-19.136 50.161 0 69.297c9.568 9.567 22.108 14.352 34.648 14.352s25.081-4.784 34.648-14.352L256 325.297l134.148 134.148c9.568 9.567 22.108 14.352 34.648 14.352s25.08-4.784 34.648-14.352c19.136-19.136 19.136-50.161 0-69.297L325.297 256z"
+      />
+    </svg>
+  </div>
+</div>
+<section
+  class="sidebar d-none d-md-block"
+  [ngClass]="[
+    isOpen && showMinimizedMenu ? 'sidebar_minimized sidebar-isOpen' : '',
+    showMinimizedMenu ? 'sidebar_minimized' : '',
+    isOpen ? 'sidebar-isOpen' : ''
+  ]"
+>
+
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <span routerLink="/dashboard">
+        <img src="assets/images/insta-written.png" alt="insta_logo" />
+      </span>
+    </div>
+  </div>
+  <div class="sidebar-wrapper">
+    <ul class="top-list">
+      <li>
+        <a
+          class="side-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLink="/dashboard"
+          (click)="toggleSidebar()"
+        >
+          <span class="side-icon">
+            <svg width="20" height="20" viewBox="-2 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>home [#1392]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-381.000000, -720.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M339.875,578.013 L336.6875,578.013 L336.6875,574.013 L330.3125,574.013 L330.3125,578.013 L327.125,578.013 L327.125,568.799 L333.489375,562.809 L339.875,568.819 L339.875,578.013 Z M341.94475,568.013 L333.47025,560 L325,567.999 L325,580.013 L332.4375,580.013 L332.4375,576.013 L334.5625,576.013 L334.5625,580.013 L342,580.013 L342,579.983 L342,568.013 L341.94475,568.013 Z" id="home-[#1392]"> </path> </g> </g> </g> </g></svg>
+          </span>
+          <span>Home</span>
+          <span class="border"></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="side-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLink="/search"
+          (click)="toggleSidebar()"
+        >
+          <span class="side-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          </span>
+          <span>Search</span>
+          <span class="border"></span>
+        </a>
+      </li>
+
+
+      <li>
+        <a
+          class="side-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLink="/explore"
+          (click)="toggleSidebar()"
+        >
+          <span class="side-icon">
+            <svg width="20" height="20" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>explore</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="icons_Q2" data-name="icons Q2"> <path d="M24,6A18,18,0,1,1,6,24,18.1,18.1,0,0,1,24,6m0-4A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2Z"></path> <path d="M33.3,13.3,20,20,13.3,33.3a1.1,1.1,0,0,0,1.4,1.4L28,28l6.7-13.3A1.1,1.1,0,0,0,33.3,13.3ZM24,26a2,2,0,1,1,2-2A2,2,0,0,1,24,26Z"></path> </g> </g> </g></svg>
+          </span>
+          <span>Archive</span>
+          <span class="border"></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="side-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLink="/reels"
+          (click)="toggleSidebar()"
+        >
+          <span class="side-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><defs><style>.cls-1{fill:none;stroke:#020202;stroke-miterlimit:10;stroke-width:1.91px;}</style></defs><rect class="cls-1" x="1.5" y="9.11" width="21" height="13.36"></rect><rect class="cls-1" x="1.5" y="3.39" width="21" height="5.73"></rect><line class="cls-1" x1="6.27" y1="0.52" x2="6.27" y2="6.25"></line><line class="cls-1" x1="17.73" y1="0.52" x2="17.73" y2="6.25"></line><line class="cls-1" x1="12" y1="0.52" x2="12" y2="6.25"></line><polygon class="cls-1" points="10.09 17.7 10.09 13.89 13.91 15.79 10.09 17.7"></polygon></g></svg>
+          </span>
+          <span>Reels</span>
+          <span class="border"></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="side-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLink="/message"
+          (click)="toggleSidebar()"
+        >
+          <span class="side-icon">
+            <svg width="20" height="20" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g stroke="#000000" stroke-linejoin="round" stroke-width="12" clip-path="url(#a)"> <path d="M148.326 43.674c-28.899-28.899-75.753-28.899-104.652 0-25.014 25.014-28.377 63.481-10.087 92.112l-4.336 22.272c-.542 2.784 1.907 5.233 4.691 4.691l22.272-4.336c28.631 18.29 67.098 14.927 92.112-10.087 28.899-28.899 28.899-75.753 0-104.652Z"></path> <path stroke-linecap="round" d="m131.355 83.272-24.041 24.042-21.92-21.92-24.042 24.041"></path> </g> <defs> <clipPath id="a"> <path fill="#ffffff" d="M0 0h192v192H0z"></path> </clipPath> </defs> </g></svg>
+          </span>
+          <span>Message</span>
+          <span class="border"></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="side-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLink="/notifications"
+          (click)="toggleSidebar()"
+        >
+          <span class="side-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          </span>
+          <span>Notifications</span>
+          <span class="border"></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="side-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLink="/create"
+          (click)="toggleSidebar()"
+        >
+          <span class="side-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="#000000" stroke-width="1.5"></path> <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+          </span>
+          <span>Create</span>
+          <span class="border"></span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="side-link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          routerLink="profile"
+          (click)="toggleSidebar()"
+        >
+          <span class="side-icon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.1334 9.05866C10.0501 9.05033 9.9501 9.05033 9.85844 9.05866C7.87507 8.99199 6.30007 7.36699 6.30007 5.36699C6.30007 3.32533 7.95007 1.66699 10.0001 1.66699C12.0418 1.66699 13.7001 3.32533 13.7001 5.36699C13.6918 7.36699 12.1168 8.99199 10.1334 9.05866ZM5.96666 12.1337C3.95 13.4837 3.95 15.6837 5.96666 17.0253C8.25833 18.5587 12.0167 18.5587 14.3084 17.0253C16.325 15.6753 16.325 13.4753 14.3084 12.1337C12.025 10.6087 8.26666 10.6087 5.96666 12.1337Z"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span>Profile</span>
+          <span class="border"></span>
+        </a>
+      </li>
+
+      <li class="auto">
+        <a class="side-link click">
+          <span class="side-icon">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M5 1C2.79086 1 1 2.79086 1 5V15C1 17.2091 2.79086 19 5 19H15C17.2091 19 19 17.2091 19 15V5C19 2.79086 17.2091 1 15 1H5ZM5.25817 5.21381C5.11995 5.07691 4.93249 5 4.73702 5C4.54155 5 4.35409 5.07691 4.21587 5.21381C4.07765 5.35071 4 5.53639 4 5.73V14.49C4 14.6836 4.07765 14.8693 4.21587 15.0062C4.35409 15.1431 4.54155 15.22 4.73702 15.22C4.93249 15.22 5.11995 15.1431 5.25817 15.0062C5.39639 14.8693 5.47404 14.6836 5.47404 14.49V5.73C5.47404 5.53639 5.39639 5.35071 5.25817 5.21381ZM10.633 7.92C10.633 7.72643 10.5554 7.54079 10.4172 7.40389C10.279 7.26704 10.0916 7.19016 9.89615 7.19016C9.70072 7.19016 9.51329 7.26704 9.37508 7.40389L7.16402 9.59389C7.02585 9.73079 6.94823 9.91643 6.94823 10.11C6.94823 10.3036 7.02585 10.4892 7.16402 10.6261L9.37508 12.8161C9.51408 12.9491 9.70026 13.0227 9.8935 13.021C10.0867 13.0193 10.2716 12.9426 10.4082 12.8072C10.5449 12.6719 10.6224 12.4888 10.6241 12.2974C10.6258 12.106 10.5515 11.9216 10.4172 11.7839L9.46426 10.84H15.0553C15.2508 10.84 15.4382 10.7631 15.5764 10.6262C15.7147 10.4893 15.7923 10.3036 15.7923 10.11C15.7923 9.91639 15.7147 9.73071 15.5764 9.59381C15.4382 9.45691 15.2508 9.38 15.0553 9.38H9.46426L10.4172 8.43611C10.5554 8.29921 10.633 8.11357 10.633 7.92Z"
+                fill="white"
+              />
+            </svg>
+          </span>
+          <span (click)="logOut()">More</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+

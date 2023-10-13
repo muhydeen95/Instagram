@@ -1,0 +1,66 @@
+@import "partials/abstract/variables";
+@import "partials/abstract/mixins";
+
+.wrapper {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  background: $black-100;
+  padding: 2rem;
+  width: 90%;
+  &-story {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 5rem;
+    grid-gap: 2rem;
+    .content {
+      display: grid;
+      grid-gap: 0.5rem;
+      margin: 0;
+      text-align: center;
+      position: relative;
+      user-select: none;
+      transition: all 0.2s ease-in;
+      &:hover {
+        transform: scale(1.1);
+      }
+      .img-wrapper {
+        display: inline-block;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background:
+          radial-gradient(rgba($black-100, 0.15) 60%, transparent 0),
+          radial-gradient($white-100 65%, transparent 0),
+          linear-gradient(to top right, orange, deeppink);
+        img {
+          display: block;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          clip-path: circle(42%);
+        }
+      }
+      .text-container {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 0.9rem;
+        color: $white-100;
+      }
+      &:last-child::after {
+        content: '';
+        width:  2rem;
+        height: 100%;
+        right: -2rem;
+      }
+    }
+  }
+}
+
+
+@include maxSize($canvas: S) {
+  .wrapper {
+    padding: 1rem;
+    width: 100%;
+  }
+}

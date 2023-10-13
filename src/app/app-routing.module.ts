@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { OfflineComponent } from './offline/offline.component';
+import { LayoutComponent } from '@shared/components/layout/layout.component';
 
 const routes: Routes = [
   {
@@ -12,11 +13,20 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'email',
-    loadChildren: () =>
-      import('./email-template/email-template.module').then(
-        (m) => m.EmailTemplateModule
-      ),
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+    ],
   },
   {
     path: 'offline',

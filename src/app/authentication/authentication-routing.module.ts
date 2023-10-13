@@ -1,12 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: LayoutComponent,
-    children: [
       {
         path: '',
         redirectTo: 'login',
@@ -40,15 +35,6 @@ const routes: Routes = [
             (m) => m.ResetPasswordModule
           ),
       },
-      {
-        path: 'confirm-email',
-        loadChildren: () =>
-          import('../authentication/components/email-confirmation/email-confirmation.module').then(
-            (m) => m.EmailconfirmationModule
-          ),
-      },
-    ],
-  },
 ];
 
 @NgModule({

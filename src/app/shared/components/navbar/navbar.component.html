@@ -1,77 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-default">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="assets/images/fidelity.svg" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a 
-            class="nav-link"  
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLink="properties/all"
-          >Buy</a>
-        </li>
-        <li class="nav-item">
-          <a 
-            class="nav-link"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLink=""
-          >Sell</a>
-        </li>
-        <li class="nav-item">
-          <a 
-            class="nav-link"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLink=""
-          >Rent</a>
-        </li>
-        <li class="nav-item">
-          <a 
-            class="nav-link"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLink=""
-          >Contact agent</a>
-        </li>
-      </ul>
-      <form class="d-md-flex">
-        <div
-          class="search-wrapper-input me-4 mb-3 form_group"
-        >
-          <span class="_icon">
-            <img src="assets/icons/search.svg" />
-          </span>
-          <input
-            #searchQuery
-            type="text"
-            class="form-control mt-0"
-            placeholder="Search"
-          />
-          <span
-            class="_clear"
-            *ngIf="searchQuery.value != ''"
-          >
-            <img src="assets/icons/x.svg" />
-          </span>
-        </div>
-        <span class="noti-icon click me-4 mt-3">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.02 20.53C9.68999 20.53 7.35999 20.16 5.14999 19.42C4.30999 19.13 3.66999 18.54 3.38999 17.77C3.09999 17 3.19999 16.15 3.65999 15.39L4.80999 13.48C5.04999 13.08 5.26999 12.28 5.26999 11.81V8.92001C5.26999 5.20001 8.29999 2.17001 12.02 2.17001C15.74 2.17001 18.77 5.20001 18.77 8.92001V11.81C18.77 12.27 18.99 13.08 19.23 13.49L20.37 15.39C20.8 16.11 20.88 16.98 20.59 17.77C20.3 18.56 19.67 19.16 18.88 19.42C16.68 20.16 14.35 20.53 12.02 20.53ZM12.02 3.67001C9.12999 3.67001 6.76999 6.02001 6.76999 8.92001V11.81C6.76999 12.54 6.46999 13.62 6.09999 14.25L4.94999 16.16C4.72999 16.53 4.66999 16.92 4.79999 17.25C4.91999 17.59 5.21999 17.85 5.62999 17.99C9.80999 19.39 14.24 19.39 18.42 17.99C18.78 17.87 19.06 17.6 19.19 17.24C19.32 16.88 19.29 16.49 19.09 16.16L17.94 14.25C17.56 13.6 17.27 12.53 17.27 11.8V8.92001C17.27 6.02001 14.92 3.67001 12.02 3.67001Z" fill="#292D32"/>
-                <path d="M13.88 3.93999C13.81 3.93999 13.74 3.92999 13.67 3.90999C13.38 3.82999 13.1 3.76999 12.83 3.72999C11.98 3.61999 11.16 3.67999 10.39 3.90999C10.11 3.99999 9.80999 3.90999 9.61999 3.69999C9.42999 3.48999 9.36999 3.18999 9.47999 2.91999C9.88999 1.86999 10.89 1.17999 12.03 1.17999C13.17 1.17999 14.17 1.85999 14.58 2.91999C14.68 3.18999 14.63 3.48999 14.44 3.69999C14.29 3.85999 14.08 3.93999 13.88 3.93999Z" fill="#292D32"/>
-                <path d="M12.02 22.81C11.03 22.81 10.07 22.41 9.37002 21.71C8.67002 21.01 8.27002 20.05 8.27002 19.06H9.77002C9.77002 19.65 10.01 20.23 10.43 20.65C10.85 21.07 11.43 21.31 12.02 21.31C13.26 21.31 14.27 20.3 14.27 19.06H15.77C15.77 21.13 14.09 22.81 12.02 22.81Z" fill="#292D32"/>
-            </svg>                        
-        </span>
-        <span class="avatar click">
-          <img src="assets/images/avatar.png" alt="">
-        </span>
-      </form>
-    </div>
-  </div>
+<nav class="navbar">
+  <span>
+    <img src="assets/images/home.png" alt="">
+  </span>
+  <span>
+    <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>explore</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="icons_Q2" data-name="icons Q2"> <path d="M24,6A18,18,0,1,1,6,24,18.1,18.1,0,0,1,24,6m0-4A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2Z"></path> <path d="M33.3,13.3,20,20,13.3,33.3a1.1,1.1,0,0,0,1.4,1.4L28,28l6.7-13.3A1.1,1.1,0,0,0,33.3,13.3ZM24,26a2,2,0,1,1,2-2A2,2,0,0,1,24,26Z"></path> </g> </g> </g></svg>
+  </span>
+  <span>
+    <svg width="24" height="24" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><defs><style>.cls-1{fill:none;stroke:#ffffff;stroke-miterlimit:10;stroke-width:1.91px;}</style></defs><path class="cls-1" d="M22.5,11c0,5.27-4.7,9.55-10.5,9.55a12,12,0,0,1-3-.4L4.36,21.52l.56-3.45A9.16,9.16,0,0,1,1.5,11C1.5,5.75,6.2,1.48,12,1.48S22.5,5.75,22.5,11Z"></path><polyline class="cls-1" points="5.32 13.89 10.09 9.11 13.91 12.93 18.68 8.16"></polyline></g></svg>
+  </span>
+  <span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7 4C18.87 4 21 6.98 21 9.76C21 15.39 12.16 20 12 20C11.84 20 3 15.39 3 9.76C3 6.98 5.13 4 8.3 4C10.12 4 11.31 4.91 12 5.71C12.69 4.91 13.88 4 15.7 4Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+  </span>
+  <span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M16.6465 2.2253C16.9469 2.52571 16.9469 3.01276 16.6465 3.31316L12.5439 7.41572C12.2435 7.71613 11.7565 7.71613 11.4561 7.41572L8.37915 4.3388C8.07875 4.0384 8.07875 3.55135 8.37915 3.25094C8.67955 2.95054 9.1666 2.95054 9.46701 3.25094L12 5.78394L15.5586 2.2253C15.859 1.9249 16.3461 1.9249 16.6465 2.2253Z" fill="#ffffff"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M16.6465 11.4561C16.9469 11.7565 16.9469 12.2435 16.6465 12.5439L13.5696 15.6209C13.2692 15.9213 12.7821 15.9213 12.4817 15.6209L10.9744 14.1135L8.44136 16.6465C8.14096 16.9469 7.65391 16.9469 7.35351 16.6465C7.0531 16.3461 7.0531 15.859 7.35351 15.5586L10.4304 12.4817C10.7308 12.1813 11.2179 12.1813 11.5183 12.4817L13.0256 13.9891L15.5586 11.4561C15.859 11.1557 16.3461 11.1557 16.6465 11.4561Z" fill="#ffffff"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7.64103C9.81513 7.64103 6.82571 7.82729 4.97715 7.9599C4.37672 8.00297 3.9021 8.46549 3.84447 9.05892C3.70564 10.4883 3.53846 12.5306 3.53846 14.0513C3.53846 15.572 3.70564 17.6143 3.84447 19.0436C3.9021 19.6371 4.37672 20.0996 4.97715 20.1427C6.82571 20.2753 9.81513 20.4615 12 20.4615C14.1849 20.4615 17.1743 20.2753 19.0229 20.1427C19.6233 20.0996 20.0979 19.6371 20.1555 19.0436C20.2944 17.6143 20.4615 15.572 20.4615 14.0513C20.4615 12.5306 20.2944 10.4883 20.1555 9.05892C20.0979 8.46549 19.6233 8.00297 19.0229 7.9599C17.1743 7.82729 14.1849 7.64103 12 7.64103ZM4.86707 6.42538C6.71631 6.29272 9.75455 6.10256 12 6.10256C14.2455 6.10256 17.2837 6.29272 19.1329 6.42538C20.4758 6.52171 21.5561 7.56442 21.6868 8.91019C21.826 10.3433 22 12.4499 22 14.0513C22 15.6527 21.826 17.7593 21.6868 19.1924C21.5561 20.5381 20.4758 21.5809 19.1329 21.6772C17.2837 21.8098 14.2454 22 12 22C9.75455 22 6.7163 21.8098 4.86707 21.6772C3.52416 21.5809 2.44392 20.5381 2.31321 19.1924C2.17402 17.7593 2 15.6527 2 14.0513C2 12.4499 2.17402 10.3433 2.31321 8.91019C2.44392 7.56442 3.52416 6.52171 4.86707 6.42538Z" fill="#ffffff"></path> </g></svg>
+  </span>
 </nav>
